@@ -1,0 +1,13 @@
+services:
+    postgres:
+        image: postgres
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=app
+        restart: unless-stopped
+
+volumes:
+    postgres-data: {}
