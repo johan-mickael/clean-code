@@ -1,15 +1,13 @@
 FROM node:23-alpine3.19
 
 # Set working directory
-WORKDIR /home/node/app
+WORKDIR /app/express
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install && \
-    npm install express && \
-    npm install -D @types/express
+RUN npm install
 
 # Copy application code
 COPY . .

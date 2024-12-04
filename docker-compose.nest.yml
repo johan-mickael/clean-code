@@ -18,3 +18,5 @@ services:
         depends_on:
             - mongo
             - postgres
+        volumes:
+            - ./src/infrastructure/frameworks/nest:/app/nest

@@ -1,12 +1,18 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Express } from 'express';
+import ServerInterface from '../ServerInterface';
 
-const app = express();
-const PORT = 3001;
+export default class ExpressServer implements ServerInterface {
+  private app: Express;
+  name: string;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello from Express!');
-});
+  constructor(private readonly port: number) {
+    this.app = express();
+    this.name = 'Express';
+  }
 
-app.listen(PORT, () => {
-  console.log(`Express server is running on port ${PORT}`);
-});
+  start() {
+    this.app.listen(this.port, () => {
+      console.info(`${this.name} server listening on port ${this.port}`);
+    });
+  }
+}
