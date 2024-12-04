@@ -9,8 +9,7 @@ export default class CustomerRoutes implements RouteInterface {
 
   constructor() {
     this.router = express.Router();
-    this.clientController =
-      container.resolve<CustomerController>('customerController');
+    this.clientController = container.resolve<CustomerController>('customerController');
   }
 
   getRouter() {

@@ -10,9 +10,7 @@ import { Occupation } from '../../../domain/entity/occupation';
  *
  * This class is just used for testing purposes
  */
-export default class InMemoryCustomerRepository
-  implements CustomerRepositoryReader
-{
+export default class InMemoryCustomerRepository implements CustomerRepositoryReader {
   private customers: Customer[] = [];
 
   constructor() {

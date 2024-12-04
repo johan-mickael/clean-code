@@ -1,0 +1,17 @@
+import { Module } from '@nestjs/common';
+import CustomerController from '../controllers/customer-controller';
+import GetCustomerListQueryHandler from '../../../../../application/queries/get-customer-list-query-handler';
+import CustomerRepositoryReader from '../../../../../application/ports/customer-repository-reader';
+import InMemoryCustomerRepository from '../../../../adapters/in-memory-database/customer-repository-reader';
+
+@Module({
+  imports: [],
+  controllers: [CustomerController],
+  providers: [
+    {
+      provide: CustomerRepositoryReader,
+      useClass: InMemoryCustomerRepository,
+    },
+  ],
+})
+export class CustomerModule {}
