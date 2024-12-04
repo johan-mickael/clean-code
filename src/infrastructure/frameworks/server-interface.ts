@@ -1,5 +1,5 @@
 export default abstract class ServerInterface {
-  constructor(port: number) {}
+  constructor(public readonly port: number) {}
 
   abstract start(): void;
 }

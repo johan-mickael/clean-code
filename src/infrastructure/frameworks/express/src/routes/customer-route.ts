@@ -1,16 +1,16 @@
 import express, { Request, Response, Express, Router } from 'express';
 import RouteInterface from './route-interface';
-import ClientController from '../controllers/client.controller';
+import CustomerController from '../controllers/customer-controller';
 import container from '../ioc/container';
 
-export default class ClientRoute implements RouteInterface {
+export default class CustomerRoutes implements RouteInterface {
   router: Router;
-  clientController: ClientController;
+  clientController: CustomerController;
 
   constructor() {
     this.router = express.Router();
     this.clientController =
-      container.resolve<ClientController>('clientController');
+      container.resolve<CustomerController>('customerController');
   }
 
   getRouter() {

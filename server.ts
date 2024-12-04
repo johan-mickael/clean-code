@@ -1,6 +1,6 @@
-import ExpressServer from "./src/infrastructure/frameworks/express/server";
-import NestServer from "./src/infrastructure/frameworks/nest/server";
-import ServerInterface from "./src/infrastructure/frameworks/ServerInterface";
+import ExpressServer from "./src/infrastructure/frameworks/express/express-server";
+import NestServer from "./src/infrastructure/frameworks/nest/nest-server";
+import ServerInterface from "./src/infrastructure/frameworks/server-interface";
 
 const run = async () => {
   const port: number = 3000;

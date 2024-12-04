@@ -1,6 +1,6 @@
 export type PermisStatus = 'VALID' | 'EXPIRED' | 'SUSPENDED';
 
-export class Permis {
+export class DrivingLicense {
   constructor(
     public id: number,
     public date: Date,
