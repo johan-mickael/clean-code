@@ -37,3 +37,33 @@ frontend/                   # Code front-end (React, par exemple)
     ├── context/            # Gestion des contextes (ex. user, auth)
     └── utils/              # Utilitaires communs
 ```
+
+## Installation
+
+1. Build the docker image
+
+```sh
+docker compose build
+```
+
+2. Install the dependencies
+Ensure that `node_modules` is present in each of the following directories:
+> - `./node_modules`
+> - `./src/infrastructure/frameworks/express/node_modules`
+> - `./src/infrastructure/frameworks/nest/node_modules`
+
+If not, just run `npm install` in each of the directories above.
+
+### Running the application
+
+1. Using nestjs as backend framework
+
+```sh
+docker compose run -e BACKEND_FRAMEWORK=nest app
+```
+
+2. Using express as backend framework
+
+```sh
+docker compose run -e BACKEND_FRAMEWORK=express app
+```

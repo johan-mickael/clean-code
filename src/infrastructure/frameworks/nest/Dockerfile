@@ -12,5 +12,7 @@ RUN npm install
 # Copy application code
 COPY . .
 
+EXPOSE 3001
+
 # Command to run the app
 CMD ["npm", "run", "start:dev"]
