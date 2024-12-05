@@ -5,7 +5,7 @@ import GetCustomerListQuery from '../../../../../application/queries/get-custome
 import { Customer } from '../../../../../domain/entity/customer';
 import CustomerRepositoryReader from '../../../../../application/ports/customer-repository-reader';
 
-@Controller('clients')
+@Controller('customers')
 export default class CustomerController {
   constructor(private readonly customerRepositoryReader: CustomerRepositoryReader) {}
 

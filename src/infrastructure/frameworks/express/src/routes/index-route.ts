@@ -10,6 +10,6 @@ export default class IndexRoute {
   }
 
   configure(app: Express) {
-    app.use('/clients', this.clientRoute.getRouter());
+    app.use('/customers', this.clientRoute.getRouter());
   }
 }
