@@ -1,4 +1,4 @@
-import CustomerRepositoryReader from '../../../application/ports/customer-repository-reader';
+import CustomerRepositoryReader from '../../../application/ports/repositories/customer-repository-reader';
 import { Customer } from '../../../domain/entity/customer';
 import { DrivingLicense } from '../../../domain/entity/driving-license';
 import { Occupation } from '../../../domain/entity/occupation';
@@ -38,7 +38,7 @@ export default class InMemoryCustomerRepository implements CustomerRepositoryRea
     this.customers.push(mockCustomer2);
   }
 
-  all(): Customer[] {
+  list(): Customer[] {
     return this.customers;
   }
 }

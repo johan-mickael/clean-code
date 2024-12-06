@@ -4,47 +4,13 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - BACKEND_FRAMEWORK=express
+      - BACKEND_FRAMEWORK=${BACKEND_FRAMEWORK:-express}
+      - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
+      - DATABASE_URL=postgres://admin:admin@postgres:5432/app
+      - BASE_URL=http://localhost:3000
+      - NODE_ENV=development
     volumes:
       - .:/app
-
-  nest:
-    build:
-        context: ./src/infrastructure/frameworks/nest
-        dockerfile: Dockerfile
-    environment:
-        - PORT=3001
-        - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
-        - DATABASE_URL=postgres://root:password@postgres:5432/app
-        - JWT_SECRET=secret
-        - MAILER_SERVICE=Gmail
-        - MAILER_HOST=smtp.gmail.com
-        - MAILER_PORT=465
-        - BASE_URL=http://localhost:3001
-        - NODE_ENV=development
-    ports:
-        - "127.0.0.1:3001:3001"
-    volumes:
-        - ./src/infrastructure/frameworks/nest:/app/nest
-
-  express:
-    build:
-        context: ./src/infrastructure/frameworks/express
-        dockerfile: Dockerfile
-    environment:
-        - PORT=3002
-        - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
-        - DATABASE_URL=postgres://root:password@postgres:5432/app
-        - JWT_SECRET=secret
-        - MAILER_SERVICE=Gmail
-        - MAILER_HOST=smtp.gmail.com
-        - MAILER_PORT=465
-        - BASE_URL=http://localhost:3002
-        - NODE_ENV=development
-    ports:
-        - "127.0.0.1:3002:3002"
-    volumes:
-        - ./src/infrastructure/frameworks/express:/app/express
 
   postgres:
     image: postgres:${POSTGRES_VERSION:-16}-alpine

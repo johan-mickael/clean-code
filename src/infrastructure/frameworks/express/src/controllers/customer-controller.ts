@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import GetCustomerListQueryHandler from '../../../../../application/queries/get-customer-list-query-handler';
 import GetCustomerListQuery from '../../../../../application/queries/get-customer-list-query';
-import CustomerRepositoryReader from '../../../../../application/ports/customer-repository-reader';
+import CustomerRepositoryReader from '../../../../../application/ports/repositories/customer-repository-reader';
 
 export default class CustomerController {
   constructor(private readonly customerRepositoryReader: CustomerRepositoryReader) {}

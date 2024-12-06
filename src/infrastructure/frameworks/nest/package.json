@@ -1,26 +1,24 @@
 {
-    "name": "nest",
-    "version": "1.0.0",
-    "main": "server.js",
-    "scripts": {
-        "start": "ts-node server.ts",
-        "start:dev": "ts-node-dev server.ts"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "description": "",
-    "dependencies": {
-        "@nestjs/cli": "^10.4.7",
-        "@nestjs/common": "^10.4.7",
-        "@nestjs/core": "^10.4.13",
-        "@nestjs/platform-express": "^10.4.7",
-        "reflect-metadata": "^0.2.2",
-        "rxjs": "^7.8.1"
-    },
-    "devDependencies": {
-        "ts-node": "^10.9.2",
-        "ts-node-dev": "^2.0.0",
-        "typescript": "^5.6.3"
-    }
+  "name": "nest",
+  "version": "1.0.0",
+  "main": "nest-server.js",
+  "scripts": {
+    "start": "ts-node nest-server.ts",
+    "start:dev": "ts-node-dev nest-server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nestjs/cli": "^10.4.7",
+    "@nestjs/common": "^10.4.7",
+    "@nestjs/core": "^10.4.13",
+    "@nestjs/platform-express": "^10.4.7",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
 }

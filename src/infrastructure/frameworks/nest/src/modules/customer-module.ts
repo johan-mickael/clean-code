@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import CustomerController from '../controllers/customer-controller';
-import GetCustomerListQueryHandler from '../../../../../application/queries/get-customer-list-query-handler';
-import CustomerRepositoryReader from '../../../../../application/ports/customer-repository-reader';
+import CustomerRepositoryReader from '../../../../../application/ports/repositories/customer-repository-reader';
 import InMemoryCustomerRepository from '../../../../adapters/in-memory-database/customer-repository-reader';
 
 @Module({
