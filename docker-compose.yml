@@ -7,3 +7,69 @@ services:
       - BACKEND_FRAMEWORK=express
     volumes:
       - .:/app
+
+  nest:
+    build:
+        context: ./src/infrastructure/frameworks/nest
+        dockerfile: Dockerfile
+    environment:
+        - PORT=3001
+        - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
+        - DATABASE_URL=postgres://root:password@postgres:5432/app
+        - JWT_SECRET=secret
+        - MAILER_SERVICE=Gmail
+        - MAILER_HOST=smtp.gmail.com
+        - MAILER_PORT=465
+        - BASE_URL=http://localhost:3001
+        - NODE_ENV=development
+    ports:
+        - "127.0.0.1:3001:3001"
+    volumes:
+        - ./src/infrastructure/frameworks/nest:/app/nest
+
+  express:
+    build:
+        context: ./src/infrastructure/frameworks/express
+        dockerfile: Dockerfile
+    environment:
+        - PORT=3002
+        - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
+        - DATABASE_URL=postgres://root:password@postgres:5432/app
+        - JWT_SECRET=secret
+        - MAILER_SERVICE=Gmail
+        - MAILER_HOST=smtp.gmail.com
+        - MAILER_PORT=465
+        - BASE_URL=http://localhost:3002
+        - NODE_ENV=development
+    ports:
+        - "127.0.0.1:3002:3002"
+    volumes:
+        - ./src/infrastructure/frameworks/express:/app/express
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    ports:
+        - target: 5432
+          published: ${POSTGRES_PORT:-5432}
+          protocol: tcp
+    environment:
+        POSTGRES_DB: ${POSTGRES_DB:-app}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+        POSTGRES_USER: ${POSTGRES_USER:-admin}
+    volumes:
+    - postgres_data:/var/lib/postgresql/data:rw
+
+  mongo:
+    image: mongo
+    ports:
+        - "127.0.0.1:27017:27017"
+    volumes:
+        - mongo-data:/data/db
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: unless-stopped
+
+volumes:
+    mongo-data: {}
+    postgres_data: {}
