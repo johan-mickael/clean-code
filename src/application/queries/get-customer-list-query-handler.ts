@@ -3,9 +3,9 @@ import CustomerRepositoryReader from '../ports/repositories/customer-repository-
 import GetCustomerListQuery from './get-customer-list-query';
 
 export default class GetAllCustomersQueryHandler {
-  constructor(private readonly customerRepositoryReader: CustomerRepositoryReader) {}
+  constructor(private readonly CustomerRepositoryReader: CustomerRepositoryReader) {}
 
   execute(query: GetCustomerListQuery): Customer[] {
-    return this.customerRepositoryReader.list();
+    return this.CustomerRepositoryReader.list();
   }
 }
