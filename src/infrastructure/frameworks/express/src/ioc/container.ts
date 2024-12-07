@@ -1,5 +1,5 @@
 import { createContainer, asClass } from 'awilix';
-import InMemoryCustomerRepository from '../../../../adapters/in-memory-database/customer-repository-reader';
+import InMemoryCustomerRepository from '@triumph/in-memory-database-infrastructure/customer-repository-reader';
 import CustomerController from '../controllers/customer-controller';
 
 const container = createContainer();

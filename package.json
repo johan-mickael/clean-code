@@ -1,8 +1,11 @@
 {
+  "name": "triumph",
   "private": true,
   "workspaces": [
+    "src/application",
+    "src/domain",
     "src/infrastructure/frameworks/*",
-    "src/infrastructure/database/*"
+    "src/infrastructure/databases/*"
   ],
   "scripts": {
     "app:install": "npm install --workspaces",

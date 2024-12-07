@@ -1,7 +1,7 @@
-import CustomerRepositoryReader from '../../../application/ports/repositories/customer-repository-reader';
-import { Customer } from '../../../domain/entity/customer';
-import { DrivingLicense } from '../../../domain/entity/driving-license';
-import { Occupation } from '../../../domain/entity/occupation';
+import CustomerRepositoryReader from '@triumph/application/ports/repositories/customer-repository-reader';
+import { Customer } from '@triumph/domain/entity/customer';
+import { DrivingLicense } from '@triumph/domain/entity/driving-license';
+import { Occupation } from '@triumph/domain/entity/occupation';
 
 /**
  * @deprecated
