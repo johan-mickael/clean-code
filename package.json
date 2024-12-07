@@ -10,6 +10,9 @@
   "scripts": {
     "app:install": "npm install --workspaces",
     "build": "npm run build --workspaces",
+    "sequelize:init": "npm run init --workspace src/infrastructure/databases/sequelize",
+    "sequelize:generate:migration": "npm run generate:migration --workspace src/infrastructure/databases/sequelize",
+    "sequelize:migrate": "npm run migrate --workspace src/infrastructure/databases/sequelize",
     "start:express": "npm run start --workspace src/infrastructure/frameworks/express",
     "start:dev:express": "npm run dev --workspace src/infrastructure/frameworks/express",
     "start:nest": "npm run start --workspace src/infrastructure/frameworks/nest",
