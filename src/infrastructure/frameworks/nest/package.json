@@ -1,15 +1,12 @@
 {
-  "name": "nest",
+  "name": "nest-infrastructure",
   "version": "1.0.0",
-  "main": "nest-server.js",
+  "private": true,
+  "main": "server.js",
   "scripts": {
-    "start": "ts-node nest-server.ts",
-    "start:dev": "ts-node-dev nest-server.ts"
+    "start": "ts-node server.ts",
+    "dev": "ts-node-dev server.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@nestjs/cli": "^10.4.7",
     "@nestjs/common": "^10.4.7",
@@ -17,8 +14,5 @@
     "@nestjs/platform-express": "^10.4.7",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
-  },
-  "devDependencies": {
-    "typescript": "^5.6.3"
   }
 }

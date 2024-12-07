@@ -9,7 +9,7 @@ export default class IndexRoute {
     this.clientRoute = new CustomerRoutes();
   }
 
-  configure(app: Express) {
+  configureRoutes(app: Express) {
     app.use('/customers', this.clientRoute.getRouter());
   }
 }

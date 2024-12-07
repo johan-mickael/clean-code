@@ -9,7 +9,7 @@ import CustomerRepositoryReader from '../../../../../application/ports/repositor
 export default class CustomerController {
   constructor(private readonly customerRepositoryReader: CustomerRepositoryReader) {}
 
-  @Get('')
+  @Get()
   all(): Customer[] {
     const getCustomerListUsecase = new GetCustomerListQueryHandler(this.customerRepositoryReader);
     const customers = getCustomerListUsecase.execute(new GetCustomerListQuery());

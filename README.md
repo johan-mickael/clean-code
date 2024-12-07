@@ -26,16 +26,6 @@ src/
     ├── controllers/        # Contrôleurs d'API
     └── routes/             # Gestion des routes API
     └── dto/                # Data Transfer Objects (pour les échanges entre couches)
-
-frontend/                   # Code front-end (React, par exemple)
-├── public/                 # Fichiers publics (index.html, favicon, etc.)
-├── src/                    # Code source React
-    ├── components/         # Composants UI
-    ├── services/           # Services pour les appels API vers le back-end
-    ├── pages/              # Pages principales de l'application
-    ├── hooks/              # Custom hooks
-    ├── context/            # Gestion des contextes (ex. user, auth)
-    └── utils/              # Utilitaires communs
 ```
 
 ## Installation
@@ -47,23 +37,27 @@ docker compose build
 ```
 
 2. Install the dependencies
-Ensure that `node_modules` is present in each of the following directories:
-> - `./node_modules`
-> - `./src/infrastructure/frameworks/express/node_modules`
-> - `./src/infrastructure/frameworks/nest/node_modules`
-
-If not, just run `npm install` in each of the directories above.
+    
+```sh
+docker compose run app npm install
+```
 
 ### Running the application
 
 1. Using nestjs as backend framework
 
 ```sh
-docker compose run -e BACKEND_FRAMEWORK=nest app
+# Development
+docker compose run app npm run start:dev:nest
+# Production
+docker compose run app npm run start:nest
 ```
 
 2. Using express as backend framework
 
 ```sh
-docker compose run -e BACKEND_FRAMEWORK=express app
+# Development
+docker compose run app npm run start:dev:express
+# Production
+docker compose run app npm run start:express
 ```
