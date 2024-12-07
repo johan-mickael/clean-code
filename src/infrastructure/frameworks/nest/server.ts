@@ -6,6 +6,6 @@ const nestApplication = new NestApplication(serverPort);
 
 nestApplication.initialize().then((app) => {
   app.listen(serverPort, () => {
-    console.log(`${serverName} server running on port ${serverPort}`);
+    console.log(`\x1b[34m%s\x1b[0m`, `${serverName} server is running on port ${serverPort}`);
   });
 });

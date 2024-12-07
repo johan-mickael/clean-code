@@ -8,7 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies for all workspaces using npm workspaces
-RUN npm install
+RUN echo "Installing shared dependencies" && \
+  npm install
 
 # Copy the rest of the application code
 COPY . .
@@ -16,6 +17,7 @@ COPY . .
 # Expose the necessary port for the app (adjust if needed)
 EXPOSE 3000
 
-# Start the application (you can modify this if you want to run Express or NestJS specifically)
-CMD ["npm", "run", "dev:start:nest"]
-# OR CMD ["npm", "run", "dev:start:express"]
+# Make the entrypoint script executable
+RUN chmod +x /app/docker/entrypoint.sh
+
+ENTRYPOINT [ "/app/docker/entrypoint.sh" ]

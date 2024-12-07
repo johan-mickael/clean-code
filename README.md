@@ -30,34 +30,29 @@ src/
 
 ## Installation
 
-1. Build the docker image
+ Build the docker image
 
 ```sh
 docker compose build
 ```
 
-2. Install the dependencies
-    
-```sh
-docker compose run app npm install
-```
-
 ### Running the application
 
-1. Using nestjs as backend framework
-
+Before running the application, you must check that the `node_modules`. If it is not present, you must run the following command:
 ```sh
-# Development
-docker compose run app npm run start:dev:nest
-# Production
-docker compose run app npm run start:nest
+docker compose run --rm -it --entrypoint "" app npm install
 ```
 
-2. Using express as backend framework
+Then, you can run the application using the following command:
 
 ```sh
-# Development
-docker compose run app npm run start:dev:express
-# Production
-docker compose run app npm run start:express
+docker compose up
+```
+
+By default, the server will use nestjs as the framework. To use express, you can set the `FRAMEWORK` environment variable to `express`:
+
+Example:
+
+```sh
+FRAMEWORK=express docker compose up
 ```

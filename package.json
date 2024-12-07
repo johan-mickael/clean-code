@@ -5,6 +5,7 @@
     "src/infrastructure/database/*"
   ],
   "scripts": {
+    "app:install": "npm install --workspaces",
     "build": "npm run build --workspaces",
     "start:express": "npm run start --workspace src/infrastructure/frameworks/express",
     "start:dev:express": "npm run dev --workspace src/infrastructure/frameworks/express",
