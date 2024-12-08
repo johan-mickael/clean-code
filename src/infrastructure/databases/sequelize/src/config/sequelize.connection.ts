@@ -12,6 +12,10 @@ export default class SequelizeConnection {
     ] as SequelizeOptions;
     const SequelizeConnection = new Sequelize(sequelizeConfigOptionsTyped);
 
+    await SequelizeConnection.sync({
+      alter: this.appEnvironment === 'development',
+    });
+
     return SequelizeConnection;
   }
 }

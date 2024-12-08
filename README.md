@@ -56,3 +56,55 @@ Example:
 ```sh
 FRAMEWORK=express docker compose up
 ```
+
+### Sequelize
+
+1. Generate a new migration
+```sh
+docker compose run --rm -it --entrypoint "" app npm run sequelize:generate:migration <migration-name>
+```
+
+2. Run the migrations
+```sh
+docker compose run --rm -it --entrypoint "" app npm run sequelize:migrate
+```
+
+3. Generate a new seed
+```sh
+docker compose run --rm -it --entrypoint "" app npm run sequelize:generate:seed <seed-name>
+```
+
+4. Run the seeds
+```
+docker compose run --rm -it --entrypoint "" app npm run sequelize:seed
+```
+
+### Tools
+
+1. Format the code
+
+> In order to have a consistent code style, you can run the following command (Especially before committing your code):
+
+Manually:
+```sh
+docker compose run --rm -it --entrypoint "" app npm run format
+```
+
+Automatically before each commit:
+
+Add the following configuration to your `.git/hooks/pre-commit` file:
+
+```sh
+#!/bin/sh
+
+# Run Prettier formatting
+echo "🎨 Running Prettier..."
+node ./dev-scripts/prettier-check.js
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier check failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ Prettier check passed. Committing..."
+exit 0
+```

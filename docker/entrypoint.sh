@@ -11,6 +11,8 @@ fi
 
 echo -e "\033[0;34mStarting the application with $FRAMEWORK framework\033[0m"
 
+npm run sequelize:migrate
+
 if [ "$FRAMEWORK" = "express" ]; then
     npm run start:dev:express
 else

@@ -5,7 +5,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc",
+    "generate:migration": "sequelize-cli migration:generate --name",
     "migrate": "sequelize-cli db:migrate",
+    "generate:seed": "sequelize-cli seed:generate --name",
     "seed": "sequelize-cli db:seed:all --env development"
   },
   "dependencies": {
