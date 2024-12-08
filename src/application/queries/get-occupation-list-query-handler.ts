@@ -5,7 +5,7 @@ import { Occupation } from '@triumph/domain/entity/occupation';
 export default class GetOccupationListQueryHandler {
   constructor(private readonly occupationRepositoryReader: OccupationRepositoryReader) {}
 
-  execute(query: GetOccupationListQuery): Occupation[] {
-    return this.occupationRepositoryReader.list();
+  async execute(query: GetOccupationListQuery): Promise<Occupation[]> {
+    return await this.occupationRepositoryReader.list();
   }
 }

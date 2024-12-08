@@ -6,10 +6,10 @@ import GetOccupationListQueryHandler from '@triumph/application/queries/get-occu
 export default class OccupationController {
   constructor(private readonly OccupationRepositoryReader: OccupationRepositoryReader) {}
 
-  all(req: Request, res: Response): Response {
+  async list(req: Request, res: Response): Promise<Response> {
     const listOccupationUsecase = new GetOccupationListQueryHandler(this.OccupationRepositoryReader);
-    const occupations = listOccupationUsecase.execute(new GetOccupationListQuery());
+    const occupations = await listOccupationUsecase.execute(new GetOccupationListQuery());
 
-    return res.status(200).json(occupations);
+    return Promise.resolve(res.status(200).json(occupations));
   }
 }

@@ -9,9 +9,9 @@ export default class OccupationController {
   constructor(private readonly occupationRepositoryReader: OccupationRepositoryReader) {}
 
   @Get()
-  all(): Occupation[] {
+  async list(): Promise<Occupation[]> {
     const getOccupationListUsecase = new GetOccupationListQueryHandler(this.occupationRepositoryReader);
-    const occupations = getOccupationListUsecase.execute(new GetOccupationListQuery());
+    const occupations = await getOccupationListUsecase.execute(new GetOccupationListQuery());
 
     return occupations;
   }

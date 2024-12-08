@@ -1,20 +1,20 @@
 import express, { Request, Response, Express, Router } from 'express';
 import RouteInterface from './route-interface';
-import CustomerController from '../controllers/customer-controller';
 import container from '../ioc/container';
+import OccupationController from '../controllers/occupation-controller';
 
 export default class OccupationRoute implements RouteInterface {
   router: Router;
-  occupationController: CustomerController;
+  occupationController: OccupationController;
 
   constructor() {
     this.router = express.Router();
-    this.occupationController = container.resolve<CustomerController>('OccupationController');
+    this.occupationController = container.resolve<OccupationController>('OccupationController');
   }
 
   getRouter() {
-    this.router.get('/', (req: Request, res: Response) => {
-      this.occupationController.all(req, res);
+    this.router.get('/', async (req: Request, res: Response) => {
+      this.occupationController.list(req, res);
     });
 
     return this.router;

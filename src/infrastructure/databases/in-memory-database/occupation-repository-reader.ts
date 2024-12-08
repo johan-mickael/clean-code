@@ -12,18 +12,18 @@ export default class InMemoryOccupationRepository implements OccupationRepositor
   private occupations: Occupation[] = [];
 
   constructor() {
-    const mockOccupation1 = new Occupation(1, 'Software Engineer');
+    const mockOccupation1 = new Occupation(1, 'In MEMORY Software Engineer');
 
-    const mockCustomer2 = new Occupation(2, 'Data Scientist');
+    const mockCustomer2 = new Occupation(2, 'In MEMORY Data Scientist');
 
-    const mockCustomer3 = new Occupation(3, 'Product Manager');
+    const mockCustomer3 = new Occupation(3, 'In MEMORY Product Manager');
 
     this.occupations.push(mockOccupation1);
     this.occupations.push(mockCustomer2);
     this.occupations.push(mockCustomer3);
   }
 
-  list(): Occupation[] {
-    return this.occupations;
+  async list(): Promise<Occupation[]> {
+    return Promise.resolve(this.occupations);
   }
 }
