@@ -22,6 +22,13 @@ export default class InMemoryOccupationRepository implements OccupationRepositor
     this.occupations.push(mockCustomer2);
     this.occupations.push(mockCustomer3);
   }
+  search(keyword: string): Promise<Occupation[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  getById(id: number): Promise<Occupation> {
+    throw new Error('Method not implemented.');
+  }
 
   async list(): Promise<Occupation[]> {
     return Promise.resolve(this.occupations);

@@ -17,6 +17,14 @@ export default class OccupationRoute implements RouteInterface {
       this.occupationController.list(req, res);
     });
 
+    this.router.get('/:id', async (req: Request, res: Response) => {
+      this.occupationController.getById(req, res);
+    });
+
+    this.router.get('/search/:keyword', async (req: Request, res: Response) => {
+      this.occupationController.search(req, res);
+    });
+
     return this.router;
   }
 }
