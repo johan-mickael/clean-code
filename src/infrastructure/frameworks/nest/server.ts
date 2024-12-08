@@ -1,11 +1,25 @@
-import NestApplication from './nest-application';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 
-const serverName = 'Nest';
-const serverPort = Number(process.env.PORT || 3000);
-const nestApplication = new NestApplication(serverPort);
+class NestServer {
+  private readonly serverName = 'Nest';
+  private readonly serverPort = parseInt(process.env.PORT || '3000');
 
-nestApplication.initialize().then((app) => {
-  app.listen(serverPort, () => {
-    console.log(`\x1b[34m%s\x1b[0m`, `${serverName} server is running on port ${serverPort}`);
-  });
-});
+  async bootstrap() {
+    // Getting the application context
+    const applicationContext = await NestFactory.createApplicationContext(AppModule);
+
+    // Connecting to the database
+    const databaseAdapter = applicationContext.get(DatabaseAdapter);
+    await databaseAdapter.connect();
+
+    // Creating the application instance and running it
+    const application = await NestFactory.create(AppModule);
+    await application.listen(this.serverPort, () => {
+      console.log(`\x1b[34m%s\x1b[0m`, `${this.serverName} server is running on port ${this.serverPort}`);
+    });
+  }
+}
+
+new NestServer().bootstrap();

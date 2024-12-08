@@ -1,19 +1,16 @@
 import express, { Express } from 'express';
-import IndexRoute from './src/routes/index-route';
+import IndexRoute from './routes/index-route';
 
-export default class ExpressApp {
+export default class ExpressApplication {
   private app: Express;
   private routes: IndexRoute;
 
-  readonly port: number;
-
-  constructor(port: number) {
-    this.port = port;
+  constructor() {
     this.app = express();
     this.routes = new IndexRoute();
   }
 
-  initialize(): Express {
+  configureExpressApplication(): Express {
     // Setting up routes
     this.routes.configureRoutes(this.app);
 

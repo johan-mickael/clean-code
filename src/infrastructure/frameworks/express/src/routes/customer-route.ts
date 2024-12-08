@@ -1,7 +1,7 @@
 import express, { Request, Response, Express, Router } from 'express';
 import RouteInterface from './route-interface';
 import CustomerController from '../controllers/customer-controller';
-import container from '../ioc/container';
+import container from '../ioc/container.registry';
 
 export default class CustomerRoute implements RouteInterface {
   router: Router;

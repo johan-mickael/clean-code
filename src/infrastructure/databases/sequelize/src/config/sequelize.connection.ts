@@ -1,11 +1,17 @@
 import sequelizeConfigOptions from './sequelize.config';
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-const appEnvironment = process.env.NODE_ENV || 'development';
+export default class SequelizeConnection {
+  private readonly appEnvironment = process.env.NODE_ENV || 'development';
 
-type AppEnvironment = 'development' | 'test' | 'production';
-const sequelizeConfigOptionsTyped = sequelizeConfigOptions[appEnvironment as AppEnvironment] as SequelizeOptions;
+  async initialize(): Promise<Sequelize> {
+    type AppEnvironment = 'development' | 'test' | 'production';
 
-const sequelizeConnection = new Sequelize(sequelizeConfigOptionsTyped);
+    const sequelizeConfigOptionsTyped = sequelizeConfigOptions[
+      this.appEnvironment as AppEnvironment
+    ] as SequelizeOptions;
+    const SequelizeConnection = new Sequelize(sequelizeConfigOptionsTyped);
 
-export default sequelizeConnection;
+    return SequelizeConnection;
+  }
+}

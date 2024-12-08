@@ -1,6 +1,6 @@
 import express, { Request, Response, Express, Router } from 'express';
 import RouteInterface from './route-interface';
-import container from '../ioc/container';
+import container from '../ioc/container.registry';
 import OccupationController from '../controllers/occupation-controller';
 
 export default class OccupationRoute implements RouteInterface {
