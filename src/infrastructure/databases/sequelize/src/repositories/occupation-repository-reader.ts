@@ -20,7 +20,7 @@ export default class SequelizeOccupationRepository implements OccupationReposito
     return new Occupation(occupation.id, occupation.name);
   }
 
-  async search(keyword: string): Promise<Occupation[]> {
+  async searchByName(keyword: string): Promise<Occupation[]> {
     const occupations = await OccupationModel.findAll({
       where: {
         name: {

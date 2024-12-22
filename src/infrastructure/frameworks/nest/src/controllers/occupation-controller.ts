@@ -1,13 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import OccupationRepositoryReader from '@triumph/application/ports/repositories/occupation-repository-reader';
-import GetOccupationListQueryHandler from '@triumph/application/queries/get-occupation-list-query-handler';
-import GetOccupationListQuery from '@triumph/application/queries/get-occupation-list-query';
 import { Occupation } from '@triumph/domain/entity/occupation';
-import GetOccupationQueryHandler from '@triumph/application/queries/get-occupation-query-handler';
-import GetOccupationQuery from '@triumph/application/queries/get-occupation-query';
-import { parse } from 'path';
-import SearchoccupationQueryHandler from '@triumph/application/queries/search-occupation-query-handler';
-import SearchOccupationQuery from '@triumph/application/queries/search-occupation-query';
+import ListOccupationsQueryHandler from '@triumph/application/queries/occupations/list-occupations/list-occupations-query-handler';
+import ListOccupationsQuery from '@triumph/application/queries/occupations/list-occupations/list-occupations-query';
+import GetOccupationByIdentifierQueryHandler from '@triumph/application/queries/occupations/get-occupation-by-identifier/get-occupation-by-identifier-query-handler';
+import GetOccupationByIdentifierQuery from '@triumph/application/queries/occupations/get-occupation-by-identifier/get-occupation-by-identifier-query';
+import SearchOccupationsByNameQueryHandler from '@triumph/application/queries/occupations/search-occupations-by-name/search-occupations-by-name-query-handler';
+import SearchOccupationsByNameQuery from '@triumph/application/queries/occupations/search-occupations-by-name/search-occupation-by-name-query';
 
 @Controller('occupations')
 export default class OccupationController {
@@ -15,25 +14,25 @@ export default class OccupationController {
 
   @Get()
   async list(): Promise<Occupation[]> {
-    const getOccupationListUsecase = new GetOccupationListQueryHandler(this.occupationRepositoryReader);
-    const occupations = await getOccupationListUsecase.execute(new GetOccupationListQuery());
+    const listOccupationsUseCase = new ListOccupationsQueryHandler(this.occupationRepositoryReader);
+    const occupations = await listOccupationsUseCase.execute(new ListOccupationsQuery());
 
     return occupations;
   }
 
   @Get(':id')
   async getById(@Param('id') id: string): Promise<Occupation> {
-    const getOccupationUsecase = new GetOccupationQueryHandler(this.occupationRepositoryReader);
-    const getOccupationQuery = new GetOccupationQuery(parseInt(id));
+    const getOccupationUsecase = new GetOccupationByIdentifierQueryHandler(this.occupationRepositoryReader);
+    const getOccupationQuery = new GetOccupationByIdentifierQuery(parseInt(id));
     const occupation = await getOccupationUsecase.execute(getOccupationQuery);
 
     return occupation;
   }
 
-  @Get('search/:keyword')
-  async search(@Param('keyword') keyword: string): Promise<Occupation[]> {
-    const searchOccupationUsecase = new SearchoccupationQueryHandler(this.occupationRepositoryReader);
-    const searchOccupationQuery = new SearchOccupationQuery(keyword);
+  @Get('search/:name')
+  async searchByName(@Param('name') keyword: string): Promise<Occupation[]> {
+    const searchOccupationUsecase = new SearchOccupationsByNameQueryHandler(this.occupationRepositoryReader);
+    const searchOccupationQuery = new SearchOccupationsByNameQuery(keyword);
     const occupations = await searchOccupationUsecase.execute(searchOccupationQuery);
 
     return occupations;

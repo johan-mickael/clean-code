@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CustomerModule } from './src/modules/customer-module';
 import { OccupationModule } from './src/modules/occupation-module';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 
 @Module({
   imports: [
-    CustomerModule,
     OccupationModule,
     // Add your modules here
   ],
