@@ -11,8 +11,7 @@ class ExpressServer {
 
   async bootstrap() {
     // Connecting to the database
-    const databaseAdapter = container.resolve<DatabaseAdapter>('DatabaseAdapter');
-    await databaseAdapter.connect();
+    await ExpressServer.connectToDatabase();
 
     // Configuring the express application
     const expressApplication = this.expressApplication.configureExpressApplication();
@@ -24,6 +23,11 @@ class ExpressServer {
     await expressApplication.listen(this.serverPort, () => {
       console.log(`\x1b[34m%s\x1b[0m`, `${this.serverName} server is running on port ${this.serverPort}`);
     });
+  }
+
+  static async connectToDatabase() {
+    const databaseAdapter = container.resolve<DatabaseAdapter>('DatabaseAdapter');
+    await databaseAdapter.connect();
   }
 }
 

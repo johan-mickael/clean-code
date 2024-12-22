@@ -1,0 +1,12 @@
+{
+  "name": "@triumph/mongoose-adapter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "mongoose": "^8.9.2"
+  }
+}
