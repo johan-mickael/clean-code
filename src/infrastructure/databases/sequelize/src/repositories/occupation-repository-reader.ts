@@ -10,11 +10,11 @@ export default class SequelizeOccupationRepository implements OccupationReposito
     return occupations.map((occupation) => new Occupation(occupation.id, occupation.name));
   }
 
-  async getById(id: number): Promise<Occupation> {
+  async getById(id: string): Promise<Occupation | null> {
     const occupation = await OccupationModel.findByPk(id);
 
     if (!occupation) {
-      throw new Error('Occupation not found');
+      return null;
     }
 
     return new Occupation(occupation.id, occupation.name);

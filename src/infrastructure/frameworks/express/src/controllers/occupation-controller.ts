@@ -3,8 +3,9 @@ import GetOccupationByIdentifierQuery from '@triumph/application/queries/occupat
 import GetOccupationByIdentifierQueryHandler from '@triumph/application/queries/occupations/get-occupation-by-identifier/get-occupation-by-identifier-query-handler';
 import ListOccupationsQuery from '@triumph/application/queries/occupations/list-occupations/list-occupations-query';
 import ListOccupationsQueryHandler from '@triumph/application/queries/occupations/list-occupations/list-occupations-query-handler';
-import SearchOccupationsByNameQuery from '@triumph/application/queries/occupations/search-occupations-by-name/search-occupation-by-name-query';
+import SearchOccupationsByNameQuery from '@triumph/application/queries/occupations/search-occupations-by-name/search-occupations-by-name-query';
 import SearchOccupationsByNameQueryHandler from '@triumph/application/queries/occupations/search-occupations-by-name/search-occupations-by-name-query-handler';
+import { OccupationNotFoundError } from '@triumph/domain/errors/occupations/occupation-not-found-error';
 import { Request, Response } from 'express';
 
 export default class OccupationController {
@@ -14,15 +15,22 @@ export default class OccupationController {
     const listOccupationsUsecase = new ListOccupationsQueryHandler(this.OccupationRepositoryReader);
     const occupations = await listOccupationsUsecase.execute(new ListOccupationsQuery());
 
-    return Promise.resolve(res.status(200).json(occupations));
+    return res.status(200).json(occupations);
   }
 
-  async getById(req: Request, res: Response): Promise<Response> {
+  async getById(req: Request, res: Response, next: any): Promise<Response> {
     const { id } = req.params;
     const getOccupationByIdentifierUsecase = new GetOccupationByIdentifierQueryHandler(this.OccupationRepositoryReader);
-    const occupation = await getOccupationByIdentifierUsecase.execute(new GetOccupationByIdentifierQuery(parseInt(id)));
+    try {
+      const occupation = await getOccupationByIdentifierUsecase.execute(new GetOccupationByIdentifierQuery(id));
+      return Promise.resolve(res.status(200).json(occupation));
+    } catch (error) {
+      if (error instanceof OccupationNotFoundError) {
+        return res.sendStatus(404);
+      }
 
-    return Promise.resolve(res.status(200).json(occupation));
+      return next(error);
+    }
   }
 
   async search(req: Request, res: Response): Promise<Response> {
@@ -30,6 +38,6 @@ export default class OccupationController {
     const searchOccupationsByNameUseCase = new SearchOccupationsByNameQueryHandler(this.OccupationRepositoryReader);
     const occupations = await searchOccupationsByNameUseCase.execute(new SearchOccupationsByNameQuery(keyword));
 
-    return Promise.resolve(res.status(200).json(occupations));
+    return res.status(200).json(occupations);
   }
 }

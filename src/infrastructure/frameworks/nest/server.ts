@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
+import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
 
 class NestServer {
   private readonly serverName = 'Nest';
@@ -16,6 +17,9 @@ class NestServer {
 
     // Creating the application instance and running it
     const application = await NestFactory.create(AppModule);
+
+    application.useGlobalFilters(new HttpErrorInterceptor());
+
     await application.listen(this.serverPort, () => {
       console.log(`\x1b[34m%s\x1b[0m`, `${this.serverName} server is running on port ${this.serverPort}`);
     });

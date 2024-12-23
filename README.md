@@ -75,7 +75,7 @@ docker compose run --rm -it --entrypoint "" app npm run sequelize:generate:seed 
 ```
 
 4. Run the seeds
-```
+```sh
 docker compose run --rm -it --entrypoint "" app npm run sequelize:seed
 ```
 

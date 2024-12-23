@@ -1,7 +1,9 @@
-export default class GetOccupationByIdentifierQuery {
-  constructor(private readonly _id: number) { }
+import { Query } from '../../query';
 
-  get id(): number {
+export default class GetOccupationByIdentifierQuery implements Query {
+  constructor(private readonly _id: string) {}
+
+  get id(): string {
     return this._id;
   }
 }

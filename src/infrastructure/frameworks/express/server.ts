@@ -1,6 +1,7 @@
 import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 import ExpressApplication from './src/express-application';
 import container from './src/ioc/container.registry';
+import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
 
 class ExpressServer {
   private readonly serverName = 'Express';
@@ -15,6 +16,9 @@ class ExpressServer {
 
     // Configuring the express application
     const expressApplication = this.expressApplication.configureExpressApplication();
+
+    // Middlewares
+    expressApplication.use(HttpErrorInterceptor.handle);
 
     // Running the express application
     await expressApplication.listen(this.serverPort, () => {

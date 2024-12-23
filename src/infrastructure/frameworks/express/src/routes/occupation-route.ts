@@ -1,4 +1,4 @@
-import express, { Request, Response, Express, Router } from 'express';
+import express, { Request, Response, Express, Router, NextFunction } from 'express';
 import RouteInterface from './route-interface';
 import container from '../ioc/container.registry';
 import OccupationController from '../controllers/occupation-controller';
@@ -17,8 +17,8 @@ export default class OccupationRoute implements RouteInterface {
       this.occupationController.list(req, res);
     });
 
-    this.router.get('/:id', async (req: Request, res: Response) => {
-      this.occupationController.getById(req, res);
+    this.router.get('/:id', async (req: Request, res: Response, nextFunction: NextFunction) => {
+      this.occupationController.getById(req, res, nextFunction);
     });
 
     this.router.get('/search/:keyword', async (req: Request, res: Response) => {
