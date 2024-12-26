@@ -1,20 +1,14 @@
 import { Module } from '@nestjs/common';
 import { OccupationModule } from './src/modules/occupation-module';
-import SequelizeAdapter from '@triumph/sequelize-adapter/src';
-import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
+import { DatabaseAdapterModule } from './src/modules/database-adapter-module';
 
 @Module({
   imports: [
+    DatabaseAdapterModule,
     OccupationModule,
     // Add your modules here
   ],
   controllers: [],
-  providers: [
-    {
-      provide: DatabaseAdapter,
-      useClass: SequelizeAdapter,
-    },
-  ],
-  exports: [DatabaseAdapter],
+  providers: [],
 })
 export class AppModule {}

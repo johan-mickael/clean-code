@@ -1,17 +1,23 @@
-import { createContainer, asClass } from 'awilix';
+import { createContainer, asClass, asFunction } from 'awilix';
 import OccupationController from '../controllers/occupation-controller';
-import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 import ExpressApplication from '../express-application';
-import SequelizeOccupationRepository from '@triumph/sequelize-adapter/src/repositories/occupation-repository-reader';
+import MongooseAdapter from '../../../../databases/mongoose/src';
+import OccupationRepositoryFactory from './repositories/occupation-repository-factory';
 
 const container = createContainer();
 
+// Main application components
 container.register({
   ExpressApplication: asClass(ExpressApplication).classic(),
-  DatabaseAdapter: asClass(SequelizeAdapter).classic(),
+  DatabaseAdapter: asClass(MongooseAdapter).classic(),
+});
 
-  OccupationRepositoryReader: asClass(SequelizeOccupationRepository).singleton(),
+// Occupation components
+container.register({
   OccupationController: asClass(OccupationController).classic(),
+  OccupationRepositoryReader: asFunction(({ DatabaseAdapter }) => {
+    return new OccupationRepositoryFactory(DatabaseAdapter).create();
+  }).singleton(),
 });
 
 export default container;
