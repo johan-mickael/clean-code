@@ -1,8 +1,9 @@
-import { Occupation } from '@triumph/domain/entity/occupation';
 import OccupationRepositoryReader from '../../../ports/repositories/occupation-repository-reader';
 import GetOccupationByIdentifierQuery from './get-occupation-by-identifier-query';
 import { OccupationNotFoundError } from '@triumph/domain/errors/occupations/occupation-not-found-error';
 import GetOccupationByIdentifierQueryValidator from './get-occupation-by-identifier-query-validator';
+import OccupationDTO from '../../../dto-mappers/occupation-dto';
+import OccupationDTOMapper from '../../../dto-mappers/occupation-dto-mapper';
 
 export default class GetOccupationByIdentifierQueryHandler {
   constructor(private readonly occupationRepository: OccupationRepositoryReader) {}
@@ -13,13 +14,13 @@ export default class GetOccupationByIdentifierQueryHandler {
    *  OccupationNotFoundError,
    * }
    */
-  async execute(getOccupationByIdentifierQuery: GetOccupationByIdentifierQuery): Promise<Occupation> {
+  async execute(getOccupationByIdentifierQuery: GetOccupationByIdentifierQuery): Promise<OccupationDTO> {
     new GetOccupationByIdentifierQueryValidator().validateQuery(getOccupationByIdentifierQuery);
 
     const foundOccupation = await this.occupationRepository.getById(getOccupationByIdentifierQuery.id);
 
     if (foundOccupation !== null) {
-      return foundOccupation;
+      return OccupationDTOMapper.toDTO(foundOccupation);
     }
 
     throw new OccupationNotFoundError();

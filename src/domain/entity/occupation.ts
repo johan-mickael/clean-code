@@ -1,6 +1,6 @@
 export class Occupation {
   constructor(
-    public id: number,
+    public id: string | number,
     public name: string,
   ) {}
 }
