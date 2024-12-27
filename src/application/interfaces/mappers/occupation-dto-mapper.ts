@@ -1,5 +1,5 @@
 import { Occupation } from '@triumph/domain/entity/occupation';
-import OccupationDTO from './occupation-dto';
+import OccupationDTO from '../dtos/occupation-dto';
 
 export default class OccupationDTOMapper {
   static toDTO(occupationEntity: Occupation): OccupationDTO {

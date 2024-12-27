@@ -2,8 +2,8 @@ import OccupationRepositoryReader from '../../../ports/repositories/occupation-r
 import GetOccupationByIdentifierQuery from './get-occupation-by-identifier-query';
 import { OccupationNotFoundError } from '@triumph/domain/errors/occupations/occupation-not-found-error';
 import GetOccupationByIdentifierQueryValidator from './get-occupation-by-identifier-query-validator';
-import OccupationDTO from '../../../dto-mappers/occupation-dto';
-import OccupationDTOMapper from '../../../dto-mappers/occupation-dto-mapper';
+import OccupationDTO from '../../../interfaces/dtos/occupation-dto';
+import OccupationDTOMapper from '../../../interfaces/mappers/occupation-dto-mapper';
 
 export default class GetOccupationByIdentifierQueryHandler {
   constructor(private readonly occupationRepository: OccupationRepositoryReader) {}

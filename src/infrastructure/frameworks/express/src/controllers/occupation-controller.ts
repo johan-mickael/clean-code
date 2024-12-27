@@ -33,7 +33,7 @@ export default class OccupationController {
     }
   }
 
-  async search(req: Request, res: Response): Promise<Response> {
+  async searchByName(req: Request, res: Response): Promise<Response> {
     const { keyword } = req.params;
     const searchOccupationsByNameUseCase = new SearchOccupationsByNameQueryHandler(this.OccupationRepositoryReader);
     const occupations = await searchOccupationsByNameUseCase.execute(new SearchOccupationsByNameQuery(keyword));
