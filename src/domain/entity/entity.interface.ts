@@ -1,2 +1,3 @@
-export default interface Entity {
+export default class Entity {
+  constructor(public id: string) {}
 }
