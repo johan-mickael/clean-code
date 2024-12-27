@@ -2,6 +2,8 @@ import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/dat
 import ExpressApplication from './src/express-application';
 import container from './src/ioc/container.registry';
 import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
+import SequelizeAdapter from '@triumph/sequelize-adapter/src';
+import MongooseAdapter from '../../databases/mongoose/src';
 
 class ExpressServer {
   private readonly serverName = 'Express';
@@ -26,7 +28,22 @@ class ExpressServer {
   }
 
   static async connectToDatabase() {
-    const databaseAdapter = container.resolve<DatabaseAdapter>('DatabaseAdapter');
+    try {
+      await ExpressServer.connectToPostgresDatabase();
+      await ExpressServer.connectToMongoDatabase();
+    } catch (error) {
+      console.error('Error connecting to the database', error);
+      process.exit(1);
+    }
+  }
+
+  static async connectToPostgresDatabase() {
+    const databaseAdapter = new SequelizeAdapter();
+    await databaseAdapter.connect();
+  }
+
+  static async connectToMongoDatabase() {
+    const databaseAdapter = new MongooseAdapter();
     await databaseAdapter.connect();
   }
 }

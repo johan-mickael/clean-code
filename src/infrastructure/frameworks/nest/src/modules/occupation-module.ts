@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
 import OccupationController from '../controllers/occupation-controller';
-import { OccupationRepositoryProvider } from './occupation-provider';
-import { DatabaseAdapterModule } from './database-adapter-module';
+import SequelizeOccupationRepository from '@triumph/sequelize-adapter/src/repositories/occupation-repository-reader';
+import OccupationRepositoryReader from '@triumph/application/ports/repositories/occupation-repository-reader';
 
 @Module({
-  imports: [DatabaseAdapterModule],
+  imports: [],
   controllers: [OccupationController],
-  providers: [OccupationRepositoryProvider],
-  exports: [OccupationRepositoryProvider],
+  providers: [
+    {
+      provide: OccupationRepositoryReader,
+      useClass: SequelizeOccupationRepository,
+    }
+  ],
+  exports: [],
 })
 export class OccupationModule {}

@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
 import DealerController from '../controllers/dealer-controller';
-import { DealerRepositoryProvider } from './dealer-provider';
-import { DatabaseAdapterModule } from './database-adapter-module';
+import SequelizeDealerRepository from '@triumph/sequelize-adapter/src/repositories/dealer-repository-reader';
+import DealerRepositoryReader from '@triumph/application/ports/repositories/dealer-repository-reader';
 
 @Module({
-  imports: [DatabaseAdapterModule],
+  imports: [],
   controllers: [DealerController],
-  providers: [DealerRepositoryProvider],
-  exports: [DealerRepositoryProvider],
+  providers: [
+    {
+      provide: DealerRepositoryReader,
+      useClass: SequelizeDealerRepository,
+    }
+  ],
+  exports: [],
 })
 export class DealerModule {}
