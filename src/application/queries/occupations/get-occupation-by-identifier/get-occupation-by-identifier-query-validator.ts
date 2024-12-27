@@ -1,5 +1,5 @@
-import { InvalidQueryError } from '../../invalid-query-error';
-import { QueryValidator } from '../../query-validator';
+import { InvalidQueryError } from '../../common/invalid-query-error';
+import { QueryValidator } from '../../common/query-validator';
 import GetOccupationByIdentifierQuery from './get-occupation-by-identifier-query';
 
 export default class GetOccupationByIdentifierQueryValidator implements QueryValidator {

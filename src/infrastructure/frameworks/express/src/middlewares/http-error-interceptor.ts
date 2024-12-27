@@ -1,4 +1,4 @@
-import { InvalidQueryError } from '@triumph/application/queries/invalid-query-error';
+import { InvalidQueryError } from '@triumph/application/queries/common/invalid-query-error';
 import { NextFunction, Request, Response } from 'express';
 
 export class HttpErrorInterceptor {

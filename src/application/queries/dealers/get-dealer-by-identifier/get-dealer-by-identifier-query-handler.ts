@@ -6,7 +6,7 @@ import GetDealerByIdentifierQuery from './get-dealer-by-identifier-query';
 import GetDealerByIdentifierQueryValidator from './get-dealer-by-identifier-query-validator';
 
 export default class GetDealerByIdentifierQueryHandler {
-  constructor(private readonly dealerRepository: DealerRepositoryReader) { }
+  constructor(private readonly dealerRepository: DealerRepositoryReader) {}
 
   /**
    * @throws {

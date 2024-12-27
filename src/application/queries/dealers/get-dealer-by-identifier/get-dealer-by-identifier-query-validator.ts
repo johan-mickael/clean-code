@@ -1,5 +1,5 @@
-import { InvalidQueryError } from '../../invalid-query-error';
-import { QueryValidator } from '../../query-validator';
+import { InvalidQueryError } from '../../common/invalid-query-error';
+import { QueryValidator } from '../../common/query-validator';
 import GetDealerByIdentifierQuery from './get-dealer-by-identifier-query';
 
 export default class GetDealerByIdentifierQueryValidator implements QueryValidator {

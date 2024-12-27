@@ -1,15 +1,14 @@
 import { Column, CreatedAt, UpdatedAt, Table, Model } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'occupations',
-  modelName: 'Occupation',
+  tableName: 'dealers',
+  modelName: 'Dealer',
   timestamps: true,
   underscored: true,
 })
-export default class Occupation extends Model {
+export default class Dealer extends Model {
   @Column({
     primaryKey: true,
-    autoIncrement: true,
   })
   declare id: string;
 
@@ -17,6 +16,11 @@ export default class Occupation extends Model {
     allowNull: false,
   })
   declare name: string;
+
+  @Column({
+    allowNull: false,
+  })
+  declare address: string;
 
   @CreatedAt
   declare createdAt: Date;

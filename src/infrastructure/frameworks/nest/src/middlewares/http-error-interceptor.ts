@@ -1,5 +1,5 @@
 import { Catch, ExceptionFilter, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
-import { InvalidQueryError } from '@triumph/application/queries/invalid-query-error';
+import { InvalidQueryError } from '@triumph/application/queries/common/invalid-query-error';
 import { Request, Response } from 'express';
 
 @Catch()
