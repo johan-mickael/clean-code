@@ -8,7 +8,10 @@
     "generate:migration": "sequelize-cli migration:generate --name",
     "migrate": "sequelize-cli db:migrate",
     "generate:seed": "sequelize-cli seed:generate --name",
-    "seed": "sequelize-cli db:seed:all --env development"
+    "seed": "sequelize-cli db:seed:all --env development",
+    "drop": "sequelize-cli db:drop",
+    "create": "sequelize-cli db:create",
+    "reset": "sequelize-cli db:reset"
   },
   "dependencies": {
     "pg": "^8.11.1",
