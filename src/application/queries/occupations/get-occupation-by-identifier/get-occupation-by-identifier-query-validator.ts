@@ -4,9 +4,9 @@ import GetOccupationByIdentifierQuery from './get-occupation-by-identifier-query
 
 export default class GetOccupationByIdentifierQueryValidator implements QueryValidator {
   validateQuery(getOccupationByIdentifierQuery: GetOccupationByIdentifierQuery): void {
-    const id = parseInt(getOccupationByIdentifierQuery.id);
+    const id = getOccupationByIdentifierQuery.id;
 
-    if (!id || isNaN(id) || id < 1) {
+    if (!id) {
       throw new InvalidQueryError();
     }
   }
