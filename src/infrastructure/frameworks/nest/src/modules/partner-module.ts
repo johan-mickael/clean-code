@@ -10,8 +10,8 @@ import PartnerRepositoryReader from '@triumph/application/ports/repositories/par
     {
       provide: PartnerRepositoryReader,
       useClass: SequelizePartnerRepository,
-    }
+    },
   ],
   exports: [],
 })
-export class PartnerModule { }
+export class PartnerModule {}

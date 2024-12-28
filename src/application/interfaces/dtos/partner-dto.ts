@@ -4,5 +4,5 @@ export default class PartnerDTO {
     public name: string,
     public email: string,
     public dealerId: string,
-  ) { }
+  ) {}
 }

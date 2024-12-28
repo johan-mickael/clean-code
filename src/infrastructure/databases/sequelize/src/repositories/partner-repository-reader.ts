@@ -6,12 +6,7 @@ export default class SequelizePartnerRepository implements PartnerRepositoryRead
   async list(): Promise<Partner[]> {
     const partners = await PartnerModel.findAll();
 
-    return partners.map((partner) => new Partner(
-      partner.id,
-      partner.name,
-      partner.email,
-      partner.dealerId
-    ));
+    return partners.map((partner) => new Partner(partner.id, partner.name, partner.email, partner.dealerId));
   }
 
   async getById(id: string): Promise<Partner | null> {
@@ -21,11 +16,6 @@ export default class SequelizePartnerRepository implements PartnerRepositoryRead
       return null;
     }
 
-    return new Partner(
-      partner.id,
-      partner.name,
-      partner.email,
-      partner.dealerId
-    );
+    return new Partner(partner.id, partner.name, partner.email, partner.dealerId);
   }
 }

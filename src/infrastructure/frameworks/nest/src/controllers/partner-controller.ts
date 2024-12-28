@@ -9,7 +9,7 @@ import { Response } from 'express';
 
 @Controller('partners')
 export default class PartnerController {
-  constructor(private readonly partnerRepositoryReader: PartnerRepositoryReader) { }
+  constructor(private readonly partnerRepositoryReader: PartnerRepositoryReader) {}
 
   @Get()
   async list(@Res() response: Response): Promise<Response> {

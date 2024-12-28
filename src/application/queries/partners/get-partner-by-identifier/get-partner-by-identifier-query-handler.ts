@@ -6,7 +6,7 @@ import GetPartnerByIdentifierQuery from './get-partner-by-identifier-query';
 import GetPartnerByIdentifierQueryValidator from './get-partner-by-identifier-query-validator';
 
 export default class GetPartnerByIdentifierQueryHandler {
-  constructor(private readonly partnerRepository: PartnerRepositoryReader) { }
+  constructor(private readonly partnerRepository: PartnerRepositoryReader) {}
 
   /**
    * @throws {
@@ -17,7 +17,10 @@ export default class GetPartnerByIdentifierQueryHandler {
   async execute(getPartnerByIdentifierQuery: GetPartnerByIdentifierQuery): Promise<PartnerDTO> {
     new GetPartnerByIdentifierQueryValidator().validateQuery(getPartnerByIdentifierQuery);
 
-    console.log('GetPartnerByIdentifierQueryHandler -> execute -> getPartnerByIdentifierQuery', getPartnerByIdentifierQuery);
+    console.log(
+      'GetPartnerByIdentifierQueryHandler -> execute -> getPartnerByIdentifierQuery',
+      getPartnerByIdentifierQuery,
+    );
 
     const foundPartner = await this.partnerRepository.getById(getPartnerByIdentifierQuery.id);
 

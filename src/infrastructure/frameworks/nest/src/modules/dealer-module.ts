@@ -10,7 +10,7 @@ import DealerRepositoryReader from '@triumph/application/ports/repositories/deal
     {
       provide: DealerRepositoryReader,
       useClass: SequelizeDealerRepository,
-    }
+    },
   ],
   exports: [],
 })

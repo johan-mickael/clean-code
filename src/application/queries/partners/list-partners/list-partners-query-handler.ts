@@ -4,7 +4,7 @@ import PartnerRepositoryReader from '../../../ports/repositories/partner-reposit
 import ListPartnersQuery from './list-partners-query';
 
 export default class ListPartnersQueryHandler {
-  constructor(private readonly partnerRepositoryReader: PartnerRepositoryReader) { }
+  constructor(private readonly partnerRepositoryReader: PartnerRepositoryReader) {}
 
   async execute(query: ListPartnersQuery): Promise<PartnerDTO[]> {
     const partners = await this.partnerRepositoryReader.list();
