@@ -3,6 +3,8 @@
 
 .env
 
+fix-permission.sh
+
 node_modules
 dist
 

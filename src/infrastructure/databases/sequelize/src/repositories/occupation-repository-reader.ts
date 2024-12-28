@@ -11,10 +11,6 @@ export default class SequelizeOccupationRepository implements OccupationReposito
   }
 
   async getById(id: string): Promise<Occupation | null> {
-    if (isNaN(Number(id))) {
-      return null;
-    }
-
     const occupation = await OccupationModel.findByPk(id);
 
     if (!occupation) {

@@ -13,7 +13,8 @@ export default class SequelizeConnection {
     const SequelizeConnection = new Sequelize(sequelizeConfigOptionsTyped);
 
     await SequelizeConnection.sync({
-      alter: this.appEnvironment === 'development',
+      alter: false,
+      force: false,
     });
 
     return SequelizeConnection;

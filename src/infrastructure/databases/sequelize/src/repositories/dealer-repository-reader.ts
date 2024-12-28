@@ -10,10 +10,6 @@ export default class SequelizeDealerRepository implements DealerRepositoryReader
   }
 
   async getById(id: string): Promise<Dealer | null> {
-    if (isNaN(Number(id))) {
-      return null;
-    }
-
     const dealer = await DealerModel.findByPk(id);
 
     if (!dealer) {
