@@ -17,7 +17,8 @@ export default class GetDealerByIdentifierQueryHandler {
   async execute(getDealerByIdentifierQuery: GetDealerByIdentifierQuery): Promise<DealerDTO> {
     new GetDealerByIdentifierQueryValidator().validateQuery(getDealerByIdentifierQuery);
 
-    const foundDealer = await this.dealerRepository.getById(getDealerByIdentifierQuery.id);
+    const dealerIdInput = getDealerByIdentifierQuery.id.trim();
+    const foundDealer = await this.dealerRepository.getById(dealerIdInput);
 
     if (foundDealer !== null) {
       return DealerDTOMapper.toDTO(foundDealer);

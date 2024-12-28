@@ -17,12 +17,8 @@ export default class GetPartnerByIdentifierQueryHandler {
   async execute(getPartnerByIdentifierQuery: GetPartnerByIdentifierQuery): Promise<PartnerDTO> {
     new GetPartnerByIdentifierQueryValidator().validateQuery(getPartnerByIdentifierQuery);
 
-    console.log(
-      'GetPartnerByIdentifierQueryHandler -> execute -> getPartnerByIdentifierQuery',
-      getPartnerByIdentifierQuery,
-    );
-
-    const foundPartner = await this.partnerRepository.getById(getPartnerByIdentifierQuery.id);
+    const partnerIdInput = getPartnerByIdentifierQuery.id.trim();
+    const foundPartner = await this.partnerRepository.getById(partnerIdInput);
 
     if (foundPartner !== null) {
       return PartnerDTOMapper.toDTO(foundPartner);
