@@ -7,10 +7,10 @@ import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-f
 import { Request, Response } from 'express';
 
 export default class DealerController {
-  constructor(private readonly DealerRepositoryReader: DealerRepositoryReader) {}
+  constructor(private readonly dealerRepositoryReader: DealerRepositoryReader) {}
 
   async list(req: Request, res: Response): Promise<Response> {
-    const listDealersUsecase = new ListDealersQueryHandler(this.DealerRepositoryReader);
+    const listDealersUsecase = new ListDealersQueryHandler(this.dealerRepositoryReader);
     const dealers = await listDealersUsecase.execute(new ListDealersQuery());
 
     return res.status(200).json(dealers);
@@ -18,7 +18,7 @@ export default class DealerController {
 
   async getById(req: Request, res: Response, next: any): Promise<Response> {
     const { id } = req.params;
-    const getDealerByIdentifierUsecase = new GetDealerByIdentifierQueryHandler(this.DealerRepositoryReader);
+    const getDealerByIdentifierUsecase = new GetDealerByIdentifierQueryHandler(this.dealerRepositoryReader);
     try {
       const dealer = await getDealerByIdentifierUsecase.execute(new GetDealerByIdentifierQuery(id));
       return Promise.resolve(res.status(200).json(dealer));

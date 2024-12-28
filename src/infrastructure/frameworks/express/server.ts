@@ -1,4 +1,3 @@
-import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 import ExpressApplication from './src/express-application';
 import container from './src/ioc/container.registry';
 import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
@@ -48,5 +47,5 @@ class ExpressServer {
   }
 }
 
-const expressApplication = container.resolve<ExpressApplication>('ExpressApplication');
+const expressApplication = container.resolve<ExpressApplication>('expressApplication');
 new ExpressServer(expressApplication).bootstrap();

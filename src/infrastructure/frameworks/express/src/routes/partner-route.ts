@@ -1,21 +1,20 @@
 import express, { Request, Response, Router, NextFunction } from 'express';
 import RouteInterface from './route-interface';
-import container from '../ioc/container.registry';
-import DealerController from '../controllers/dealer-controller';
+import PartnerController from '../controllers/partner-controller';
 
-export default class DealerRoute implements RouteInterface {
+export default class PartnerRoute implements RouteInterface {
   constructor(
-    private readonly dealerController: DealerController,
+    private readonly partnerController: PartnerController,
     private readonly expressCoreRouter: Router,
   ) {}
 
   getRouter() {
     this.expressCoreRouter.get('/', async (req: Request, res: Response) => {
-      this.dealerController.list(req, res);
+      this.partnerController.list(req, res);
     });
 
     this.expressCoreRouter.get('/:id', async (req: Request, res: Response, nextFunction: NextFunction) => {
-      this.dealerController.getById(req, res, nextFunction);
+      this.partnerController.getById(req, res, nextFunction);
     });
 
     return this.expressCoreRouter;

@@ -2,18 +2,15 @@ import express, { Express } from 'express';
 import IndexRoute from './routes/index-route';
 
 export default class ExpressApplication {
-  private app: Express;
-  private routes: IndexRoute;
-
-  constructor() {
-    this.app = express();
-    this.routes = new IndexRoute();
-  }
+  constructor(
+    private expressCore: Express,
+    private indexRoute: IndexRoute,
+  ) {}
 
   configureExpressApplication(): Express {
     // Setting up routes
-    this.routes.configureRoutes(this.app);
+    this.indexRoute.configureRoutes(this.expressCore);
 
-    return this.app;
+    return this.expressCore;
   }
 }
