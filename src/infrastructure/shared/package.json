@@ -1,5 +1,8 @@
 {
   "name": "@triumph/shared-infrastructure",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "uuid": "^11.0.3"
+  }
 }

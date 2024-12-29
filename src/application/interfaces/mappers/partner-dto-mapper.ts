@@ -7,7 +7,7 @@ export default class PartnerDTOMapper {
     return new PartnerDTO(partnerEntity.id, partnerEntity.name, partnerEntity.email, partnerEntity.dealerId);
   }
 
-  static toEntity(partnerDTO: PartnerDTO): Occupation {
+  static toEntity(partnerDTO: PartnerDTO): Partner {
     return new Partner(partnerDTO.id, partnerDTO.name, partnerDTO.email, partnerDTO.dealerId);
   }
 }

@@ -1,4 +1,5 @@
 import { Catch, ExceptionFilter, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import { InvalidCommandError } from '@triumph/application/commands/common/invalid-command-error';
 import { InvalidQueryError } from '@triumph/application/queries/common/invalid-query-error';
 import { Request, Response } from 'express';
 
@@ -9,9 +10,8 @@ export class HttpErrorInterceptor implements ExceptionFilter {
 
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
 
-    if (exception instanceof InvalidQueryError) {
+    if (exception instanceof InvalidQueryError || exception instanceof InvalidCommandError) {
       return response.sendStatus(HttpStatus.BAD_REQUEST);
     }
 

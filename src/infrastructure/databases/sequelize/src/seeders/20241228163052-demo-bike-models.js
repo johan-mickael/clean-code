@@ -1,20 +1,18 @@
 'use strict';
 
-const TABLE_NAME = 'dealers';
+const TABLE_NAME = 'bike_models';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(TABLE_NAME, [
       {
-        name: 'Triumph Montparnasse',
-        address: 'Rue de la Gaîté, Paris',
+        name: 'Street Triple',
         created_at: new Date(), 
         updated_at: new Date(),
       },
       {
-        name: 'Triumph Bastille',
-        address: 'Rue de la Roquette, Paris',
+        name: 'Tiger Sport 660',
         created_at: new Date(),
         updated_at: new Date(),
       },
