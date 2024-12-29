@@ -1,3 +1,4 @@
+import { InvalidCommandError } from '@triumph/application/commands/common/invalid-command-error';
 import { InvalidQueryError } from '@triumph/application/queries/common/invalid-query-error';
 import { NextFunction, Request, Response } from 'express';
 
@@ -6,7 +7,7 @@ export class HttpErrorInterceptor {
     // Debug the error
     console.debug(error);
 
-    if (error instanceof InvalidQueryError) {
+    if (error instanceof InvalidQueryError || error instanceof InvalidCommandError) {
       // BAD REQUEST
       return response.sendStatus(400);
     }

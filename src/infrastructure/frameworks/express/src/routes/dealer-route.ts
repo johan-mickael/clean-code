@@ -1,6 +1,5 @@
-import express, { Request, Response, Router, NextFunction } from 'express';
+import { Request, Response, Router, NextFunction } from 'express';
 import RouteInterface from './route-interface';
-import container from '../ioc/container.registry';
 import DealerController from '../controllers/dealer-controller';
 
 export default class DealerRoute implements RouteInterface {

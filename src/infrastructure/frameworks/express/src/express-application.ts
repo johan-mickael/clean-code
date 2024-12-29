@@ -1,16 +1,23 @@
 import express, { Express } from 'express';
-import IndexRoute from './routes/index-route';
+import Routes from './routes/index-route';
+import { HttpErrorInterceptor } from './middlewares/http-error-interceptor';
 
 export default class ExpressApplication {
-  constructor(
-    private expressCore: Express,
-    private indexRoute: IndexRoute,
-  ) {}
+  constructor(private routes: Routes) {}
 
   configureExpressApplication(): Express {
-    // Setting up routes
-    this.indexRoute.configureRoutes(this.expressCore);
+    const expressCore = express();
 
-    return this.expressCore;
+    // Accepting JSON payloads
+    expressCore.use(express.json());
+    expressCore.use(express.urlencoded({ extended: true }));
+
+    // Setting up routes
+    this.routes.configureRoutes(expressCore);
+
+    // Setting up middlewares
+    expressCore.use(HttpErrorInterceptor.handle);
+
+    return expressCore;
   }
 }

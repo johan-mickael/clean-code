@@ -1,9 +1,7 @@
 import ExpressApplication from './src/express-application';
 import container from './src/ioc/container.registry';
-import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 import MongooseAdapter from '../../databases/mongoose/src';
-
 class ExpressServer {
   private readonly serverName = 'Express';
   private readonly serverPort = parseInt(process.env.PORT || '3000');
@@ -16,9 +14,6 @@ class ExpressServer {
 
     // Configuring the express application
     const expressApplication = this.expressApplication.configureExpressApplication();
-
-    // Middlewares
-    expressApplication.use(HttpErrorInterceptor.handle);
 
     // Running the express application
     await expressApplication.listen(this.serverPort, () => {

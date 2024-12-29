@@ -1,15 +1,22 @@
-import { Express } from 'express';
+import express, { Express } from 'express';
 import DealerRoute from './dealer-route';
 import PartnerRoute from './partner-route';
+import BikeModelRoute from './bike-model-route';
 
-export default class IndexRoute {
+export default class Routes {
   constructor(
-    private dealerRoute: DealerRoute,
-    private partnerRoute: PartnerRoute,
+    private readonly bikeModelRoute: BikeModelRoute,
+    private readonly dealerRoute: DealerRoute,
+    private readonly partnerRoute: PartnerRoute,
   ) {}
 
   configureRoutes(app: Express) {
-    app.use('/dealers', this.dealerRoute.getRouter());
-    app.use('/partners', this.partnerRoute.getRouter());
+    const router = express.Router();
+
+    router.use('/bike-models', this.bikeModelRoute.getRouter());
+    router.use('/dealers', this.dealerRoute.getRouter());
+    router.use('/partners', this.partnerRoute.getRouter());
+
+    app.use(router);
   }
 }
