@@ -1,4 +1,4 @@
-import DealerRepositoryReader from '@triumph/application/ports/repositories/dealer-repository-reader';
+import DealerRepositoryReader from '@triumph/application/ports/repositories/readers/dealer-repository-reader';
 import GetDealerByIdentifierQuery from '@triumph/application/queries/dealers/get-dealer-by-identifier/get-dealer-by-identifier-query';
 import GetDealerByIdentifierQueryHandler from '@triumph/application/queries/dealers/get-dealer-by-identifier/get-dealer-by-identifier-query-handler';
 import ListDealersQuery from '@triumph/application/queries/dealers/list-dealers/list-dealers-query';

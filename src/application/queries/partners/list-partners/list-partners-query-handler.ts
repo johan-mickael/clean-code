@@ -1,6 +1,6 @@
 import PartnerDTO from '../../../interfaces/dtos/partner-dto';
 import PartnerDTOMapper from '../../../interfaces/mappers/partner-dto-mapper';
-import PartnerRepositoryReader from '../../../ports/repositories/partner-repository-reader';
+import PartnerRepositoryReader from '../../../ports/repositories/readers/partner-repository-reader';
 import ListPartnersQuery from './list-partners-query';
 
 export default class ListPartnersQueryHandler {

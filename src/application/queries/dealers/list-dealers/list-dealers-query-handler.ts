@@ -1,6 +1,6 @@
 import DealerDTO from '../../../interfaces/dtos/dealer-dto';
 import DealerDTOMapper from '../../../interfaces/mappers/dealer-dto-mapper';
-import DealerRepositoryReader from '../../../ports/repositories/dealer-repository-reader';
+import DealerRepositoryReader from '../../../ports/repositories/readers/dealer-repository-reader';
 import ListDealersQuery from './list-dealers-query';
 
 export default class ListDealersQueryHandler {

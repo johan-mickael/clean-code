@@ -1,6 +1,6 @@
 import { BikeModel } from '@triumph/domain/entity/bike-model';
-import BikeModelModel from '../models/bike-model.model';
-import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/bike-model-repository-writer';
+import BikeModelModel from '../../models/bike-model.model';
+import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model-repository-writer';
 import BikeModelDTO from '@triumph/application/interfaces/dtos/bike-model-dto';
 import BikeModelDTOMapper from '@triumph/application/interfaces/mappers/bike-model-dto-mapper';
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';

@@ -1,4 +1,4 @@
-import PartnerRepositoryReader from '@triumph/application/ports/repositories/partner-repository-reader';
+import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner-repository-reader';
 import GetPartnerByIdentifierQuery from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier-query';
 import GetPartnerByIdentifierQueryHandler from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier-query-handler';
 import ListPartnersQuery from '@triumph/application/queries/partners/list-partners/list-partners-query';

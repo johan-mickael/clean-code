@@ -1,5 +1,5 @@
 import BikeModelDTO from '../../../interfaces/dtos/bike-model-dto';
-import BikeModelRepositoryWriter from '../../../ports/repositories/bike-model-repository-writer';
+import BikeModelRepositoryWriter from '../../../ports/repositories/writers/bike-model-repository-writer';
 import UpdateBikeModelCommand from './update-bike-model-command';
 import UpdateBikeModelCommandValidator from './update-bike-model-command-validator';
 

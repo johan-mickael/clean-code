@@ -1,6 +1,6 @@
 import { Partner } from '@triumph/domain/entity/partner';
-import PartnerModel from '../models/partner.model';
-import PartnerRepositoryReader from '@triumph/application/ports/repositories/partner-repository-reader';
+import PartnerModel from '../../models/partner.model';
+import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner-repository-reader';
 
 export default class SequelizePartnerRepository implements PartnerRepositoryReader {
   async list(): Promise<Partner[]> {

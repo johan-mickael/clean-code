@@ -4,8 +4,8 @@ import DeleteBikeModelCommand from '@triumph/application/commands/bike-models/de
 import DeleteBikeModelCommandHandler from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model-command-handler';
 import UpdateBikeModelCommand from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command';
 import UpdateBikeModelCommandHandler from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command-handler';
-import BikeModelRepositoryReader from '@triumph/application/ports/repositories/bike-model-repository-reader';
-import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/bike-model-repository-writer';
+import BikeModelRepositoryReader from '@triumph/application/ports/repositories/readers/bike-model-repository-reader';
+import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model-repository-writer';
 import GetBikeModelByIdentifierQuery from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query';
 import GetBikeModelByIdentifierQueryHandler from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query-handler';
 import ListBikeModelsQuery from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query';
