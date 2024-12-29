@@ -1,4 +1,5 @@
 import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found-error';
+
 import DealerDTO from '../../../interfaces/dtos/dealer-dto';
 import DealerDTOMapper from '../../../interfaces/mappers/dealer-dto-mapper';
 import DealerRepositoryReader from '../../../ports/repositories/readers/dealer-repository-reader';

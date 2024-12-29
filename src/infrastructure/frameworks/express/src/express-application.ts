@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
-import Routes from './routes/index-route';
+
 import { HttpErrorInterceptor } from './middlewares/http-error-interceptor';
+import Routes from './routes/index-route';
 
 export default class ExpressApplication {
   constructor(private routes: Routes) {}

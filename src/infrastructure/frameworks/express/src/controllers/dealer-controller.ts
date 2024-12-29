@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
+
 import DealerRepositoryReader from '@triumph/application/ports/repositories/readers/dealer-repository-reader';
 import GetDealerByIdentifierQuery from '@triumph/application/queries/dealers/get-dealer-by-identifier/get-dealer-by-identifier-query';
 import GetDealerByIdentifierQueryHandler from '@triumph/application/queries/dealers/get-dealer-by-identifier/get-dealer-by-identifier-query-handler';
 import ListDealersQuery from '@triumph/application/queries/dealers/list-dealers/list-dealers-query';
 import ListDealersQueryHandler from '@triumph/application/queries/dealers/list-dealers/list-dealers-query-handler';
 import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found-error';
-import { Request, Response } from 'express';
 
 export default class DealerController {
   constructor(private readonly dealerRepositoryReader: DealerRepositoryReader) {}

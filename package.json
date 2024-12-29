@@ -24,7 +24,7 @@
     "start:dev:express": "npm run dev --workspace src/infrastructure/frameworks/express",
     "start:nest": "npm run start --workspace src/infrastructure/frameworks/nest",
     "start:dev:nest": "npm run dev --workspace src/infrastructure/frameworks/nest",
-    "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "format": "prettier --config .prettierrc.json 'src/**/*.ts' --write"
   },
   "dependencies": {
     "audit": "^0.0.6",
@@ -32,6 +32,7 @@
     "prettier": "^3.4.2"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",

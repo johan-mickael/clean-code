@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import MongoUriResolver from './mongo-uri-resolver';
 
 export default class MongooseConnection {

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner-repository-reader';
+import SequelizePartnerRepository from '@triumph/sequelize-adapter/src/repositories/readers/partner-repository-reader';
+
 import PartnerController from '../controllers/partner-controller';
-import SequelizePartnerRepository from '@triumph/sequelize-adapter/src/repositories/partner-repository-reader';
-import PartnerRepositoryReader from '@triumph/application/ports/repositories/partner-repository-reader';
 
 @Module({
   imports: [],

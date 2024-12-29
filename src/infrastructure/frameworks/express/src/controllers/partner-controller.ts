@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
+
 import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner-repository-reader';
 import GetPartnerByIdentifierQuery from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier-query';
 import GetPartnerByIdentifierQueryHandler from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier-query-handler';
 import ListPartnersQuery from '@triumph/application/queries/partners/list-partners/list-partners-query';
 import ListPartnersQueryHandler from '@triumph/application/queries/partners/list-partners/list-partners-query-handler';
 import { PartnerNotFoundError } from '@triumph/domain/errors/partners/partner-not-found-error';
-import { Request, Response } from 'express';
 
 export default class PartnerController {
   constructor(private readonly partnerRepositoryReader: PartnerRepositoryReader) {}

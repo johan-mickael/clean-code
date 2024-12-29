@@ -9,7 +9,7 @@ module.exports = {
       {
         name: 'Triumph Montparnasse',
         address: 'Rue de la Gaîté, Paris',
-        created_at: new Date(), 
+        created_at: new Date(),
         updated_at: new Date(),
       },
       {

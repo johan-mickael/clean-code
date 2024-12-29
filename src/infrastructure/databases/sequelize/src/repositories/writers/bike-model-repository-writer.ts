@@ -1,10 +1,12 @@
-import { BikeModel } from '@triumph/domain/entity/bike-model';
-import BikeModelModel from '../../models/bike-model.model';
-import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model-repository-writer';
+import { Error as SequelizeError } from 'sequelize';
+
 import BikeModelDTO from '@triumph/application/interfaces/dtos/bike-model-dto';
 import BikeModelDTOMapper from '@triumph/application/interfaces/mappers/bike-model-dto-mapper';
+import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model-repository-writer';
+import { BikeModel } from '@triumph/domain/entity/bike-model';
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';
-import { Error as SequelizeError } from 'sequelize';
+
+import BikeModelModel from '../../models/bike-model.model';
 
 export default class SequelizeBikeModelRepositoryWriter implements BikeModelRepositoryWriter {
   async create(bikeModelDTO: BikeModelDTO): Promise<BikeModel> {

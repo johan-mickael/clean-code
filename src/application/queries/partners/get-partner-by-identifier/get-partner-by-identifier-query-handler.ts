@@ -1,4 +1,5 @@
 import { PartnerNotFoundError } from '@triumph/domain/errors/partners/partner-not-found-error';
+
 import PartnerDTO from '../../../interfaces/dtos/partner-dto';
 import PartnerDTOMapper from '../../../interfaces/mappers/partner-dto-mapper';
 import PartnerRepositoryReader from '../../../ports/repositories/readers/partner-repository-reader';

@@ -1,4 +1,5 @@
-import { Column, CreatedAt, UpdatedAt, Table, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
+
 import Dealer from './dealer.model';
 
 @Table({

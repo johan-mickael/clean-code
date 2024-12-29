@@ -9,7 +9,7 @@ module.exports = {
   // @ts-ignore
   up: async (queryInterface, Sequelize) => {
     // Find all dealers and randomly assign them to partners
-    const dealerIds = await queryInterface.sequelize.query('SELECT id FROM dealers', { 
+    const dealerIds = await queryInterface.sequelize.query('SELECT id FROM dealers', {
       type: Sequelize.QueryTypes.SELECT,
     });
 
@@ -18,7 +18,7 @@ module.exports = {
         name: 'Uber Eats',
         email: 'uber.eats@email.com',
         dealer_id: dealerIds[Math.floor(Math.random() * dealerIds.length)].id,
-        created_at: new Date(), 
+        created_at: new Date(),
         updated_at: new Date(),
       },
       {

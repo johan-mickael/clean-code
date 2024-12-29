@@ -1,6 +1,7 @@
-import { Dealer } from '@triumph/domain/entity/dealer';
-import DealerModel from '../models/dealer.model';
 import DealerRepositoryReader from '@triumph/application/ports/repositories/dealer-repository-reader';
+import { Dealer } from '@triumph/domain/entity/dealer';
+
+import DealerModel from '../models/dealer.model';
 import ObjectIdValidator from '../validators/objectid-validator';
 
 export default class MongooseDealerRepository implements DealerRepositoryReader {

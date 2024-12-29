@@ -1,5 +1,6 @@
 import { Occupation } from '@triumph/domain/entity/occupation';
 import { Partner } from '@triumph/domain/entity/partner';
+
 import PartnerDTO from '../dtos/partner-dto';
 
 export default class PartnerDTOMapper {

@@ -1,6 +1,7 @@
-import express, { Request, Response, Router, NextFunction } from 'express';
-import RouteInterface from './route-interface';
+import express, { NextFunction, Request, Response, Router } from 'express';
+
 import PartnerController from '../controllers/partner-controller';
+import RouteInterface from './route-interface';
 
 export default class PartnerRoute implements RouteInterface {
   constructor(

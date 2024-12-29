@@ -1,7 +1,9 @@
+import SequelizeAdapter from '@triumph/sequelize-adapter/src';
+
+import MongooseAdapter from '../../databases/mongoose/src';
 import ExpressApplication from './src/express-application';
 import container from './src/ioc/container.registry';
-import SequelizeAdapter from '@triumph/sequelize-adapter/src';
-import MongooseAdapter from '../../databases/mongoose/src';
+
 class ExpressServer {
   private readonly serverName = 'Express';
   private readonly serverPort = parseInt(process.env.PORT || '3000');

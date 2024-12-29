@@ -1,5 +1,6 @@
-import sequelizeConfigOptions from './sequelize.config';
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+
+import sequelizeConfigOptions from './sequelize.config';
 
 export default class SequelizeConnection {
   private readonly appEnvironment = process.env.NODE_ENV || 'development';

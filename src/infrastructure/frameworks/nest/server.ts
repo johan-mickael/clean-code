@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
-import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
+import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
+
 import MongooseAdapter from '../../databases/mongoose/src';
+import { AppModule } from './app.module';
+import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
 
 class NestServer {
   private readonly serverName = 'Nest';

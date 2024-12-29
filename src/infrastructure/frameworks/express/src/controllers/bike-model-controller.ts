@@ -1,3 +1,6 @@
+import { error } from 'console';
+import { Request, Response } from 'express';
+
 import CreateBikeModelCommand from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model-command';
 import CreateBikeModelCommandHandler from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model-command-handler';
 import DeleteBikeModelCommand from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model-command';
@@ -11,8 +14,6 @@ import GetBikeModelByIdentifierQueryHandler from '@triumph/application/queries/b
 import ListBikeModelsQuery from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query';
 import ListBikeModelsQueryHandler from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query-handler';
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';
-import { error } from 'console';
-import { Request, Response } from 'express';
 
 export default class BikeModelController {
   constructor(

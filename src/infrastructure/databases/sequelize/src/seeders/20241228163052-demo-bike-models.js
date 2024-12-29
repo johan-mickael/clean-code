@@ -8,7 +8,7 @@ module.exports = {
     await queryInterface.bulkInsert(TABLE_NAME, [
       {
         name: 'Street Triple',
-        created_at: new Date(), 
+        created_at: new Date(),
         updated_at: new Date(),
       },
       {

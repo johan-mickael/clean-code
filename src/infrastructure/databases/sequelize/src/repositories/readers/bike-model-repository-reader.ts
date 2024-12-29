@@ -1,7 +1,9 @@
-import { BikeModel } from '@triumph/domain/entity/bike-model';
-import BikeModelModel from '../../models/bike-model.model';
-import BikeModelRepositoryReader from '@triumph/application/ports/repositories/readers/bike-model-repository-reader';
 import { Error as SequelizeError } from 'sequelize';
+
+import BikeModelRepositoryReader from '@triumph/application/ports/repositories/readers/bike-model-repository-reader';
+import { BikeModel } from '@triumph/domain/entity/bike-model';
+
+import BikeModelModel from '../../models/bike-model.model';
 
 export default class SequelizeBikeModelRepositoryReader implements BikeModelRepositoryReader {
   async list(): Promise<BikeModel[]> {

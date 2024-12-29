@@ -1,9 +1,10 @@
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';
+
 import BikeModelDTO from '../../../interfaces/dtos/bike-model-dto';
 import BikeModelDTOMapper from '../../../interfaces/mappers/bike-model-dto-mapper';
+import BikeModelRepositoryReader from '../../../ports/repositories/readers/bike-model-repository-reader';
 import GetBikeModelByIdentifierQuery from './get-bike-model-by-identifier-query';
 import GetBikeModelByIdentifierQueryValidator from './get-bike-model-by-identifier-query-validator';
-import BikeModelRepositoryReader from '../../../ports/repositories/readers/bike-model-repository-reader';
 
 export default class GetBikeModelByIdentifierQueryHandler {
   constructor(private readonly bikeModelRepository: BikeModelRepositoryReader) {}

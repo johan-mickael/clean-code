@@ -1,6 +1,7 @@
-import { Request, Response, Router, NextFunction } from 'express';
-import RouteInterface from './route-interface';
+import { NextFunction, Request, Response, Router } from 'express';
+
 import BikeModelController from '../controllers/bike-model-controller';
+import RouteInterface from './route-interface';
 
 export default class BikeModelRoute implements RouteInterface {
   constructor(

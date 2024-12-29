@@ -1,4 +1,5 @@
 import { Dealer } from '@triumph/domain/entity/dealer';
+
 import DealerDTO from '../dtos/dealer-dto';
 
 export default class DealerDTOMapper {

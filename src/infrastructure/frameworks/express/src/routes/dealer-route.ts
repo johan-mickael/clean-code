@@ -1,6 +1,7 @@
-import { Request, Response, Router, NextFunction } from 'express';
-import RouteInterface from './route-interface';
+import { NextFunction, Request, Response, Router } from 'express';
+
 import DealerController from '../controllers/dealer-controller';
+import RouteInterface from './route-interface';
 
 export default class DealerRoute implements RouteInterface {
   constructor(

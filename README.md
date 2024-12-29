@@ -14,11 +14,11 @@ src/
 │   └── valueObjects/       # Objets de valeurs et agrégats
 │
 ├── infrastructure/         # Couche Infrastructure (Base de données, frameworks)
-│   ├── databases/          # Gestion des bases de données (SQL, NoSQL, etc.)  
-│       ├── mongo/  
-│           ├── repositories/  
-│       ├── postgresql/  
-│           ├── repositories/  
+│   ├── databases/          # Gestion des bases de données (SQL, NoSQL, etc.)
+│       ├── mongo/
+│           ├── repositories/
+│       ├── postgresql/
+│           ├── repositories/
 │   └── frameworks/         # Frameworks externes (Express, NestJS, etc.)
 │   └── dto/                # Data Transfer Objects (pour les échanges entre couches)
 │
@@ -30,7 +30,7 @@ src/
 
 ## Installation
 
- Build the docker image
+Build the docker image
 
 ```sh
 docker compose build
@@ -39,6 +39,7 @@ docker compose build
 ### Running the application
 
 Before running the application, you must check that the `node_modules`. If it is not present, you must run the following command:
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm install
 ```
@@ -60,21 +61,25 @@ FRAMEWORK=express docker compose up
 ### Sequelize
 
 1. Generate a new migration
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm run sequelize:generate:migration <migration-name>
 ```
 
 2. Run the migrations
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm run sequelize:migrate
 ```
 
 3. Generate a new seed
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm run sequelize:generate:seed <seed-name>
 ```
 
 4. Run the seeds
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm run sequelize:seed
 ```
@@ -86,6 +91,7 @@ docker compose run --rm -it --entrypoint "" app npm run sequelize:seed
 > In order to have a consistent code style, you can run the following command (Especially before committing your code):
 
 Manually:
+
 ```sh
 docker compose run --rm -it --entrypoint "" app npm run format
 ```

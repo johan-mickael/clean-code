@@ -1,18 +1,19 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
-import BikeModelRepositoryReader from '@triumph/application/ports/repositories/bike-model-repository-reader';
-import ListBikeModelsQueryHandler from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query-handler';
-import ListBikeModelsQuery from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query';
-import GetBikeModelByIdentifierQueryHandler from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query-handler';
-import GetBikeModelByIdentifierQuery from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query';
-import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';
 import { Response } from 'express';
-import CreateBikeModelCommandHandler from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model-command-handler';
-import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/bike-model-repository-writer';
+
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateBikeModelCommand from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model-command';
-import UpdateBikeModelCommandHandler from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command-handler';
-import UpdateBikeModelCommand from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command';
-import DeleteBikeModelCommandHandler from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model-command-handler';
+import CreateBikeModelCommandHandler from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model-command-handler';
 import DeleteBikeModelCommand from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model-command';
+import DeleteBikeModelCommandHandler from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model-command-handler';
+import UpdateBikeModelCommand from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command';
+import UpdateBikeModelCommandHandler from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model-command-handler';
+import BikeModelRepositoryReader from '@triumph/application/ports/repositories/readers/bike-model-repository-reader';
+import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model-repository-writer';
+import GetBikeModelByIdentifierQuery from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query';
+import GetBikeModelByIdentifierQueryHandler from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier-query-handler';
+import ListBikeModelsQuery from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query';
+import ListBikeModelsQueryHandler from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models-query-handler';
+import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found-error';
 
 @Controller('bike-models')
 export default class BikeModelController {

@@ -1,6 +1,7 @@
-import { Dealer } from '@triumph/domain/entity/dealer';
-import DealerModel from '../../models/dealer.model';
 import DealerRepositoryReader from '@triumph/application/ports/repositories/readers/dealer-repository-reader';
+import { Dealer } from '@triumph/domain/entity/dealer';
+
+import DealerModel from '../../models/dealer.model';
 
 export default class SequelizeDealerRepository implements DealerRepositoryReader {
   async list(): Promise<Dealer[]> {

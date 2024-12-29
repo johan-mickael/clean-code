@@ -1,7 +1,8 @@
-import { Catch, ExceptionFilter, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import { Request, Response } from 'express';
+
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import { InvalidCommandError } from '@triumph/application/commands/common/invalid-command-error';
 import { InvalidQueryError } from '@triumph/application/queries/common/invalid-query-error';
-import { Request, Response } from 'express';
 
 @Catch()
 export class HttpErrorInterceptor implements ExceptionFilter {

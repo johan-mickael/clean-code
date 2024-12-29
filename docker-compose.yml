@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - FRAMEWORK=${FRAMEWORK:-nest}
       - PORT=${PORT:-3000}
@@ -19,50 +19,50 @@ services:
   postgres:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
     ports:
-        - target: 5432
-          published: ${POSTGRES_PORT:-5432}
-          protocol: tcp
+      - target: 5432
+        published: ${POSTGRES_PORT:-5432}
+        protocol: tcp
     environment:
-        POSTGRES_DB: ${POSTGRES_DB:-triumph}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
-        POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_DB: ${POSTGRES_DB:-triumph}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
     volumes:
-    - postgres_data:/var/lib/postgresql/data:rw
+      - postgres_data:/var/lib/postgresql/data:rw
 
   mongo:
     image: mongo:8.0
     ports:
-        - "27017:27017"
+      - '27017:27017'
     volumes:
-        - mongo-data:/data/db
-        - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo-data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     environment:
-        - MONGO_INITDB_ROOT_USERNAME=admin
-        - MONGO_INITDB_ROOT_PASSWORD=admin
-        - MONGO_INITDB_DATABASE=triumph
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=triumph
     restart: unless-stopped
 
   adminer:
     image: adminer
     ports:
-        - "8080:8080"
+      - '8080:8080'
     environment:
-        - ADMINER_DEFAULT_SERVER=postgres
+      - ADMINER_DEFAULT_SERVER=postgres
     restart: unless-stopped
 
   mongo-express:
     image: mongo-express:1.0.2-20-alpine3.19
     ports:
-        - "8081:8081"
+      - '8081:8081'
     environment:
-        - ME_CONFIG_MONGODB_SERVER=mongo
-        - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-        - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
-        - ME_CONFIG_BASICAUTH_USERNAME=admin
-        - ME_CONFIG_BASICAUTH_PASSWORD=admin
-        - ME_CONFIG_MONGODB_URL=mongodb://admin:admin@mongo:27017/triumph
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:admin@mongo:27017/triumph
     restart: unless-stopped
 
 volumes:
-    mongo-data: {}
-    postgres_data: {}
+  mongo-data: {}
+  postgres_data: {}

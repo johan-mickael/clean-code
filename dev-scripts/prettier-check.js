@@ -6,7 +6,6 @@ const command = 'npm run format';
 
 try {
   execSync(command, { stdio: 'inherit' });
-}
-catch (error) {
+} catch (error) {
   process.exit(1);
 }

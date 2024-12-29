@@ -1,7 +1,8 @@
 import express, { Express } from 'express';
+
+import BikeModelRoute from './bike-model-route';
 import DealerRoute from './dealer-route';
 import PartnerRoute from './partner-route';
-import BikeModelRoute from './bike-model-route';
 
 export default class Routes {
   constructor(
