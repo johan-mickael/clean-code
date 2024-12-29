@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import MongoUriResolver from './mongo-uri-resolver';
+import MongoUriResolver from './mongo-uri.resolver';
 
 export default class MongooseConnection {
   async initialize(): Promise<void> {

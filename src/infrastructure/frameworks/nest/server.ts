@@ -4,7 +4,7 @@ import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/dat
 
 import MongooseAdapter from '../../databases/mongoose/src';
 import { AppModule } from './app.module';
-import { HttpErrorInterceptor } from './src/middlewares/http-error-interceptor';
+import { HttpErrorInterceptor } from './src/middlewares/http-error.interceptor';
 
 class NestServer {
   private readonly serverName = 'Nest';
