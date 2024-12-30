@@ -1,5 +1,6 @@
 import { asClass, asFunction, createContainer } from 'awilix';
 import express from 'express';
+import { register } from 'module';
 
 import SequelizeBikeModelRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/bike-model.repository-reader';
 import SequelizeDealerRepository from '@triumph/sequelize-adapter/src/repositories/readers/dealer.repository-reader';
@@ -11,6 +12,7 @@ import ExpressApplication from '../express-application';
 import BikeModelRoute from '../routes/bike-model.route';
 import DealerRoute from '../routes/dealer.route';
 import Routes from '../routes/index.route';
+import registerDealerModule from './dealer.module';
 import registerPartnerModule from './partner.module';
 
 const container = createContainer();
@@ -19,24 +21,22 @@ const container = createContainer();
 container.register({
   bikeModelRepositoryReader: asClass(SequelizeBikeModelRepositoryReader).classic(),
   bikeModelRepositoryWriter: asClass(SequelizeBikeModelRepositoryWriter).classic(),
-  dealerRepositoryReader: asClass(SequelizeDealerRepository).classic(),
 });
 
 // Register controllers and repositories
 container.register({
   bikeModelController: asClass(BikeModelController).classic(),
-  dealerController: asClass(DealerController).classic(),
 });
 
 // Register routes
 container.register({
   bikeModelRoute: asClass(BikeModelRoute).classic(),
-  dealerRoute: asClass(DealerRoute).classic(),
   routes: asClass(Routes).classic(),
 });
 
-// Partner module
+// Register modules
 registerPartnerModule(container);
+registerDealerModule(container);
 
 // Register express application
 container.register({

@@ -5,16 +5,11 @@ import DealerDTOMapper from '../../../interfaces/mappers/dealer.dto-mapper';
 import DealerRepositoryReader from '../../../ports/repositories/readers/dealer.repository-reader';
 import GetDealerByIdentifierQuery from './get-dealer-by-identifier.query';
 import GetDealerByIdentifierQueryValidator from './get-dealer-by-identifier.query-validator';
+import GetDealerByIdentifierUseCase from './get-dealer-by-identifier.usecase';
 
-export default class GetDealerByIdentifierQueryHandler {
+export default class GetDealerByIdentifierQueryHandler implements GetDealerByIdentifierUseCase {
   constructor(private readonly dealerRepository: DealerRepositoryReader) {}
 
-  /**
-   * @throws {
-   *  InvalidQueryError,
-   *  DealerNotFoundError,
-   * }
-   */
   async execute(getDealerByIdentifierQuery: GetDealerByIdentifierQuery): Promise<DealerDTO> {
     new GetDealerByIdentifierQueryValidator().validateQuery(getDealerByIdentifierQuery);
 

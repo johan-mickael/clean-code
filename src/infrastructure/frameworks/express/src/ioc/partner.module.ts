@@ -1,5 +1,4 @@
 import { AwilixContainer, asClass, asFunction } from 'awilix';
-import { create } from 'domain';
 
 import CreatePartnerCommandHandler from '@triumph/application/commands/partners/create-partner/create-partner.command-handler';
 import DeletePartnerCommandHandler from '@triumph/application/commands/partners/delete-partner/delete-partner.command-handler';
