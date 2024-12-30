@@ -2,16 +2,11 @@ import BikeModelDTO from '../../../interfaces/dtos/bike-model.dto';
 import BikeModelRepositoryWriter from '../../../ports/repositories/writers/bike-model.repository-writer';
 import UpdateBikeModelCommand from './update-bike-model.command';
 import UpdateBikeModelCommandValidator from './update-bike-model.command-validator';
+import UpdateBikeModelUseCase from './update-bike-model.usecase';
 
-export default class UpdateBikeModelCommandHandler {
+export default class UpdateBikeModelCommandHandler implements UpdateBikeModelUseCase {
   constructor(private readonly bikeModelRepositoryWriter: BikeModelRepositoryWriter) {}
 
-  /**
-   * @throws {
-   *  InvalidCommandError,
-   *  BikeModelNotFoundError,
-   * }
-   */
   async execute(updateBikeModelCommand: UpdateBikeModelCommand): Promise<BikeModelDTO> {
     new UpdateBikeModelCommandValidator().validateCommand(updateBikeModelCommand);
 

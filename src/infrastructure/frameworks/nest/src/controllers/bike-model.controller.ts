@@ -2,41 +2,40 @@ import { Response } from 'express';
 
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateBikeModelCommand from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model.command';
-import CreateBikeModelCommandHandler from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model.command-handler';
+import CreateBikeModelUseCase from '@triumph/application/commands/bike-models/create-bike-model/create-bike-model.usecase';
 import DeleteBikeModelCommand from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model.command';
-import DeleteBikeModelCommandHandler from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model.command-handler';
+import DeleteBikeModelUseCase from '@triumph/application/commands/bike-models/delete-bike-model/delete-bike-model.usecase';
 import UpdateBikeModelCommand from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model.command';
-import UpdateBikeModelCommandHandler from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model.command-handler';
-import BikeModelRepositoryReader from '@triumph/application/ports/repositories/readers/bike-model.repository-reader';
-import BikeModelRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-model.repository-writer';
+import UpdateBikeModelUseCase from '@triumph/application/commands/bike-models/update-bike-model/update-bike-model.usecase';
 import GetBikeModelByIdentifierQuery from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier.query';
-import GetBikeModelByIdentifierQueryHandler from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier.query-handler';
+import GetBikeModelByIdentifierUseCase from '@triumph/application/queries/bike-models/get-bike-model-by-identifier/get-bike-model-by-identifier.usecase';
 import ListBikeModelsQuery from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models.query';
-import ListBikeModelsQueryHandler from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models.query-handler';
+import ListBikeModelsUseCase from '@triumph/application/queries/bike-models/list-bike-models/list-bike-models.usecase';
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found.error';
 
 @Controller('bike-models')
 export default class BikeModelController {
   constructor(
-    private readonly bikeModelRepositoryReader: BikeModelRepositoryReader,
-    private readonly bikeModelRepositoryWriter: BikeModelRepositoryWriter,
+    private readonly listBikeModelsUseCase: ListBikeModelsUseCase,
+    private readonly getBikeModelByIdentifierUseCase: GetBikeModelByIdentifierUseCase,
+    private readonly createBikeModelUseCase: CreateBikeModelUseCase,
+    private readonly updateBikeModelUseCase: UpdateBikeModelUseCase,
+    private readonly deleteBikeModelUseCase: DeleteBikeModelUseCase,
   ) {}
 
   @Get()
   async list(@Res() response: Response): Promise<Response> {
-    const listBikeModelsUseCase = new ListBikeModelsQueryHandler(this.bikeModelRepositoryReader);
-    const bikeModels = await listBikeModelsUseCase.execute(new ListBikeModelsQuery());
+    const bikeModels = await this.listBikeModelsUseCase.execute(new ListBikeModelsQuery());
 
     return response.json(bikeModels);
   }
 
   @Get(':id')
   async getById(@Param('id') id: string, @Res() response: Response): Promise<Response> {
-    const getBikeModelUsecase = new GetBikeModelByIdentifierQueryHandler(this.bikeModelRepositoryReader);
     const getBikeModelQuery = new GetBikeModelByIdentifierQuery(id);
 
     try {
-      const bikeModel = await getBikeModelUsecase.execute(getBikeModelQuery);
+      const bikeModel = await this.getBikeModelByIdentifierUseCase.execute(getBikeModelQuery);
       return response.json(bikeModel);
     } catch (error: unknown) {
       if (error instanceof BikeModelNotFoundError) {
@@ -49,10 +48,9 @@ export default class BikeModelController {
 
   @Post()
   async create(@Body() bikeModelPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
-    const createBikeModelUseCase = new CreateBikeModelCommandHandler(this.bikeModelRepositoryWriter);
     const createBikeModelCommand = new CreateBikeModelCommand(bikeModelPayload);
 
-    const createdBikeModel = await createBikeModelUseCase.execute(createBikeModelCommand);
+    const createdBikeModel = await this.createBikeModelUseCase.execute(createBikeModelCommand);
 
     if (createdBikeModel) {
       return response.status(HttpStatus.CREATED).json(createdBikeModel);
@@ -67,11 +65,10 @@ export default class BikeModelController {
     @Body() bikeModelPayload: Record<string, unknown>,
     @Res() response: Response,
   ): Promise<Response> {
-    const updateBikeModelUseCase = new UpdateBikeModelCommandHandler(this.bikeModelRepositoryWriter);
     const updateBikeModelCommand = new UpdateBikeModelCommand(id, bikeModelPayload);
 
     try {
-      const updatedBikeModel = await updateBikeModelUseCase.execute(updateBikeModelCommand);
+      const updatedBikeModel = await this.updateBikeModelUseCase.execute(updateBikeModelCommand);
 
       if (updatedBikeModel) {
         return response.json(updatedBikeModel);
@@ -90,10 +87,9 @@ export default class BikeModelController {
   @Delete(':id')
   async delete(@Param('id') id: string, @Res() response: Response): Promise<Response> {
     try {
-      const deleteBikeModelUseCase = new DeleteBikeModelCommandHandler(this.bikeModelRepositoryWriter);
       const deleteBikeModelCommand = new DeleteBikeModelCommand(id);
 
-      await deleteBikeModelUseCase.execute(deleteBikeModelCommand);
+      await this.deleteBikeModelUseCase.execute(deleteBikeModelCommand);
 
       return response.sendStatus(HttpStatus.NO_CONTENT);
     } catch (error: any) {

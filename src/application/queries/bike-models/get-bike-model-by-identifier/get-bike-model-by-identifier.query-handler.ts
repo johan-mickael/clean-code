@@ -5,16 +5,11 @@ import BikeModelDTOMapper from '../../../interfaces/mappers/bike-model.dto-mappe
 import BikeModelRepositoryReader from '../../../ports/repositories/readers/bike-model.repository-reader';
 import GetBikeModelByIdentifierQuery from './get-bike-model-by-identifier.query';
 import GetBikeModelByIdentifierQueryValidator from './get-bike-model-by-identifier.query-validator';
+import GetBikeModelByIdentifierUseCase from './get-bike-model-by-identifier.usecase';
 
-export default class GetBikeModelByIdentifierQueryHandler {
+export default class GetBikeModelByIdentifierQueryHandler implements GetBikeModelByIdentifierUseCase {
   constructor(private readonly bikeModelRepository: BikeModelRepositoryReader) {}
 
-  /**
-   * @throws {
-   *  InvalidQueryError,
-   *  BikeModelNotFoundError,
-   * }
-   */
   async execute(getBikeModelByIdentifierQuery: GetBikeModelByIdentifierQuery): Promise<BikeModelDTO> {
     new GetBikeModelByIdentifierQueryValidator().validateQuery(getBikeModelByIdentifierQuery);
 
