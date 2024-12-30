@@ -47,11 +47,15 @@ export default class SequelizeBikeModelRepositoryWriter implements BikeModelRepo
   }
   async delete(id: string): Promise<void> {
     try {
-      await BikeModelModel.destroy({
+      const deletedBikeModelCount = await BikeModelModel.destroy({
         where: {
           id,
         },
       });
+
+      if (deletedBikeModelCount === 0) {
+        throw new BikeModelNotFoundError();
+      }
 
       return Promise.resolve();
     } catch (error: unknown) {

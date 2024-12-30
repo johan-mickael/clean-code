@@ -1,4 +1,15 @@
-import { BelongsTo, Column, CreatedAt, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  Default,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
 
 import Dealer from './dealer.model';
 
@@ -9,9 +20,9 @@ import Dealer from './dealer.model';
   underscored: true,
 })
 export default class Partner extends Model {
-  @Column({
-    primaryKey: true,
-  })
+  @PrimaryKey
+  @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
   declare id: string;
 
   @Column({

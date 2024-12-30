@@ -1,4 +1,4 @@
-import { Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, Default, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
   tableName: 'dealers',
@@ -7,9 +7,9 @@ import { Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript
   underscored: true,
 })
 export default class Dealer extends Model {
-  @Column({
-    primaryKey: true,
-  })
+  @PrimaryKey
+  @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
   declare id: string;
 
   @Column({

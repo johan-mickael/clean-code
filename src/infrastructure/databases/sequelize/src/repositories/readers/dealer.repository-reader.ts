@@ -1,3 +1,5 @@
+import { Error as SequelizeError } from 'sequelize';
+
 import DealerRepositoryReader from '@triumph/application/ports/repositories/readers/dealer.repository-reader';
 import { Dealer } from '@triumph/domain/entity/dealer';
 
@@ -11,12 +13,20 @@ export default class SequelizeDealerRepository implements DealerRepositoryReader
   }
 
   async getById(id: string): Promise<Dealer | null> {
-    const dealer = await DealerModel.findByPk(id);
+    try {
+      const dealer = await DealerModel.findByPk(id);
 
-    if (!dealer) {
-      return null;
+      if (!dealer) {
+        return null;
+      }
+
+      return new Dealer(dealer.id, dealer.name, dealer.address);
+    } catch (error) {
+      if (error instanceof SequelizeError) {
+        return null;
+      }
+
+      throw error;
     }
-
-    return new Dealer(dealer.id, dealer.name, dealer.address);
   }
 }

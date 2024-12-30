@@ -4,9 +4,9 @@ import DeleteBikeModelCommand from './delete-bike-model.command';
 
 export default class DeleteBikeModelCommandValidator implements CommandValidator {
   validateCommand(deleteBikeModelCommand: DeleteBikeModelCommand): void {
-    const bikeModelIdToUpdate = deleteBikeModelCommand.bikeModelId;
+    const bikeModelIdToDelete = deleteBikeModelCommand.bikeModelId;
 
-    if (!bikeModelIdToUpdate) {
+    if (!bikeModelIdToDelete) {
       throw new InvalidCommandError(deleteBikeModelCommand);
     }
   }

@@ -5,16 +5,11 @@ import PartnerDTOMapper from '../../../interfaces/mappers/partner.dto-mapper';
 import PartnerRepositoryReader from '../../../ports/repositories/readers/partner.repository-reader';
 import GetPartnerByIdentifierQuery from './get-partner-by-identifier.query';
 import GetPartnerByIdentifierQueryValidator from './get-partner-by-identifier.query-validator';
+import GetPartnerByIdentifierUseCase from './get-partner-by-identifier.usecase';
 
-export default class GetPartnerByIdentifierQueryHandler {
+export default class GetPartnerByIdentifierQueryHandler implements GetPartnerByIdentifierUseCase {
   constructor(private readonly partnerRepository: PartnerRepositoryReader) {}
 
-  /**
-   * @throws {
-   *  InvalidQueryError,
-   *  PartnerNotFoundError,
-   * }
-   */
   async execute(getPartnerByIdentifierQuery: GetPartnerByIdentifierQuery): Promise<PartnerDTO> {
     new GetPartnerByIdentifierQueryValidator().validateQuery(getPartnerByIdentifierQuery);
 
