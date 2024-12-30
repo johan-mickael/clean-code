@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import DealerRepositoryReader from '@triumph/application/ports/repositories/readers/dealer.repository-reader';
 import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner.repository-reader';
 import PartnerRepositoryWriter from '@triumph/application/ports/repositories/writers/partner.repository-writer';
-import GetPartnerByIdentifierUseCase from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier.usecase';
-import ListPartnersUseCase from '@triumph/application/queries/partners/list-partners/list-partners.usecase';
 import SequelizeDealerRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/dealer.repository-reader';
 import SequelizePartnerRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/partner.repository-reader';
 import SequelizePartnerRepositoryWriter from '@triumph/sequelize-adapter/src/repositories/writers/partner.repository-writer';
@@ -39,12 +37,6 @@ import {
     UpdatePartnerUseCaseProvider,
     DeletePartnerUseCaseProvider,
   ],
-  exports: [
-    ListPartnersUseCase,
-    GetPartnerByIdentifierUseCase,
-    CreatePartnerUseCaseProvider,
-    UpdatePartnerUseCaseProvider,
-    DeletePartnerUseCaseProvider,
-  ],
+  exports: [],
 })
 export class PartnerModule {}

@@ -16,6 +16,6 @@ import { GetDealerByIdentifierUseCaseProvider, ListDealersUseCaseProvider } from
     ListDealersUseCaseProvider,
     GetDealerByIdentifierUseCaseProvider,
   ],
-  exports: [ListDealersUseCaseProvider, GetDealerByIdentifierUseCaseProvider],
+  exports: [],
 })
 export class DealerModule {}

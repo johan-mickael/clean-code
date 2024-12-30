@@ -23,12 +23,6 @@ import {
     UpdateBikeModelUseCaseProvider,
     DeleteBikeModelUseCaseProvider,
   ],
-  exports: [
-    ListBikeModelsUseCaseProvider,
-    GetBikeModelByIdentifierUseCaseProvider,
-    CreateBikeModelUseCaseProvider,
-    UpdateBikeModelUseCaseProvider,
-    DeleteBikeModelUseCaseProvider,
-  ],
+  exports: [],
 })
 export class BikeModelModule {}
