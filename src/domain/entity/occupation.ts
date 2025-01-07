@@ -1,10 +1,6 @@
-import Entity from './entity.interface';
-
-export class Occupation extends Entity {
+export class Occupation {
   constructor(
-    public id: string,
+    public id: string | number,
     public name: string,
-  ) {
-    super(id);
-  }
+  ) {}
 }
