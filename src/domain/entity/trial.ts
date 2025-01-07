@@ -1,4 +1,4 @@
-import { Bike } from './bike';
+import Bike from './bike';
 
 export class Trial {
   constructor(

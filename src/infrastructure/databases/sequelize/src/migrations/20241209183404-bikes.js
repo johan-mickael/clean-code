@@ -9,10 +9,9 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable(TABLE_NAME, {
       id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.fn('gen_random_uuid'),
         primaryKey: true,
-        allowNull: false,
       },
       bike_model_id: {
         type: DataTypes.UUID,
@@ -34,7 +33,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      kilometers: {
+      mileage: {
         type: Sequelize.FLOAT,
       },
       status: {

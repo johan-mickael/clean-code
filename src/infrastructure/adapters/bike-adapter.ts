@@ -1,4 +1,4 @@
-import { Bike } from '@triumph/domain/entity/bike';
+import Bike from '@triumph/domain/entity/bike';
 import BikeModel from '@triumph/sequelize-adapter/src/models/bike.model';
 
 import { toDomainCustomer } from './customer-adapter';

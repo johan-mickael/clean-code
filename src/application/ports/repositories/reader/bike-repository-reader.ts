@@ -1,4 +1,4 @@
-import { Bike } from '@triumph/domain/entity/bike';
+import Bike from '@triumph/domain/entity/bike';
 
 export default abstract class BikeRepositoryReader {
   abstract list(): Promise<Bike[]>;

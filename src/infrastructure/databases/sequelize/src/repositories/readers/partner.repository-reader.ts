@@ -1,3 +1,5 @@
+import { Error as SequelizeError } from 'sequelize';
+
 import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner.repository-reader';
 import { Partner } from '@triumph/domain/entity/partner';
 
@@ -11,12 +13,20 @@ export default class SequelizePartnerRepository implements PartnerRepositoryRead
   }
 
   async getById(id: string): Promise<Partner | null> {
-    const partner = await PartnerModel.findByPk(id);
+    try {
+      const partner = await PartnerModel.findByPk(id);
 
-    if (!partner) {
-      return null;
+      if (!partner) {
+        return null;
+      }
+
+      return new Partner(partner.id, partner.name, partner.email, partner.dealerId);
+    } catch (error: unknown) {
+      if (error instanceof SequelizeError) {
+        return null;
+      }
+
+      throw error;
     }
-
-    return new Partner(partner.id, partner.name, partner.email, partner.dealerId);
   }
 }

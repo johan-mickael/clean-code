@@ -1,5 +1,7 @@
 'use strict';
 
+const { DataTypes } = require('sequelize');
+
 const TABLE_NAME = 'visits';
 
 /** @type {import('sequelize-cli').Migration} */
@@ -13,10 +15,14 @@ module.exports = {
         allowNull: false,
       },
       bike_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'bikes', key: 'id' },
-        onDelete: 'SET NULL',
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'bikes',
+          key: 'id',
+        },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       visit_date: {
         type: Sequelize.DATE,

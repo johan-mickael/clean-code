@@ -1,4 +1,16 @@
-import { BelongsTo, Column, CreatedAt, ForeignKey, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  Default,
+  ForeignKey,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
 
 import BikeModel from './bike-model.model';
 import Partner from './partner.model';
@@ -12,11 +24,10 @@ import Visit from './visit.model';
   underscored: true,
 })
 export default class Bike extends Model {
-  @Column({
-    primaryKey: true,
-    autoIncrement: true,
-  })
-  declare id: number;
+  @PrimaryKey
+  @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
+  declare id: string;
 
   @ForeignKey(() => Partner)
   @Column
@@ -33,7 +44,7 @@ export default class Bike extends Model {
   declare bikeModel: BikeModel;
 
   @Column
-  declare kilometers: number;
+  declare mileage: number;
 
   @Column
   declare status: number;

@@ -1,5 +1,5 @@
 import BikeRepositoryWriter from '@triumph/application/ports/repositories/writer/bike-repository-writer';
-import { Bike } from '@triumph/domain/entity/bike';
+import Bike from '@triumph/domain/entity/bike';
 import { BikeModel as BikeModelDomain } from '@triumph/domain/entity/bike-model';
 
 import { toDomainCustomer } from '../../../../../adapters/customer-adapter';

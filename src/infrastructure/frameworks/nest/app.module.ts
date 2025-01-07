@@ -3,7 +3,7 @@ import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 
 import { BikeModelModule } from './src/modules/bike-models/bike-model.module';
-import { BikeModule } from './src/modules/bike/bike-module';
+import { BikeModule } from './src/modules/bikes/bike.module';
 import { CustomerEventModule } from './src/modules/customer-event/customer-event-module';
 import { CustomerModule } from './src/modules/customer/customer-module';
 import { DealerModule } from './src/modules/dealers/dealer.module';

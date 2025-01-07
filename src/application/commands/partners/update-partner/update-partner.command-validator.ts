@@ -4,7 +4,7 @@ import UpdatePartnerCommand from './update-partner.command';
 
 export default class UpdatePartnerCommandValidator implements CommandValidator {
   validateCommand(updatePartnerCommand: UpdatePartnerCommand): void {
-    const partnerIdToUpdate = updatePartnerCommand.partnerId;
+    const partnerIdToUpdate = updatePartnerCommand.partnerId.trim();
 
     if (!partnerIdToUpdate) {
       throw new InvalidCommandError(updatePartnerCommand);

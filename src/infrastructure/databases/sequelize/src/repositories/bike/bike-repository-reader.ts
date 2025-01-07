@@ -1,10 +1,7 @@
 import { Op } from 'sequelize';
 
 import BikeRepositoryReader from '@triumph/application/ports/repositories/reader/bike-repository-reader';
-import { Bike } from '@triumph/domain/entity/bike';
-import { BikeModel as BikeModelEntity } from '@triumph/domain/entity/bike-model';
-import { Customer } from '@triumph/domain/entity/customer';
-import { DrivingLicense } from '@triumph/domain/entity/driving-license';
+import Bike from '@triumph/domain/entity/bike';
 import { PermisStatus } from '@triumph/domain/entity/driving-license';
 
 import BikeModelModel from '../../models/bike-model.model';
