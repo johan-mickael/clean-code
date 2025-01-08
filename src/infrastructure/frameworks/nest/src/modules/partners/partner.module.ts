@@ -6,7 +6,8 @@ import SequelizeDealerRepositoryReader from '@triumph/sequelize-adapter/src/repo
 import SequelizePartnerRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/partner.repository-reader';
 import SequelizePartnerRepositoryWriter from '@triumph/sequelize-adapter/src/repositories/writers/partner.repository-writer';
 
-import PartnerController from '../../controllers/partner.controller';
+import PartnerReaderController from '../../controllers/partners/partner.reader.controller';
+import PartnerWriterController from '../../controllers/partners/partner.writer.controller';
 import {
   CreatePartnerUseCaseProvider,
   DeletePartnerUseCaseProvider,
@@ -17,7 +18,7 @@ import {
 
 @Module({
   imports: [],
-  controllers: [PartnerController],
+  controllers: [PartnerReaderController, PartnerWriterController],
   providers: [
     {
       provide: PartnerRepositoryReader,

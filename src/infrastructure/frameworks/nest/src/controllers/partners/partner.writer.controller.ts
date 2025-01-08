@@ -1,51 +1,22 @@
 import { Response } from 'express';
 
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreatePartnerCommand from '@triumph/application/commands/partners/create-partner/create-partner.command';
 import CreatePartnerUseCase from '@triumph/application/commands/partners/create-partner/create-partner.usecase';
 import DeletePartnerCommand from '@triumph/application/commands/partners/delete-partner/delete-partner.command';
 import DeletePartnerUseCase from '@triumph/application/commands/partners/delete-partner/delete-partner.usecase';
 import UpdatePartnerCommand from '@triumph/application/commands/partners/update-partner/update-partner.command';
 import UpdatePartnerUseCase from '@triumph/application/commands/partners/update-partner/update-partner.usecase';
-import GetPartnerByIdentifierQuery from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier.query';
-import GetPartnerByIdentifierUseCase from '@triumph/application/queries/partners/get-partner-by-identifier/get-partner-by-identifier.usecase';
-import ListPartnersQuery from '@triumph/application/queries/partners/list-partners/list-partners.query';
-import ListPartnersUseCase from '@triumph/application/queries/partners/list-partners/list-partners.usecase';
 import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found.error';
 import { PartnerNotFoundError } from '@triumph/domain/errors/partners/partner-not-found.error';
 
 @Controller('partners')
-export default class PartnerController {
+export default class PartnerWriterController {
   constructor(
-    private readonly listPartnersUseCase: ListPartnersUseCase,
-    private readonly getPartnerByIdentifierUseCase: GetPartnerByIdentifierUseCase,
     private readonly createPartnerUseCase: CreatePartnerUseCase,
     private readonly updatePartnerUseCase: UpdatePartnerUseCase,
     private readonly deletePartnerUseCase: DeletePartnerUseCase,
   ) {}
-
-  @Get()
-  async list(@Res() response: Response): Promise<Response> {
-    const partners = await this.listPartnersUseCase.execute(new ListPartnersQuery());
-
-    return response.json(partners);
-  }
-
-  @Get(':id')
-  async getById(@Param('id') id: string, @Res() response: Response): Promise<Response> {
-    const getPartnerQuery = new GetPartnerByIdentifierQuery(id);
-
-    try {
-      const partner = await this.getPartnerByIdentifierUseCase.execute(getPartnerQuery);
-      return response.json(partner);
-    } catch (error: unknown) {
-      if (error instanceof PartnerNotFoundError) {
-        return response.sendStatus(HttpStatus.NOT_FOUND);
-      }
-
-      throw error;
-    }
-  }
 
   @Post()
   async create(@Body() partnerPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {

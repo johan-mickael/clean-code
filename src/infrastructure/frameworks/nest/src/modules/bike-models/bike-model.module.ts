@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import BikeModelController from '../../controllers/bike-model.controller';
+import BikeModelReaderController from '../../controllers/bike-models/bike-model.reader.controller';
+import BikeModelWriterController from '../../controllers/bike-models/bike-model.writer.controller';
 import {
   BikeModelRepositoryReaderProvider,
   BikeModelRepositoryWriterProvider,
@@ -13,7 +14,7 @@ import {
 
 @Module({
   imports: [],
-  controllers: [BikeModelController],
+  controllers: [BikeModelReaderController, BikeModelWriterController],
   providers: [
     BikeModelRepositoryReaderProvider,
     BikeModelRepositoryWriterProvider,

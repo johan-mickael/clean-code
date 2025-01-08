@@ -8,8 +8,8 @@ import SequelizeBikeRepositoryReader from '@triumph/sequelize-adapter/src/reposi
 import SequelizePartnerRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/partner.repository-reader';
 import SequelizeBikeRepositoryWriter from '@triumph/sequelize-adapter/src/repositories/writers/bike.repository-writer';
 
-import BikeReaderController from '../../controllers/bike/bike.reader.controller';
-import BikeWriterController from '../../controllers/bike/bike.writer.controller';
+import BikeReaderController from '../../controllers/bikes/bike.reader.controller';
+import BikeWriterController from '../../controllers/bikes/bike.writer.controller';
 import {
   CreateBikeUseCaseProvider,
   DeleteBikeUseCaseProvider,
