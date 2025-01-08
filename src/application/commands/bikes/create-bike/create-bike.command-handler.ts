@@ -2,6 +2,7 @@ import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-
 import { PartnerNotFoundError } from '@triumph/domain/errors/partners/partner-not-found.error';
 
 import BikeDTO from '../../../interfaces/dtos/bike.dto';
+import BikeDTOMapper from '../../../interfaces/mappers/bike.dto-mapper';
 import BikeModelRepositoryReader from '../../../ports/repositories/readers/bike-model.repository-reader';
 import PartnerRepositoryReader from '../../../ports/repositories/readers/partner.repository-reader';
 import BikeRepositoryWriter from '../../../ports/repositories/writers/bike-repository-writer';
@@ -44,6 +45,7 @@ export default class CreateBikeCommandHandler implements CreateBikeUseCase {
       bikeCirculationDateInput,
     );
 
-    return await this.bikeRepositoryWriter.create(bikeDTO);
+    const createdBikeEntity = await this.bikeRepositoryWriter.create(bikeDTO);
+    return BikeDTOMapper.toDTO(createdBikeEntity);
   }
 }

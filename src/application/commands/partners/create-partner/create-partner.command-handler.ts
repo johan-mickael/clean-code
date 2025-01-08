@@ -1,6 +1,7 @@
 import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found.error';
 
 import PartnerDTO from '../../../interfaces/dtos/partner.dto';
+import PartnerDTOMapper from '../../../interfaces/mappers/partner.dto-mapper';
 import DealerRepositoryReader from '../../../ports/repositories/readers/dealer.repository-reader';
 import PartnerRepositoryWriter from '../../../ports/repositories/writers/partner.repository-writer';
 import CreatePartnerCommand from './create-partner.command';
@@ -26,7 +27,8 @@ export default class CreatePartnerCommandHandler implements CreatePartnerUseCase
     }
 
     const partnerDTO = new PartnerDTO(null, partnerNameInput, partnerEmailInput, partnerDealerIdInput);
+    const createdPartnerEntity = await this.partnerRepositoryWriter.create(partnerDTO);
 
-    return await this.partnerRepositoryWriter.create(partnerDTO);
+    return PartnerDTOMapper.toDTO(createdPartnerEntity);
   }
 }

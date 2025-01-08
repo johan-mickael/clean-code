@@ -1,4 +1,7 @@
+import Bike from '@triumph/domain/entity/bike';
+
 import BikeModelDTO from '../../../interfaces/dtos/bike-model.dto';
+import BikeModelDTOMapper from '../../../interfaces/mappers/bike-model.dto-mapper';
 import BikeModelRepositoryWriter from '../../../ports/repositories/writers/bike-model.repository-writer';
 import UpdateBikeModelCommand from './update-bike-model.command';
 import UpdateBikeModelCommandValidator from './update-bike-model.command-validator';
@@ -13,6 +16,10 @@ export default class UpdateBikeModelCommandHandler implements UpdateBikeModelUse
     const bikeModelNameInput = updateBikeModelCommand.bikeModelData.name.trim();
     const bikeModelDTO = new BikeModelDTO(null, bikeModelNameInput);
 
-    return await this.bikeModelRepositoryWriter.update(updateBikeModelCommand.bikeModelId, bikeModelDTO);
+    const updatedBikeModelEntity = await this.bikeModelRepositoryWriter.update(
+      updateBikeModelCommand.bikeModelId,
+      bikeModelDTO,
+    );
+    return BikeModelDTOMapper.toDTO(updatedBikeModelEntity);
   }
 }

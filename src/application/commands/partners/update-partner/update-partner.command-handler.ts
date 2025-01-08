@@ -1,6 +1,7 @@
 import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found.error';
 
 import PartnerDTO from '../../../interfaces/dtos/partner.dto';
+import PartnerDTOMapper from '../../../interfaces/mappers/partner.dto-mapper';
 import DealerRepositoryReader from '../../../ports/repositories/readers/dealer.repository-reader';
 import PartnerRepositoryWriter from '../../../ports/repositories/writers/partner.repository-writer';
 import UpdatePartnerCommand from './update-partner.command';
@@ -41,6 +42,7 @@ export default class UpdatePartnerCommandHandler implements UpdatePartnerUseCase
       throw new DealerNotFoundError();
     }
 
-    return await this.partnerRepositoryWriter.update(updatePartnerCommand.partnerId, partnerDTO);
+    const updatedPartnerEntity = await this.partnerRepositoryWriter.update(updatePartnerCommand.partnerId, partnerDTO);
+    return PartnerDTOMapper.toDTO(updatedPartnerEntity);
   }
 }
