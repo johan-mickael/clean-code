@@ -29,10 +29,10 @@ class NestServer {
 
   static async connectToDatabase() {
     try {
-      await NestServer.connectToPostgresDatabase();
-      await NestServer.connectToMongoDatabase();
+      NestServer.connectToPostgresDatabase();
+      NestServer.connectToMongoDatabase();
     } catch (error) {
-      console.error('Error connecting to the database', error);
+      console.error('Error connecting to the databases', error);
       process.exit(1);
     }
   }

@@ -10,6 +10,7 @@ import { DealerModule } from './src/modules/dealers/dealer.module';
 import { DrivingLicenseModule } from './src/modules/driving_license/driving-license-module';
 import { EventModule } from './src/modules/event/event-module';
 import { GuaranteeModule } from './src/modules/guarantee/guarantee-module';
+import { MaintenanceScheduleModule } from './src/modules/maintenance-schedules/maintenance-schedule.module';
 import { OccupationModule } from './src/modules/occupation/occupation-module';
 import { PartnerModule } from './src/modules/partners/partner.module';
 import { TrialModule } from './src/modules/trial/trial-module';
@@ -29,6 +30,7 @@ import { VisitModule } from './src/modules/visit/visit-module';
     BikeModelModule,
     DealerModule,
     PartnerModule,
+    MaintenanceScheduleModule,
   ],
   controllers: [],
   providers: [
