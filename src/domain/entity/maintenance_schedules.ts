@@ -1,39 +1,78 @@
-import InvalidMileageIntervalMaintenanceScheduleError from '../errors/maintenance_schedules/invalid-mileage-interval-maintenance-schedule.error';
-import InvalidMonthIntervalMaintenanceScheduleError from '../errors/maintenance_schedules/invalid-month-interval-maintenance-schedule.error';
-import Entity from './entity.interface';
+import InvalidEntityError from '../errors/common/invalid-entity.error';
 
-export class MaintenanceSchedule extends Entity {
+export class MaintenanceSchedule {
   constructor(
-    public id: string,
-    public label: string,
-    public bikeModelId: string,
-    public monthInterval?: number | null,
-    public mileageInterval?: number | null,
-  ) {
-    super(id);
+    private id?: string,
+    private label?: string,
+    private bikeModelId?: string,
+    private monthInterval?: number,
+    private mileageInterval?: number,
+  ) {}
+
+  getId(): string | null | undefined {
+    return this.id;
   }
 
-  getMonthInterval(): number | null {
-    return this.monthInterval || null;
+  setId(id: string): MaintenanceSchedule {
+    this.id = id;
+    return this;
   }
 
-  getMileageInterval(): number | null {
-    return this.mileageInterval || null;
+  getLabel(): string | null | undefined {
+    return this.label;
   }
 
-  setMonthInterval(monthInterval: number): void {
+  setLabel(label: string): MaintenanceSchedule {
+    this.label = label;
+    return this;
+  }
+
+  getBikeModelId(): string | null | undefined {
+    return this.bikeModelId;
+  }
+
+  setBikeModelId(bikeModelId: string): MaintenanceSchedule {
+    this.bikeModelId = bikeModelId;
+    return this;
+  }
+
+  getMonthInterval(): number | null | undefined {
+    return this.monthInterval;
+  }
+
+  setMonthInterval(monthInterval: number): MaintenanceSchedule {
     if (monthInterval < 0) {
-      throw new InvalidMonthIntervalMaintenanceScheduleError();
+      throw new InvalidEntityError('Month interval must be a positive number');
     }
 
     this.monthInterval = monthInterval;
+    return this;
   }
 
-  setMileageInterval(mileageInterval: number): void {
+  getMileageInterval(): number | null | undefined {
+    return this.mileageInterval;
+  }
+
+  setMileageInterval(mileageInterval: number): MaintenanceSchedule {
     if (mileageInterval < 0) {
-      throw new InvalidMileageIntervalMaintenanceScheduleError();
+      throw new InvalidEntityError('Mileage interval must be a positive number');
     }
 
     this.mileageInterval = mileageInterval;
+    return this;
+  }
+
+  validate(): void {
+    if (!this.label) {
+      throw new InvalidEntityError('Maintenance schedule label is required');
+    }
+
+    if (!this.bikeModelId) {
+      throw new InvalidEntityError('Bike model ID is required');
+    }
+
+    if (!this.monthInterval && !this.mileageInterval) {
+      throw new InvalidEntityError('Either month interval or mileage interval is required');
+    }
   }
 }
