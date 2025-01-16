@@ -1,4 +1,5 @@
-import { Column, CreatedAt, DataType, Default, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { HasMany, Column, CreatedAt, DataType, Default, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import User from './user.model';
 
 @Table({
   tableName: 'dealers',
@@ -21,6 +22,9 @@ export default class Dealer extends Model {
     allowNull: false,
   })
   declare address: string;
+
+  @HasMany(() => User)
+  declare users: User[];
 
   @CreatedAt
   declare createdAt: Date;

@@ -16,6 +16,8 @@ import { GetDealerByIdentifierUseCaseProvider, ListDealersUseCaseProvider } from
     ListDealersUseCaseProvider,
     GetDealerByIdentifierUseCaseProvider,
   ],
-  exports: [],
+  exports: [
+    DealerRepositoryReader, // Ajoutez ceci pour rendre le provider accessible à d'autres modules
+  ],
 })
 export class DealerModule {}

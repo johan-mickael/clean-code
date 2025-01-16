@@ -4,33 +4,36 @@ import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/dat
 
 import { BikeModelModule } from './src/modules/bike-models/bike-model.module';
 import { BikeModule } from './src/modules/bikes/bike.module';
-import { CustomerEventModule } from './src/modules/customer-event/customer-event-module';
-import { CustomerModule } from './src/modules/customer/customer-module';
 import { DealerModule } from './src/modules/dealers/dealer.module';
-import { DrivingLicenseModule } from './src/modules/driving_license/driving-license-module';
-import { EventModule } from './src/modules/event/event-module';
-import { GuaranteeModule } from './src/modules/guarantee/guarantee-module';
 import { MaintenanceScheduleModule } from './src/modules/maintenance-schedules/maintenance-schedule.module';
-import { OccupationModule } from './src/modules/occupation/occupation-module';
 import { PartnerModule } from './src/modules/partners/partner.module';
-import { TrialModule } from './src/modules/trial/trial-module';
-import { VisitModule } from './src/modules/visit/visit-module';
+import { DriverLicenseModule } from './src/modules/driver-licenses/driver-license.module';
+import { DriversModule } from './src/modules/drivers/driver.module';
+import { DrivingHistoryModule } from './src/modules/driving-history/driving-history.module';
+import { DrivingIncidentsModule } from './src/modules/driving-incidents/driving-incident.module';
+import { MaintenanceDetailsModule } from './src/modules/maintenance-details/maintenance-detail.module';
+import { MaintenanceModule } from './src/modules/maintenances/maintenance.module';
+import { SpareOrdersModule } from './src/modules/spare-orders/spare-order.module';
+import { SparePartModule } from './src/modules/spare-parts/spare-part.module';
+import { UserModule } from './src/modules/users/user.module';
+
 
 @Module({
   imports: [
-    CustomerModule,
-    OccupationModule,
     BikeModule,
-    CustomerEventModule,
-    DrivingLicenseModule,
-    EventModule,
-    GuaranteeModule,
-    VisitModule,
-    TrialModule,
     BikeModelModule,
     DealerModule,
     PartnerModule,
     MaintenanceScheduleModule,
+    DriverLicenseModule,
+    DriversModule,
+    DrivingHistoryModule,
+    DrivingIncidentsModule,
+    MaintenanceDetailsModule,
+    MaintenanceModule,
+    SpareOrdersModule,
+    SparePartModule,
+    UserModule
   ],
   controllers: [],
   providers: [

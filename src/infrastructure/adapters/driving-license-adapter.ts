@@ -1,6 +1,6 @@
 import { DrivingLicense } from '@triumph/domain/entity/driving-license';
 
-import DrivingLicenseModel from '../databases/sequelize/src/models/driving-licence.model';
+import DrivingLicenseModel from '@triumph/sequelize-adapter/src/models/driver-licence.model';
 
 function mapStatus(status: number): 'VALID' | 'EXPIRED' | 'SUSPENDED' {
   switch (status) {

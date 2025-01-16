@@ -14,8 +14,6 @@ import {
 
 import BikeModel from './bike-model.model';
 import Partner from './partner.model';
-import Trial from './trial.model';
-import Visit from './visit.model';
 
 @Table({
   tableName: 'bikes',
@@ -51,12 +49,6 @@ export default class Bike extends Model {
 
   @Column
   declare circulationDate: Date;
-
-  @HasMany(() => Trial)
-  declare trials: Trial[];
-
-  @HasMany(() => Visit)
-  declare visits: Visit[];
 
   @CreatedAt
   declare createdAt: Date;

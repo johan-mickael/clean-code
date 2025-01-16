@@ -3,7 +3,7 @@ import BikeModelRepositoryReader from '@triumph/application/ports/repositories/r
 import BikeRepositoryReader from '@triumph/application/ports/repositories/readers/bike-repository-reader';
 import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner.repository-reader';
 import BikeRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-repository-writer';
-import SequelizeBikeModelRepositoryReader from '@triumph/sequelize-adapter/src/repositories/bike-model/bike-model-repository-reader';
+import SequelizeBikeModelRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/bike-model.repository-reader';
 import SequelizeBikeRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/bike.repository-reader';
 import SequelizePartnerRepositoryReader from '@triumph/sequelize-adapter/src/repositories/readers/partner.repository-reader';
 import SequelizeBikeRepositoryWriter from '@triumph/sequelize-adapter/src/repositories/writers/bike.repository-writer';
@@ -44,6 +44,10 @@ import {
     UpdateBikeUseCaseProvider,
     DeleteBikeUseCaseProvider,
   ],
-  exports: [],
+  exports: [
+    CreateBikeUseCaseProvider, // Ajout ici
+    UpdateBikeUseCaseProvider,
+    DeleteBikeUseCaseProvider,
+  ],
 })
 export class BikeModule {}
