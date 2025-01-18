@@ -1,65 +1,62 @@
 import InvalidEntityError from '../errors/common/invalid-entity.error';
 
 export class MaintenanceSchedule {
+  private _id: string | undefined = undefined;
+
   constructor(
-    private id?: string,
-    private label?: string,
-    private bikeModelId?: string,
-    private monthInterval?: number,
-    private mileageInterval?: number,
+    private _label: string,
+    private _bikeModelId: string,
+    private _monthInterval?: number | null,
+    private _mileageInterval?: number | null,
   ) {}
 
-  getId(): string | null | undefined {
-    return this.id;
+  get id(): string | undefined {
+    return this._id;
   }
 
   setId(id: string): MaintenanceSchedule {
-    this.id = id;
+    this._id = id;
     return this;
   }
 
-  getLabel(): string | null | undefined {
-    return this.label;
+  get label(): string {
+    return this._label;
   }
 
-  setLabel(label: string): MaintenanceSchedule {
-    this.label = label;
-    return this;
+  set label(label: string) {
+    this._label = label;
   }
 
-  getBikeModelId(): string | null | undefined {
-    return this.bikeModelId;
+  get bikeModelId(): string {
+    return this._bikeModelId;
   }
 
-  setBikeModelId(bikeModelId: string): MaintenanceSchedule {
-    this.bikeModelId = bikeModelId;
-    return this;
+  set bikeModelId(bikeModelId: string) {
+    this._bikeModelId = bikeModelId;
   }
 
-  getMonthInterval(): number | null | undefined {
-    return this.monthInterval;
+  get monthInterval(): number | null | undefined {
+    return this._monthInterval;
   }
 
-  setMonthInterval(monthInterval: number): MaintenanceSchedule {
+  set monthInterval(monthInterval: number) {
     if (monthInterval < 0) {
       throw new InvalidEntityError('Month interval must be a positive number');
     }
 
-    this.monthInterval = monthInterval;
-    return this;
+    this._monthInterval = monthInterval;
   }
 
-  getMileageInterval(): number | null | undefined {
-    return this.mileageInterval;
+  get mileageInterval(): number | null | undefined {
+    return this._mileageInterval;
   }
 
-  setMileageInterval(mileageInterval: number): MaintenanceSchedule {
+  set mileageInterval(mileageInterval: number) {
     if (mileageInterval < 0) {
       throw new InvalidEntityError('Mileage interval must be a positive number');
     }
 
-    this.mileageInterval = mileageInterval;
-    return this;
+    this._mileageInterval = mileageInterval;
   }
 
   validate(): void {
@@ -71,7 +68,7 @@ export class MaintenanceSchedule {
       throw new InvalidEntityError('Bike model ID is required');
     }
 
-    if (!this.monthInterval && !this.mileageInterval) {
+    if (!this._monthInterval && !this._mileageInterval) {
       throw new InvalidEntityError('Either month interval or mileage interval is required');
     }
   }

@@ -15,13 +15,16 @@ export default class MongooseMaintenanceScheduleRepositoryWriter implements Main
       mileage_interval: maintenanceScheduleDTO.mileageInterval,
     });
 
-    return new MaintenanceSchedule(
-      createdMaintenanceSchedule.id,
+    const maintenanceScheduleEntity = new MaintenanceSchedule(
       createdMaintenanceSchedule.label,
       createdMaintenanceSchedule.bike_model_id,
       createdMaintenanceSchedule.month_interval,
       createdMaintenanceSchedule.mileage_interval,
     );
+
+    maintenanceScheduleEntity.setId(createdMaintenanceSchedule._id);
+
+    return maintenanceScheduleEntity;
   }
   update(id: string, entityDTO: MaintenanceScheduleDTO): Promise<MaintenanceSchedule> {
     throw new Error('Method not implemented.');

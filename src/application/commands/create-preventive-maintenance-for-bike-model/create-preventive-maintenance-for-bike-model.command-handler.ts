@@ -20,19 +20,18 @@ export default class CreatePreventiveMaintenanceForBikeModelCommandHandler
   async execute(
     createPreventiveMaintenanceForBikeModelCommand: CreatePreventiveMaintenanceForBikeModelCommand,
   ): Promise<MaintenanceScheduleDTO> {
-    const maintenanceScheduleEntity = new MaintenanceSchedule();
+    const maintenanceScheduleEntity = new MaintenanceSchedule(
+      createPreventiveMaintenanceForBikeModelCommand.maintenanceScheduleLabel,
+      createPreventiveMaintenanceForBikeModelCommand.bikeModelId,
+    );
 
     try {
-      maintenanceScheduleEntity
-        .setLabel(createPreventiveMaintenanceForBikeModelCommand.maintenanceScheduleLabel)
-        .setBikeModelId(createPreventiveMaintenanceForBikeModelCommand.bikeModelId);
-
       if (createPreventiveMaintenanceForBikeModelCommand.monthInterval) {
-        maintenanceScheduleEntity.setMonthInterval(createPreventiveMaintenanceForBikeModelCommand.monthInterval);
+        maintenanceScheduleEntity.monthInterval = createPreventiveMaintenanceForBikeModelCommand.monthInterval;
       }
 
       if (createPreventiveMaintenanceForBikeModelCommand.mileageInterval) {
-        maintenanceScheduleEntity.setMileageInterval(createPreventiveMaintenanceForBikeModelCommand.mileageInterval);
+        maintenanceScheduleEntity.mileageInterval = createPreventiveMaintenanceForBikeModelCommand.mileageInterval;
       }
 
       maintenanceScheduleEntity.validate();

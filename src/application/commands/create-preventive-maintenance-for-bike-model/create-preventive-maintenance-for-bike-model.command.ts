@@ -22,8 +22,8 @@ export default class CreatePreventiveMaintenanceForBikeModelCommand implements C
     return {
       maintenanceScheduleLabel: preventiveMaintenanceForBikeModelData.maintenanceScheduleLabel?.trim(),
       bikeModelId: preventiveMaintenanceForBikeModelData.bikeModelId?.trim(),
-      monthInterval: preventiveMaintenanceForBikeModelData.monthInterval,
-      mileageInterval: preventiveMaintenanceForBikeModelData.mileageInterval,
+      monthInterval: Number(preventiveMaintenanceForBikeModelData.monthInterval),
+      mileageInterval: Number(preventiveMaintenanceForBikeModelData.mileageInterval),
     };
   }
 
