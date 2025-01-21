@@ -20,6 +20,13 @@ class NestServer {
     // Creating the application instance and running it
     const application = await NestFactory.create(AppModule);
 
+    application.enableCors({
+      origin: 'http://localhost:3030', 
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+    });
+
     application.useGlobalFilters(new HttpErrorInterceptor());
 
     await application.listen(this.serverPort, () => {

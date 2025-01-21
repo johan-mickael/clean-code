@@ -1,43 +1,53 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { Express } from 'express';
+import { Express, Router } from 'express';
 import express from 'express';
+
+import container from '../ioc/container.registry';
 
 import BikeModelRoute from './bike-model-route';
 import BikeRoute from './bike-route';
-import CustomerEventRoute from './customer-event-route';
-import CustomerRoute from './customer-route';
-import DrivingLicenseRoute from './driving-license-route';
-import EventRoute from './event-route';
-import GuaranteeRoute from './guarantee-route';
-import OccupationRoute from './occupation-route';
+import PartnerRoute from './partner.route';
+import DriverLicenseRoute from './driver-license-route';
+import DriverRoute from './driver-route';
+import DrivingHistoryRoute from './driving-history-route';
+import DriverIncidentRoute from './driving-incident-route';
 import RouteInterface from './route-interface';
-import TrialRoute from './trial-route';
-import VisitRoute from './visit-route';
 
 export default class IndexRoute {
-  clientRoute: RouteInterface;
-  clientEventRoute: RouteInterface;
-  occupationRoute: RouteInterface;
   bikeModelRoute: RouteInterface;
   bikeRoute: RouteInterface;
-  drivingLicenseRoute: RouteInterface;
-  eventRoute: RouteInterface;
-  guaranteeRoute: RouteInterface;
-  trialRoute: RouteInterface;
-  visitRoute: RouteInterface;
+  partnerRoute: RouteInterface;
+  driverLicenseRoute: RouteInterface;
+  driverRoute: RouteInterface;
+  drivingHistoryRoute: RouteInterface;
+  driverIncidentRoute: RouteInterface;
 
   constructor() {
-    this.clientRoute = new CustomerRoute();
-    this.clientEventRoute = new CustomerEventRoute();
-    this.occupationRoute = new OccupationRoute();
+    const expressRouter = Router();
+
     this.bikeModelRoute = new BikeModelRoute();
     this.bikeRoute = new BikeRoute();
-    this.drivingLicenseRoute = new DrivingLicenseRoute();
-    this.eventRoute = new EventRoute();
-    this.guaranteeRoute = new GuaranteeRoute();
-    this.trialRoute = new TrialRoute();
-    this.visitRoute = new VisitRoute();
+    this.partnerRoute = new PartnerRoute(
+      container.resolve('PartnerController'),
+      expressRouter,
+    );
+    this.driverLicenseRoute = new DriverLicenseRoute(
+      container.resolve('DriverLicenseController'),
+      expressRouter,
+    );
+    this.driverRoute = new DriverRoute(
+      container.resolve('DriverController'),
+      expressRouter,
+    );
+    this.drivingHistoryRoute = new DrivingHistoryRoute(
+      container.resolve('DrivingHistoryController'),
+      expressRouter,
+    );
+    this.driverIncidentRoute = new DriverIncidentRoute(
+      container.resolve('DriverIncidentController'),
+      expressRouter,
+    );
   }
 
   configureRoutes(app: Express) {
@@ -50,15 +60,13 @@ export default class IndexRoute {
     );
     app.use(bodyParser.json());
     app.use(express.json());
-    app.use('/customers', this.clientRoute.getRouter());
-    app.use('/occupations', this.occupationRoute.getRouter());
-    app.use('/bikemodels', this.bikeModelRoute.getRouter());
+
+    app.use('/bike-models', this.bikeModelRoute.getRouter());
     app.use('/bikes', this.bikeRoute.getRouter());
-    app.use('/customerevents', this.clientEventRoute.getRouter());
-    app.use('/drivinglicenses', this.drivingLicenseRoute.getRouter());
-    app.use('/events', this.eventRoute.getRouter());
-    app.use('/guaranties', this.guaranteeRoute.getRouter());
-    app.use('/trials', this.trialRoute.getRouter());
-    app.use('/visits', this.visitRoute.getRouter());
+    app.use('/partners', this.partnerRoute.getRouter());
+    app.use('/driver-licenses', this.driverLicenseRoute.getRouter());
+    app.use('/drivers', this.driverRoute.getRouter());
+    app.use('/driving-history', this.drivingHistoryRoute.getRouter());
+    app.use('/driving-incidents', this.driverIncidentRoute.getRouter());
   }
 }

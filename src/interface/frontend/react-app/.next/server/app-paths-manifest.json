@@ -1,5 +1,9 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/trials/add/page": "app/trials/add/page.js",
-  "/trials/page": "app/trials/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/drivers/page": "app/drivers/page.js",
+  "/driving-history/add/page": "app/driving-history/add/page.js",
+  "/driving-history/page": "app/driving-history/page.js",
+  "/driver-licenses/add/page": "app/driver-licenses/add/page.js",
+  "/driving-incidents/add/page": "app/driving-incidents/add/page.js",
+  "/driving-incidents/page": "app/driving-incidents/page.js"
 }
