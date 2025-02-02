@@ -9,9 +9,7 @@ export default class SequelizeSparePartRepository implements SparePartRepository
   async list(): Promise<SparePart[]> {
     const spareParts = await SparePartModel.findAll();
 
-    return spareParts.map(
-      (part) => new SparePart(part.id, part.name, part.price, part.quantity),
-    );
+    return spareParts.map((part) => new SparePart(part.id, part.name, part.price, part.quantity));
   }
 
   async getById(id: string): Promise<SparePart | null> {

@@ -17,11 +17,11 @@ export default class UpdateMaintenanceDetailCommandHandler {
       maintenanceType,
       sparePartId,
       price,
-      comments
+      comments,
     );
     const updatedMaintenanceDetail = await this.maintenanceDetailRepositoryWriter.update(
       maintenanceDetailId,
-      maintenanceDetailDTO
+      maintenanceDetailDTO,
     );
 
     return MaintenanceDetailDTOMapper.toDTO(updatedMaintenanceDetail);

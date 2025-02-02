@@ -6,5 +6,7 @@ export default abstract class GetMaintenanceDetailByIdentifierUseCase {
    * @throws InvalidQueryError
    * @throws MaintenanceDetailNotFoundError
    */
-  abstract execute(getMaintenanceDetailByIdentifierQuery: GetMaintenanceDetailByIdentifierQuery): Promise<MaintenanceDetailDTO>;
+  abstract execute(
+    getMaintenanceDetailByIdentifierQuery: GetMaintenanceDetailByIdentifierQuery,
+  ): Promise<MaintenanceDetailDTO>;
 }

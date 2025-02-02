@@ -1,11 +1,12 @@
-import { Controller, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateDriverLicenseCommand from '@triumph/application/commands/driver-licenses/create-driver-license/create-driver-license.command';
 import CreateDriverLicenseUseCase from '@triumph/application/commands/driver-licenses/create-driver-license/create-driver-license.usecase';
-import UpdateDriverLicenseCommand from '@triumph/application/commands/driver-licenses/update-driver-license/update-driver-license.command';
-import UpdateDriverLicenseUseCase from '@triumph/application/commands/driver-licenses/update-driver-license/update-driver-license.usecase';
 import DeleteDriverLicenseCommand from '@triumph/application/commands/driver-licenses/delete-driver-license/delete-driver-license.command';
 import DeleteDriverLicenseUseCase from '@triumph/application/commands/driver-licenses/delete-driver-license/delete-driver-license.usecase';
+import UpdateDriverLicenseCommand from '@triumph/application/commands/driver-licenses/update-driver-license/update-driver-license.command';
+import UpdateDriverLicenseUseCase from '@triumph/application/commands/driver-licenses/update-driver-license/update-driver-license.usecase';
 
 @Controller('driver-licenses')
 export default class DriverLicenseWriterController {
@@ -23,7 +24,11 @@ export default class DriverLicenseWriterController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() driverLicensePayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async update(
+    @Param('id') id: string,
+    @Body() driverLicensePayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const updateDriverLicenseCommand = new UpdateDriverLicenseCommand(id, driverLicensePayload);
     const updatedDriverLicense = await this.updateDriverLicenseUseCase.execute(updateDriverLicenseCommand);
     return response.json(updatedDriverLicense);

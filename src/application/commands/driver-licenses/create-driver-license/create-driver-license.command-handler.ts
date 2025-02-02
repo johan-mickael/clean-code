@@ -7,7 +7,8 @@ export default class CreateDriverLicenseCommandHandler {
   constructor(private readonly driverLicenseRepositoryWriter: DriverLicenseRepositoryWriter) {}
 
   async execute(createDriverLicenseCommand: CreateDriverLicenseCommand): Promise<DriverLicenseDTO> {
-    const { licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive, driverId } = createDriverLicenseCommand.driverLicensePayload;
+    const { licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive, driverId } =
+      createDriverLicenseCommand.driverLicensePayload;
     const driverLicenseDTO = new DriverLicenseDTO(
       null,
       driverId,

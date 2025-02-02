@@ -6,8 +6,6 @@ import MaintenanceScheduleModel from '../../models/maintenance-schedule.model';
 
 export default class MongooseMaintenanceScheduleRepositoryWriter implements MaintenanceScheduleRepositoryWriter {
   async create(maintenanceScheduleDTO: MaintenanceScheduleDTO): Promise<MaintenanceSchedule> {
-    console.log('maintenanceScheduleDTO', maintenanceScheduleDTO);
-
     const createdMaintenanceSchedule = await MaintenanceScheduleModel.create({
       label: maintenanceScheduleDTO.label,
       bike_model_id: maintenanceScheduleDTO.bikeModelId,

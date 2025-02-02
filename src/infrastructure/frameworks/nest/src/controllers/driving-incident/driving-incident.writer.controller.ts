@@ -1,11 +1,12 @@
-import { Controller, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateDrivingIncidentCommand from '@triumph/application/commands/driving-incidents/create-driving-incident/create-driving-incident.command';
 import CreateDrivingIncidentUseCase from '@triumph/application/commands/driving-incidents/create-driving-incident/create-driving-incident.usecase';
-import UpdateDrivingIncidentCommand from '@triumph/application/commands/driving-incidents/update-driving-incident/update-driving-incident.command';
-import UpdateDrivingIncidentUseCase from '@triumph/application/commands/driving-incidents/update-driving-incident/update-driving-incident.usecase';
 import DeleteDrivingIncidentCommand from '@triumph/application/commands/driving-incidents/delete-driving-incident/delete-driving-incident.command';
 import DeleteDrivingIncidentUseCase from '@triumph/application/commands/driving-incidents/delete-driving-incident/delete-driving-incident.usecase';
+import UpdateDrivingIncidentCommand from '@triumph/application/commands/driving-incidents/update-driving-incident/update-driving-incident.command';
+import UpdateDrivingIncidentUseCase from '@triumph/application/commands/driving-incidents/update-driving-incident/update-driving-incident.usecase';
 
 @Controller('driving-incidents')
 export default class DrivingIncidentWriterController {
@@ -23,7 +24,11 @@ export default class DrivingIncidentWriterController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() drivingIncidentPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async update(
+    @Param('id') id: string,
+    @Body() drivingIncidentPayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const updateDrivingIncidentCommand = new UpdateDrivingIncidentCommand(id, drivingIncidentPayload);
     const updatedDrivingIncident = await this.updateDrivingIncidentUseCase.execute(updateDrivingIncidentCommand);
     return response.json(updatedDrivingIncident);

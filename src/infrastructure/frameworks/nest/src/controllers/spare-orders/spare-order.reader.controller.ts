@@ -1,4 +1,5 @@
 import { Response } from 'express';
+
 import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetSpareOrderByIdentifierQuery from '@triumph/application/queries/spare-orders/get-spare-order-by-identifier/get-spare-order-by-identifier.query';
 import GetSpareOrderByIdentifierUseCase from '@triumph/application/queries/spare-orders/get-spare-order-by-identifier/get-spare-order-by-identifier.usecase';

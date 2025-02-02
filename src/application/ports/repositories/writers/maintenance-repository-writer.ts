@@ -1,5 +1,5 @@
-import MaintenanceEntity from '@triumph/domain/entity/maintenance';
-import MaintenanceDTO from '../../../interfaces/dtos/maintenance.dto';
-import BaseRepositoryWriter from './base.repository-writer';
+import MaintenanceEntity from '@triumph/domain/entity/maintenance/maintenance';
 
-export default abstract class MaintenanceRepositoryWriter extends BaseRepositoryWriter<MaintenanceEntity, MaintenanceDTO> {}
+export default abstract class MaintenanceRepositoryWriter {
+  abstract create(maintenanceData: any): Promise<MaintenanceEntity>;
+}

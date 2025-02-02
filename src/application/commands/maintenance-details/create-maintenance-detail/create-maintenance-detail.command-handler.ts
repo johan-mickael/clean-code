@@ -7,7 +7,8 @@ export default class CreateMaintenanceDetailCommandHandler {
   constructor(private readonly maintenanceDetailRepositoryWriter: MaintenanceDetailRepositoryWriter) {}
 
   async execute(createMaintenanceDetailCommand: CreateMaintenanceDetailCommand): Promise<MaintenanceDetailDTO> {
-    const { maintenanceId, label, maintenanceType, sparePartId, price, comments } = createMaintenanceDetailCommand.maintenanceDetailPayload;
+    const { maintenanceId, label, maintenanceType, sparePartId, price, comments } =
+      createMaintenanceDetailCommand.maintenanceDetailPayload;
 
     const maintenanceDetailDTO = new MaintenanceDetailDTO(
       null,
@@ -16,7 +17,7 @@ export default class CreateMaintenanceDetailCommandHandler {
       maintenanceType,
       sparePartId,
       price,
-      comments
+      comments,
     );
     const createdMaintenanceDetail = await this.maintenanceDetailRepositoryWriter.create(maintenanceDetailDTO);
 

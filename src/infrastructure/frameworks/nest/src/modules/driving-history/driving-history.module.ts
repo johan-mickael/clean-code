@@ -8,10 +8,10 @@ import DrivingHistoryReaderController from '../../controllers/driving-history/dr
 import DrivingHistoryWriterController from '../../controllers/driving-history/driving-history.writer.controller';
 import {
   CreateDrivingHistoryUseCaseProvider,
-  UpdateDrivingHistoryUseCaseProvider,
   DeleteDrivingHistoryUseCaseProvider,
   GetDrivingHistoryByIdentifierUseCaseProvider,
   ListDrivingHistoryUseCaseProvider,
+  UpdateDrivingHistoryUseCaseProvider,
 } from './driving-history.provider';
 
 @Module({

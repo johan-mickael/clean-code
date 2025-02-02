@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetDriverLicenseByIdentifierQuery from '@triumph/application/queries/driver-licenses/get-driver-license-by-identifier/get-driver-license-by-identifier.query';
 import GetDriverLicenseByIdentifierUseCase from '@triumph/application/queries/driver-licenses/get-driver-license-by-identifier/get-driver-license-by-identifier.usecase';
 import ListDriverLicensesQuery from '@triumph/application/queries/driver-licenses/list-driver-licenses/list-driver-licenses.query';

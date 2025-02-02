@@ -1,8 +1,9 @@
+import { UserNotFoundError } from '@triumph/domain/errors/users/user-not-found.error';
+
 import UserDTO from '../../../interfaces/dtos/user.dto';
 import UserDTOMapper from '../../../interfaces/mappers/user.dto-mapper';
 import UserRepositoryReader from '../../../ports/repositories/readers/user-repository-reader';
 import GetUserByIdQuery from './get-user-by-identifier.query';
-import { UserNotFoundError } from '@triumph/domain/errors/users/user-not-found.error';
 
 export default class GetUserByIdQueryHandler {
   constructor(private readonly userRepository: UserRepositoryReader) {}

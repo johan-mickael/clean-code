@@ -29,7 +29,6 @@ export const createMoto = async (newMoto: any) => {
   }
 };
 
-
 export const getBikeModels = async () => {
   try {
     const response = await axios.get(API_BIKEMODELS_URL);
@@ -50,12 +49,7 @@ export const createBikeModel = async (name: string) => {
   }
 };
 
-export const createDrivingLicense = async (
-  customerId: string,
-  date: string,
-  status: string,
-  country: string
-) => {
+export const createDrivingLicense = async (customerId: string, date: string, status: string, country: string) => {
   try {
     const response = await axios.post(API_DRIVING_URL, {
       customerId,
@@ -90,7 +84,6 @@ export const getDriverLicense = async () => {
   }
 };
 
-
 export const createDriverLicense = async (newDriverLicense: any) => {
   try {
     const response = await axios.post(API_DRIVER_LICENSES_URL, newDriverLicense);
@@ -116,7 +109,7 @@ export const createDrivingHistory = async (newHistory: any) => {
     const response = await axios.post(API_DRIVING_HISTORY_URL, newHistory);
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de la création d\'un historique de conduite', error);
+    console.error("Erreur lors de la création d'un historique de conduite", error);
     throw error;
   }
 };
@@ -126,11 +119,10 @@ export const deleteDrivingHistory = async (id: string) => {
     const response = await axios.delete(`${API_DRIVING_HISTORY_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de la suppression de l\'historique de conduite', error);
+    console.error("Erreur lors de la suppression de l'historique de conduite", error);
     throw error;
   }
 };
-
 
 export const getDrivingIncidents = async () => {
   try {
@@ -142,13 +134,12 @@ export const getDrivingIncidents = async () => {
   }
 };
 
-
 export const createDrivingIncident = async (newIncident: any) => {
   try {
     const response = await axios.post(API_DRIVING_INCIDENTS_URL, newIncident);
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de la création de l\'incident de conduite', error);
+    console.error("Erreur lors de la création de l'incident de conduite", error);
     throw error;
   }
 };
@@ -158,7 +149,7 @@ export const deleteDrivingIncident = async (id: string) => {
     const response = await axios.delete(`${API_DRIVING_INCIDENTS_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de la suppression de l\'incident de conduite', error);
+    console.error("Erreur lors de la suppression de l'incident de conduite", error);
     throw error;
   }
 };

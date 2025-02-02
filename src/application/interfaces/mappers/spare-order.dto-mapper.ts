@@ -1,5 +1,6 @@
 import SpareOrder from '@triumph/domain/entity/spare-order';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
+
 import SpareOrderDTO from '../dtos/spare-order.dto';
 
 export default class SpareOrderDTOMapper {

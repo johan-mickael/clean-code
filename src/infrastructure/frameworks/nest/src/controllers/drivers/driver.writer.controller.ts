@@ -1,11 +1,12 @@
-import { Controller, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateDriverCommand from '@triumph/application/commands/drivers/create-driver/create-driver.command';
 import CreateDriverUseCase from '@triumph/application/commands/drivers/create-driver/create-driver.usecase';
-import UpdateDriverCommand from '@triumph/application/commands/drivers/update-driver/update-driver.command';
-import UpdateDriverUseCase from '@triumph/application/commands/drivers/update-driver/update-driver.usecase';
 import DeleteDriverCommand from '@triumph/application/commands/drivers/delete-driver/delete-driver.command';
 import DeleteDriverUseCase from '@triumph/application/commands/drivers/delete-driver/delete-driver.usecase';
+import UpdateDriverCommand from '@triumph/application/commands/drivers/update-driver/update-driver.command';
+import UpdateDriverUseCase from '@triumph/application/commands/drivers/update-driver/update-driver.usecase';
 
 @Controller('drivers')
 export default class DriverWriterController {
@@ -23,7 +24,11 @@ export default class DriverWriterController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() driverPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async update(
+    @Param('id') id: string,
+    @Body() driverPayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const updateDriverCommand = new UpdateDriverCommand(id, driverPayload);
     const updatedDriver = await this.updateDriverUseCase.execute(updateDriverCommand);
     return response.json(updatedDriver);

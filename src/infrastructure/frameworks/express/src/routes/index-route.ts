@@ -4,14 +4,13 @@ import { Express, Router } from 'express';
 import express from 'express';
 
 import container from '../ioc/container.registry';
-
 import BikeModelRoute from './bike-model-route';
 import BikeRoute from './bike-route';
-import PartnerRoute from './partner.route';
 import DriverLicenseRoute from './driver-license-route';
 import DriverRoute from './driver-route';
 import DrivingHistoryRoute from './driving-history-route';
 import DriverIncidentRoute from './driving-incident-route';
+import PartnerRoute from './partner.route';
 import RouteInterface from './route-interface';
 
 export default class IndexRoute {
@@ -28,26 +27,11 @@ export default class IndexRoute {
 
     this.bikeModelRoute = new BikeModelRoute();
     this.bikeRoute = new BikeRoute();
-    this.partnerRoute = new PartnerRoute(
-      container.resolve('PartnerController'),
-      expressRouter,
-    );
-    this.driverLicenseRoute = new DriverLicenseRoute(
-      container.resolve('DriverLicenseController'),
-      expressRouter,
-    );
-    this.driverRoute = new DriverRoute(
-      container.resolve('DriverController'),
-      expressRouter,
-    );
-    this.drivingHistoryRoute = new DrivingHistoryRoute(
-      container.resolve('DrivingHistoryController'),
-      expressRouter,
-    );
-    this.driverIncidentRoute = new DriverIncidentRoute(
-      container.resolve('DriverIncidentController'),
-      expressRouter,
-    );
+    this.partnerRoute = new PartnerRoute(container.resolve('PartnerController'), expressRouter);
+    this.driverLicenseRoute = new DriverLicenseRoute(container.resolve('DriverLicenseController'), expressRouter);
+    this.driverRoute = new DriverRoute(container.resolve('DriverController'), expressRouter);
+    this.drivingHistoryRoute = new DrivingHistoryRoute(container.resolve('DrivingHistoryController'), expressRouter);
+    this.driverIncidentRoute = new DriverIncidentRoute(container.resolve('DriverIncidentController'), expressRouter);
   }
 
   configureRoutes(app: Express) {

@@ -1,11 +1,12 @@
-import { Controller, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateMaintenanceDetailCommand from '@triumph/application/commands/maintenance-details/create-maintenance-detail/create-maintenance-detail.command';
 import CreateMaintenanceDetailUseCase from '@triumph/application/commands/maintenance-details/create-maintenance-detail/create-maintenance-detail.usecase';
-import UpdateMaintenanceDetailCommand from '@triumph/application/commands/maintenance-details/update-maintenance-detail/update-maintenance-detail.command';
-import UpdateMaintenanceDetailUseCase from '@triumph/application/commands/maintenance-details/update-maintenance-detail/update-maintenance-detail.usecase';
 import DeleteMaintenanceDetailCommand from '@triumph/application/commands/maintenance-details/delete-maintenance-detail/delete-maintenance-detail.command';
 import DeleteMaintenanceDetailUseCase from '@triumph/application/commands/maintenance-details/delete-maintenance-detail/delete-maintenance-detail.usecase';
+import UpdateMaintenanceDetailCommand from '@triumph/application/commands/maintenance-details/update-maintenance-detail/update-maintenance-detail.command';
+import UpdateMaintenanceDetailUseCase from '@triumph/application/commands/maintenance-details/update-maintenance-detail/update-maintenance-detail.usecase';
 
 @Controller('maintenance-details')
 export default class MaintenanceDetailWriterController {
@@ -16,14 +17,21 @@ export default class MaintenanceDetailWriterController {
   ) {}
 
   @Post()
-  async create(@Body() maintenanceDetailPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async create(
+    @Body() maintenanceDetailPayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const createMaintenanceDetailCommand = new CreateMaintenanceDetailCommand(maintenanceDetailPayload);
     const createdMaintenanceDetail = await this.createMaintenanceDetailUseCase.execute(createMaintenanceDetailCommand);
     return response.status(HttpStatus.CREATED).json(createdMaintenanceDetail);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() maintenanceDetailPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async update(
+    @Param('id') id: string,
+    @Body() maintenanceDetailPayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const updateMaintenanceDetailCommand = new UpdateMaintenanceDetailCommand(id, maintenanceDetailPayload);
     const updatedMaintenanceDetail = await this.updateMaintenanceDetailUseCase.execute(updateMaintenanceDetailCommand);
     return response.json(updatedMaintenanceDetail);

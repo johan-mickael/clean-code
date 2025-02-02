@@ -1,70 +1,29 @@
 import { Response } from 'express';
 
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
-import CreateBikeCommand from '@triumph/application/commands/bikes/create-bike/create-bike.command';
-import CreateBikeUseCase from '@triumph/application/commands/bikes/create-bike/create-bike.usecase';
-import DeleteBikeCommand from '@triumph/application/commands/bikes/delete-bike/delete-bike.command';
-import DeleteBikeUseCase from '@triumph/application/commands/bikes/delete-bike/delete-bike.usecase';
-import UpdateBikeCommand from '@triumph/application/commands/bikes/update-bike/update-bike.command';
-import UpdateBikeUseCase from '@triumph/application/commands/bikes/update-bike/update-bike.usecase';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import CreateCurativeMaintenanceForBikeCommand from '@triumph/application/commands/create-curative-maintenance-for-bike/create-curative-maintenance-for-bike.command';
+import CreateCreativeMaintenanceForBikeUseCase from '@triumph/application/commands/create-curative-maintenance-for-bike/create-curative-maintenance-for-bike.usecase';
 import { BikeNotFoundError } from '@triumph/domain/errors/bikes/bike-not-found.error';
-import { DealerNotFoundError } from '@triumph/domain/errors/dealers/dealer-not-found.error';
 
 @Controller('maintenances')
-export default class BikeWriterController {
-  constructor(
-    private readonly createBikeUseCase: CreateBikeUseCase,
-    private readonly updateBikeUseCase: UpdateBikeUseCase,
-    private readonly deleteBikeUseCase: DeleteBikeUseCase,
-  ) {}
+export default class MaintenanceWriterController {
+  constructor(private readonly CreateCurativeMaintenanceForBikeUseCase: CreateCreativeMaintenanceForBikeUseCase) {}
 
   @Post()
-  async create(@Body() bikePayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
-    const createBikeCommand = new CreateBikeCommand(bikePayload);
-
-    const createdBike = await this.createBikeUseCase.execute(createBikeCommand);
-
-    if (createdBike) {
-      return response.status(HttpStatus.CREATED).json(createdBike);
-    }
-
-    return response.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-  }
-
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() bikePayload: Record<string, unknown>,
-    @Res() response: Response,
-  ): Promise<Response> {
-    const updateBikeCommand = new UpdateBikeCommand(id, bikePayload);
-
+  async createMaintenanceSchedule(@Body() maintenancePayload: any, @Res() response: Response): Promise<Response> {
     try {
-      const updatedBike = await this.updateBikeUseCase.execute(updateBikeCommand);
+      const createMaintenanceScheduleCommand = CreateCurativeMaintenanceForBikeCommand.validateAndCreateCommand({
+        maintenanceLabel: maintenancePayload['maintenance_label'],
+        bikeId: maintenancePayload['bike_id'],
+        maintenanceDate: maintenancePayload['maintenance_date'],
+      });
 
-      if (updatedBike) {
-        return response.json(updatedBike);
-      }
+      const createdMaintenance = await this.CreateCurativeMaintenanceForBikeUseCase.execute(
+        createMaintenanceScheduleCommand,
+      );
 
-      return response.sendStatus(HttpStatus.NOT_MODIFIED);
-    } catch (error: any) {
-      if (error instanceof BikeNotFoundError || error instanceof DealerNotFoundError) {
-        return response.sendStatus(HttpStatus.NOT_FOUND);
-      }
-
-      throw error;
-    }
-  }
-
-  @Delete(':id')
-  async delete(@Param('id') bikeId: string, @Res() response: Response): Promise<Response> {
-    try {
-      const deleteBikeCommand = new DeleteBikeCommand(bikeId);
-
-      await this.deleteBikeUseCase.execute(deleteBikeCommand);
-
-      return response.sendStatus(HttpStatus.NO_CONTENT);
-    } catch (error: any) {
+      return response.status(HttpStatus.CREATED).json(createdMaintenance);
+    } catch (error: unknown) {
       if (error instanceof BikeNotFoundError) {
         return response.sendStatus(HttpStatus.NOT_FOUND);
       }

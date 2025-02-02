@@ -1,5 +1,6 @@
 import DrivingIncident from '@triumph/domain/entity/driving-incident';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
+
 import DrivingIncidentDTO from '../dtos/driving-incident.dto';
 
 export default class DrivingIncidentDTOMapper {

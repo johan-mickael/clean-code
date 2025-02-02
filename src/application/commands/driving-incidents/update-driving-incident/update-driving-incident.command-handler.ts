@@ -11,7 +11,10 @@ export default class UpdateDrivingIncidentCommandHandler {
     const { drivingHistoryId, label, comments } = drivingIncidentPayload;
 
     const drivingIncidentDTO = new DrivingIncidentDTO(drivingIncidentId, drivingHistoryId, label, comments);
-    const updatedDrivingIncident = await this.drivingIncidentRepositoryWriter.update(drivingIncidentId, drivingIncidentDTO);
+    const updatedDrivingIncident = await this.drivingIncidentRepositoryWriter.update(
+      drivingIncidentId,
+      drivingIncidentDTO,
+    );
 
     return DrivingIncidentDTOMapper.toDTO(updatedDrivingIncident);
   }

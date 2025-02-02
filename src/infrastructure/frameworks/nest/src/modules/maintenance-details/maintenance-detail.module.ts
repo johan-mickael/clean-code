@@ -8,10 +8,10 @@ import MaintenanceDetailReaderController from '../../controllers/maintenance-det
 import MaintenanceDetailWriterController from '../../controllers/maintenance-details/maintenance-detail.writer.controller';
 import {
   CreateMaintenanceDetailUseCaseProvider,
-  UpdateMaintenanceDetailUseCaseProvider,
   DeleteMaintenanceDetailUseCaseProvider,
   GetMaintenanceDetailByIdentifierUseCaseProvider,
   ListMaintenanceDetailsUseCaseProvider,
+  UpdateMaintenanceDetailUseCaseProvider,
 } from './maintenance-detail.provider';
 
 @Module({

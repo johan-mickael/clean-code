@@ -1,8 +1,9 @@
+import { DrivingHistoryNotFoundError } from '@triumph/domain/errors/driving-history/driving-history-not-found.error';
+
 import DrivingHistoryDTO from '../../../interfaces/dtos/driving-history.dto';
 import DrivingHistoryDTOMapper from '../../../interfaces/mappers/driving-history.dto-mapper';
 import DrivingHistoryRepositoryReader from '../../../ports/repositories/readers/driving-history-repository-reader';
 import GetDrivingHistoryByIdQuery from './get-driving-history-by-identifier.query';
-import { DrivingHistoryNotFoundError } from '@triumph/domain/errors/driving-history/driving-history-not-found.error';
 
 export default class GetDrivingHistoryByIdQueryHandler {
   constructor(private readonly drivingHistoryRepository: DrivingHistoryRepositoryReader) {}

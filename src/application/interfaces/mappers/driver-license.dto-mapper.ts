@@ -1,5 +1,6 @@
 import DriverLicense from '@triumph/domain/entity/driver-license';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
+
 import DriverLicenseDTO from '../dtos/driver-license.dto';
 
 export default class DriverLicenseDTOMapper {
@@ -17,7 +18,8 @@ export default class DriverLicenseDTOMapper {
   }
 
   static toEntity(driverLicenseDTO: DriverLicenseDTO): DriverLicense {
-    const { id, driverId, licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive } = driverLicenseDTO;
+    const { id, driverId, licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive } =
+      driverLicenseDTO;
 
     if (!id) {
       throw new InvalidIdentifierError();

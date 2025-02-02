@@ -8,10 +8,10 @@ import DriverLicenseReaderController from '../../controllers/driver-licenses/dri
 import DriverLicenseWriterController from '../../controllers/driver-licenses/driver-license.writer.controller';
 import {
   CreateDriverLicenseUseCaseProvider,
-  UpdateDriverLicenseUseCaseProvider,
   DeleteDriverLicenseUseCaseProvider,
   GetDriverLicenseByIdentifierUseCaseProvider,
   ListDriverLicensesUseCaseProvider,
+  UpdateDriverLicenseUseCaseProvider,
 } from './driver-license.provider';
 
 @Module({

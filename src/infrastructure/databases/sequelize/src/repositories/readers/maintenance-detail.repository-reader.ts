@@ -10,7 +10,16 @@ export default class SequelizeMaintenanceDetailRepository implements Maintenance
     const maintenanceDetails = await MaintenanceDetailModel.findAll();
 
     return maintenanceDetails.map(
-      (detail) => new MaintenanceDetail(detail.id, detail.label, detail.maintenanceId, detail.sparePartId, detail.maintenanceType, detail.price, detail.comments),
+      (detail) =>
+        new MaintenanceDetail(
+          detail.id,
+          detail.label,
+          detail.maintenanceId,
+          detail.sparePartId,
+          detail.maintenanceType,
+          detail.price,
+          detail.comments,
+        ),
     );
   }
 
@@ -22,7 +31,15 @@ export default class SequelizeMaintenanceDetailRepository implements Maintenance
         return null;
       }
 
-      return new MaintenanceDetail(detail.id, detail.label, detail.maintenanceId, detail.sparePartId, detail.maintenanceType, detail.price, detail.comments);
+      return new MaintenanceDetail(
+        detail.id,
+        detail.label,
+        detail.maintenanceId,
+        detail.sparePartId,
+        detail.maintenanceType,
+        detail.price,
+        detail.comments,
+      );
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
         console.error(error);

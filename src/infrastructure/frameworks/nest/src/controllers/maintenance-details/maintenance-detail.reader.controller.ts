@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetMaintenanceDetailByIdentifierQuery from '@triumph/application/queries/maintenance-details/get-maintenance-detail-by-identifier/get-maintenance-detail-by-identifier.query';
 import GetMaintenanceDetailByIdentifierUseCase from '@triumph/application/queries/maintenance-details/get-maintenance-detail-by-identifier/get-maintenance-detail-by-identifier.usecase';
 import ListMaintenanceDetailsQuery from '@triumph/application/queries/maintenance-details/list-maintenance-details/list-maintenance-details.query';

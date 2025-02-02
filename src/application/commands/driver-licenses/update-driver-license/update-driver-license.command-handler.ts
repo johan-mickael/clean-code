@@ -8,7 +8,8 @@ export default class UpdateDriverLicenseCommandHandler {
 
   async execute(updateDriverLicenseCommand: UpdateDriverLicenseCommand): Promise<DriverLicenseDTO> {
     const { driverLicenseId, driverLicensePayload } = updateDriverLicenseCommand;
-    const { licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive, driverId } = driverLicensePayload;
+    const { licenseNumber, issueDate, expiryDate, licenseClass, stateIssued, isActive, driverId } =
+      driverLicensePayload;
     const driverLicenseDTO = new DriverLicenseDTO(
       driverLicenseId,
       driverId,

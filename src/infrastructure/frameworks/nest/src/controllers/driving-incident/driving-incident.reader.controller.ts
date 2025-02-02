@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetDrivingIncidentByIdentifierQuery from '@triumph/application/queries/driving-incidents/get-driving-incident-by-identifier/get-driving-incident-by-identifier.query';
 import GetDrivingIncidentByIdentifierUseCase from '@triumph/application/queries/driving-incidents/get-driving-incident-by-identifier/get-driving-incident-by-identifier.usecase';
 import ListDrivingIncidentsQuery from '@triumph/application/queries/driving-incidents/list-driving-incidents/list-driving-incidents.query';

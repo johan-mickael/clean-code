@@ -8,10 +8,10 @@ import DrivingIncidentReaderController from '../../controllers/driving-incident/
 import DrivingIncidentWriterController from '../../controllers/driving-incident/driving-incident.writer.controller';
 import {
   CreateDrivingIncidentUseCaseProvider,
-  UpdateDrivingIncidentUseCaseProvider,
   DeleteDrivingIncidentUseCaseProvider,
   GetDrivingIncidentByIdentifierUseCaseProvider,
   ListDrivingIncidentsUseCaseProvider,
+  UpdateDrivingIncidentUseCaseProvider,
 } from './driving-incident.provider';
 
 @Module({

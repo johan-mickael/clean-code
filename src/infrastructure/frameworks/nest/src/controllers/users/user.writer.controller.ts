@@ -1,11 +1,12 @@
-import { Controller, Post, Put, Delete, Body, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Body, Controller, Delete, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import CreateUserCommand from '@triumph/application/commands/users/create-user/create-user.command';
 import CreateUserUseCase from '@triumph/application/commands/users/create-user/create-user.usecase';
-import UpdateUserCommand from '@triumph/application/commands/users/update-user/update-user.command';
-import UpdateUserUseCase from '@triumph/application/commands/users/update-user/update-user.usecase';
 import DeleteUserCommand from '@triumph/application/commands/users/delete-user/delete-user.command';
 import DeleteUserUseCase from '@triumph/application/commands/users/delete-user/delete-user.usecase';
+import UpdateUserCommand from '@triumph/application/commands/users/update-user/update-user.command';
+import UpdateUserUseCase from '@triumph/application/commands/users/update-user/update-user.usecase';
 
 @Controller('users')
 export default class UserWriterController {
@@ -23,7 +24,11 @@ export default class UserWriterController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() userPayload: Record<string, unknown>, @Res() response: Response): Promise<Response> {
+  async update(
+    @Param('id') id: string,
+    @Body() userPayload: Record<string, unknown>,
+    @Res() response: Response,
+  ): Promise<Response> {
     const updateUserCommand = new UpdateUserCommand(id, userPayload);
     const updatedUser = await this.updateUserUseCase.execute(updateUserCommand);
     return response.json(updatedUser);

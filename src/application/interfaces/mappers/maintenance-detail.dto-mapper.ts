@@ -1,5 +1,6 @@
 import MaintenanceDetail from '@triumph/domain/entity/maintenance-detail';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
+
 import MaintenanceDetailDTO from '../dtos/maintenance-detail.dto';
 
 export default class MaintenanceDetailDTOMapper {
@@ -22,14 +23,6 @@ export default class MaintenanceDetailDTOMapper {
       throw new InvalidIdentifierError();
     }
 
-    return new MaintenanceDetail(
-      id,
-      label,
-      maintenanceId,
-      sparePartId,
-      maintenanceType,
-      price,
-      comments,
-    );
+    return new MaintenanceDetail(id, label, maintenanceId, sparePartId, maintenanceType, price, comments);
   }
 }

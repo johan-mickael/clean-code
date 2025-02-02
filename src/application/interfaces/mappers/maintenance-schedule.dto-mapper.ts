@@ -1,13 +1,7 @@
 import { MaintenanceSchedule } from '@triumph/domain/entity/maintenance_schedules';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
 
-
-
 import { MaintenanceScheduleDTO } from '../dtos/maintenance_schedules.dto';
-
-
-
-
 
 export default class MaintenanceScheduleDTOMapper {
   static toDTO(maintenanceScheduleEntity: MaintenanceSchedule): MaintenanceScheduleDTO {

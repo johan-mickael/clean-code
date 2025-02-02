@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetDrivingHistoryByIdentifierQuery from '@triumph/application/queries/driving-history/get-driving-history-by-identifier/get-driving-history-by-identifier.query';
 import GetDrivingHistoryByIdentifierUseCase from '@triumph/application/queries/driving-history/get-driving-history-by-identifier/get-driving-history-by-identifier.usecase';
 import ListDrivingHistoriesQuery from '@triumph/application/queries/driving-history/list-driving-history/list-driving-history.query';

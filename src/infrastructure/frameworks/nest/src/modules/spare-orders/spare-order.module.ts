@@ -8,10 +8,10 @@ import SpareOrderReaderController from '../../controllers/spare-orders/spare-ord
 import SpareOrderWriterController from '../../controllers/spare-orders/spare-order.writer.controller';
 import {
   CreateSpareOrderUseCaseProvider,
-  UpdateSpareOrderUseCaseProvider,
   DeleteSpareOrderUseCaseProvider,
   GetSpareOrderByIdentifierUseCaseProvider,
   ListSpareOrdersUseCaseProvider,
+  UpdateSpareOrderUseCaseProvider,
 } from './spare-order.provider';
 
 @Module({

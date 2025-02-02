@@ -1,5 +1,6 @@
 import DrivingHistory from '@triumph/domain/entity/driving-history';
 import InvalidIdentifierError from '@triumph/domain/errors/common/invalid-identifier.error';
+
 import DrivingHistoryDTO from '../dtos/driving-history.dto';
 
 export default class DrivingHistoryDTOMapper {

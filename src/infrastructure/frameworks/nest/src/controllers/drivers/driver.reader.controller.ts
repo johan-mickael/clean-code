@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetDriverByIdentifierQuery from '@triumph/application/queries/drivers/get-driver-by-identifier/get-driver-by-identifier.query';
 import GetDriverByIdentifierUseCase from '@triumph/application/queries/drivers/get-driver-by-identifier/get-driver-by-identifier.usecase';
 import ListDriversQuery from '@triumph/application/queries/drivers/list-drivers/list-drivers.query';

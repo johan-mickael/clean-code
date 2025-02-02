@@ -10,13 +10,8 @@ export default class UpdateDriverCommandHandler {
     const { driverId, driverPayload } = updateDriverCommand;
     const { firstname, lastname, profilePicture } = driverPayload;
 
-    const driverDTO = new DriverDTO(
-      driverId,
-      firstname,
-      lastname,
-      profilePicture
-    );
-    
+    const driverDTO = new DriverDTO(driverId, firstname, lastname, profilePicture);
+
     const updatedDriver = await this.driverRepositoryWriter.update(driverId, driverDTO);
 
     return DriverDTOMapper.toDTO(updatedDriver);

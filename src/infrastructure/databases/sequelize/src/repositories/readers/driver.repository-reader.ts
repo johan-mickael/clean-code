@@ -9,9 +9,7 @@ export default class SequelizeDriverRepository implements DriverRepositoryReader
   async list(): Promise<Driver[]> {
     const drivers = await DriverModel.findAll();
 
-    return drivers.map(
-      (driver) => new Driver(driver.id, driver.firstname, driver.lastname, driver.profilePicture),
-    );
+    return drivers.map((driver) => new Driver(driver.id, driver.firstname, driver.lastname, driver.profilePicture));
   }
 
   async getById(id: string): Promise<Driver | null> {

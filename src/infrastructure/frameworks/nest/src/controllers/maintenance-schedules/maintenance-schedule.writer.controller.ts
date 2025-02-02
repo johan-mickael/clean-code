@@ -12,7 +12,10 @@ export default class MaintenanceScheduleWriterController {
   ) {}
 
   @Post()
-  async create(@Body() maintenanceSchedulePayload: any, @Res() response: Response): Promise<Response> {
+  async createMaintenanceSchedule(
+    @Body() maintenanceSchedulePayload: any,
+    @Res() response: Response,
+  ): Promise<Response> {
     try {
       const createMaintenanceScheduleCommand = CreatePreventiveMaintenanceForBikeModelCommand.validateAndCreateCommand({
         maintenanceScheduleLabel: maintenanceSchedulePayload['maintenance_schedule_label'],

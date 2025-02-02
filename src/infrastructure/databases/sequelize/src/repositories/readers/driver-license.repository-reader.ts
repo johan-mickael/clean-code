@@ -10,7 +10,17 @@ export default class SequelizeDriverLicenseRepository implements DriverLicenseRe
     const licenses = await DriverLicenseModel.findAll();
 
     return licenses.map(
-      (license) => new DriverLicense(license.id, license.driverId, license.licenseNumber, license.issueDate, license.expiryDate, license.licenseClass, license.stateIssued, license.isActive),
+      (license) =>
+        new DriverLicense(
+          license.id,
+          license.driverId,
+          license.licenseNumber,
+          license.issueDate,
+          license.expiryDate,
+          license.licenseClass,
+          license.stateIssued,
+          license.isActive,
+        ),
     );
   }
 
@@ -22,7 +32,16 @@ export default class SequelizeDriverLicenseRepository implements DriverLicenseRe
         return null;
       }
 
-      return new DriverLicense(license.id, license.driverId, license.licenseNumber, license.issueDate, license.expiryDate, license.licenseClass, license.stateIssued, license.isActive);
+      return new DriverLicense(
+        license.id,
+        license.driverId,
+        license.licenseNumber,
+        license.issueDate,
+        license.expiryDate,
+        license.licenseClass,
+        license.stateIssued,
+        license.isActive,
+      );
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
         console.error(error);

@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import GetUserByIdentifierQuery from '@triumph/application/queries/users/get-user-by-identifier/get-user-by-identifier.query';
 import GetUserByIdentifierUseCase from '@triumph/application/queries/users/get-user-by-identifier/get-user-by-identifier.usecase';
 import ListUsersQuery from '@triumph/application/queries/users/list-users/list-users.query';

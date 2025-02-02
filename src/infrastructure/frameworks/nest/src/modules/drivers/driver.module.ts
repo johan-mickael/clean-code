@@ -8,10 +8,10 @@ import DriversReaderController from '../../controllers/drivers/driver.reader.con
 import DriversWriterController from '../../controllers/drivers/driver.writer.controller';
 import {
   CreateDriverUseCaseProvider,
-  UpdateDriverUseCaseProvider,
   DeleteDriverUseCaseProvider,
   GetDriverByIdentifierUseCaseProvider,
   ListDriversUseCaseProvider,
+  UpdateDriverUseCaseProvider,
 } from './driver.provider';
 
 @Module({

@@ -9,13 +9,8 @@ export default class CreateDriverCommandHandler {
   async execute(createDriverCommand: CreateDriverCommand): Promise<DriverDTO> {
     const { firstname, lastname, profilePicture } = createDriverCommand.driverPayload;
 
-    const driverDTO = new DriverDTO(
-      null,
-      firstname,
-      lastname,
-      profilePicture
-    );
-    
+    const driverDTO = new DriverDTO(null, firstname, lastname, profilePicture);
+
     const createdDriver = await this.driverRepositoryWriter.create(driverDTO);
 
     return DriverDTOMapper.toDTO(createdDriver);

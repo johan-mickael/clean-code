@@ -6,5 +6,7 @@ export default abstract class GetDrivingIncidentByIdentifierUseCase {
    * @throws InvalidQueryError
    * @throws DrivingIncidentNotFoundError
    */
-  abstract execute(getDrivingIncidentByIdentifierQuery: GetDrivingIncidentByIdentifierQuery): Promise<DrivingIncidentDTO>;
+  abstract execute(
+    getDrivingIncidentByIdentifierQuery: GetDrivingIncidentByIdentifierQuery,
+  ): Promise<DrivingIncidentDTO>;
 }
