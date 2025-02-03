@@ -1,5 +1,9 @@
 {
   "name": "@triumph/domain",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@triumph/bus": "file:../bus",
+    "amqplib": "^0.10.5"
+  }
 }

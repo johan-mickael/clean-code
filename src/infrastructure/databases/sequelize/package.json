@@ -14,6 +14,8 @@
     "reset": "sequelize-cli db:reset"
   },
   "dependencies": {
+    "@triumph/bus": "file:../bus",
+    "amqplib": "^0.10.5",
     "pg": "^8.11.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.1",

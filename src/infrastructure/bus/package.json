@@ -1,0 +1,16 @@
+{
+  "name": "@triumph/bus",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "private": true,
+  "dependencies": {
+    "amqplib": "^0.10.5"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.5"
+  }
+}

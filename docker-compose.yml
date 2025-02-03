@@ -3,7 +3,6 @@ services:
     build: .
     ports:
       - '3000:3000'
-      - '9229:9229'
     environment:
       - FRAMEWORK=${FRAMEWORK:-nest}
       - PORT=${PORT:-3000}
@@ -41,6 +40,16 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=triumph
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:4.0.5-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
     restart: unless-stopped
 
   adminer:

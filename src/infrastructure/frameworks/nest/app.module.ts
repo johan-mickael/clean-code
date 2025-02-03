@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import SequelizeAdapter from '@triumph/sequelize-adapter/src';
-import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
+import BusEmitter from '@triumph/application/ports/bus-emitter/bus-emitter.interface';
 
 import { BikeModelModule } from './src/modules/bike-models/bike-model.module';
 import { BikeModule } from './src/modules/bikes/bike.module';
@@ -34,13 +33,17 @@ import { UserModule } from './src/modules/users/user.module';
     SparePartModule,
     UserModule,
   ],
-  controllers: [],
-  providers: [
-    {
-      provide: DatabaseAdapter,
-      useClass: SequelizeAdapter,
-    },
-  ],
-  exports: [DatabaseAdapter],
 })
-export class AppModule {}
+export class AppModule {
+  static async withBus(busEmitter: BusEmitter): Promise<AppModule> {
+    return {
+      module: AppModule,
+      providers: [
+        {
+          provide: BusEmitter,
+          useValue: busEmitter,
+        },
+      ],
+    };
+  }
+}

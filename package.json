@@ -6,7 +6,8 @@
     "src/domain",
     "src/infrastructure/frameworks/*",
     "src/infrastructure/databases/*",
-    "src/infrastructure/shared"
+    "src/infrastructure/shared",
+    "src/infrastructure/bus"
   ],
   "scripts": {
     "app:install": "npm install --workspaces",

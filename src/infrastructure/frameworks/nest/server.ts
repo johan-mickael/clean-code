@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
+import BusEmitter from '@triumph/application/ports/bus-emitter/bus-emitter.interface';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
-import DatabaseAdapter from '@triumph/shared-infrastructure/database-adapter/database-adapter.interface';
 
+import RabbitMQEmitter from '../../bus/src';
 import MongooseAdapter from '../../databases/mongoose/src';
 import { AppModule } from './app.module';
 import { HttpErrorInterceptor } from './src/middlewares/http-error.interceptor';
@@ -11,8 +12,9 @@ class NestServer {
   private readonly serverPort = parseInt(process.env.PORT || '3000');
 
   async bootstrap() {
+    const appModule = AppModule.withBus(await NestServer.connectToBus());
     // Getting the application context
-    const applicationContext = await NestFactory.createApplicationContext(AppModule);
+    const applicationContext = await NestFactory.createApplicationContext(appModule);
 
     // Connecting to the database
     await NestServer.connectToDatabase();
@@ -40,6 +42,17 @@ class NestServer {
       NestServer.connectToMongoDatabase();
     } catch (error) {
       console.error('Error connecting to the databases', error);
+      process.exit(1);
+    }
+  }
+
+  static async connectToBus(): Promise<BusEmitter> {
+    try {
+      const busEmitter = new RabbitMQEmitter();
+      await busEmitter.connect();
+      return busEmitter;
+    } catch (error) {
+      console.error('Error connecting to the bus', error);
       process.exit(1);
     }
   }
