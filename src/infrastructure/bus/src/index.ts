@@ -1,11 +1,23 @@
 import * as amqp from 'amqplib';
 
-import BusEmitter from '@triumph/application/ports/bus-emitter/bus-emitter.interface';
+import BusConsumer from '@triumph/application/ports/message-broker/bus-consumer.interface';
+import BusEmitter from '@triumph/application/ports/message-broker/bus-emitter.interface';
+import { Event } from '@triumph/domain/events/event.interface';
+
+type ExchangeType = 'direct' | 'fanout' | 'topic' | 'headers';
+type ExchangeParameterType = { exchangeName: string; exchangeType: ExchangeType };
 
 export default class RabbitMQEmitter implements BusEmitter {
   private connection: amqp.Connection | null = null;
   private channel: amqp.Channel | null = null;
   private readonly rabbitUrl: string;
+
+  private DEFAULT_EXCHANGE_NAME = 'triumph';
+  private DEFAULT_EXCHANGE_TYPE = 'fanout';
+  private DEFAULT_EXCHANGE_OPTIONS = { durable: false };
+
+  private DIRECT_EXCHANGE_NAME = 'triumph.direct';
+  private DIRECT_EXCHANGE_TYPE = 'direct';
 
   constructor() {
     this.rabbitUrl = process.env.RABBITMQ_URL || 'amqp://admin:admin@rabbitmq:5672';
@@ -20,11 +32,7 @@ export default class RabbitMQEmitter implements BusEmitter {
   async connect(): Promise<BusEmitter> {
     try {
       this.connection = await amqp.connect(this.rabbitUrl);
-      console.log('Connected to RabbitMQ');
-
       this.channel = await this.connection.createChannel();
-      console.log('Channel created');
-
       this.connection.on('error', (err) => {
         console.error('RabbitMQ Connection Error:', err);
       });
@@ -59,21 +67,22 @@ export default class RabbitMQEmitter implements BusEmitter {
     }
   }
 
-  async emit(
-    eventName: string,
-    data: any,
-    routingKey: string = '',
-    exchangeName: string = 'events',
-    exchangeType: string = 'fanout',
-    exchangeOptions: amqp.Options.AssertExchange = { durable: false },
-  ): Promise<void> {
+  async emit(event: Event): Promise<void> {
     await this.ensureChannel();
 
     try {
-      await this.channel!.assertExchange(exchangeName, exchangeType, exchangeOptions);
-      this.channel!.publish(exchangeName, routingKey, Buffer.from(JSON.stringify({ event: eventName, data })));
+      await this.channel!.assertExchange(event.getExchangeName(), event.getExchangeType(), event.getExchangeOptions());
 
-      console.log(`Event emitted: ${eventName}, Exchange: ${exchangeName}, Routing Key: ${routingKey}`);
+      this.channel!.publish(
+        event.getExchangeName(),
+        event.getRoutingKey(),
+        Buffer.from(
+          JSON.stringify({
+            event: event.getEventName(),
+            data: event.getEventPayload(),
+          }),
+        ),
+      );
     } catch (error) {
       console.error('Failed to emit event:', error);
       throw error;
@@ -81,39 +90,49 @@ export default class RabbitMQEmitter implements BusEmitter {
   }
 
   async createQueue(
+    exchangeName: string,
+    exchangeType: string,
     queueName: string,
-    exchangeName: string = 'events',
     routingKey: string = '',
-    exchangeType: string = 'fanout',
-    queueOptions: amqp.Options.AssertQueue = { durable: false },
+    exchangeOptions: amqp.Options.AssertExchange = this.DEFAULT_EXCHANGE_OPTIONS,
   ): Promise<void> {
     await this.ensureChannel();
 
-    try {
-      await this.channel!.assertQueue(queueName, queueOptions);
-      await this.channel!.assertExchange(exchangeName, exchangeType);
-      await this.channel!.bindQueue(queueName, exchangeName, routingKey);
+    if (!this.channel) {
+      throw new Error('Channel is not available');
+    }
 
-      console.log(`Queue "${queueName}" bound to Exchange "${exchangeName}" with Routing Key "${routingKey}"`);
+    try {
+      await this.channel.assertExchange(exchangeName, exchangeType, exchangeOptions);
+      await this.channel.assertQueue(queueName, { durable: true, autoDelete: false });
+      await this.channel.bindQueue(queueName, exchangeName, routingKey);
     } catch (error) {
       console.error('Failed to create queue:', error);
       throw error;
     }
   }
 
-  async consume(queueName: string, callback: (message: any) => void): Promise<void> {
+  async consume(
+    queueName: string,
+    callback: (message: any) => void,
+    routingKey: string = '',
+    exchangeName: string = this.DEFAULT_EXCHANGE_NAME,
+    exchangeType: string = this.DEFAULT_EXCHANGE_TYPE,
+    exchangeOptions: amqp.Options.AssertExchange = this.DEFAULT_EXCHANGE_OPTIONS,
+  ): Promise<void> {
     await this.ensureChannel();
 
     try {
-      console.log(`Consuming messages from queue: ${queueName}`);
       await this.channel!.assertQueue(queueName);
+      await this.channel!.assertExchange(exchangeName, exchangeType, exchangeOptions);
+      await this.channel!.bindQueue(queueName, exchangeName, routingKey);
 
       this.channel!.consume(queueName, (msg) => {
         if (msg) {
           try {
             const content = JSON.parse(msg.content.toString());
-            callback(content);
-            this.channel!.ack(msg);
+            callback(content); // Process the message
+            this.channel!.ack(msg); // Acknowledge the message
           } catch (error) {
             console.error('Failed to process message:', error);
           }
@@ -130,7 +149,6 @@ export default class RabbitMQEmitter implements BusEmitter {
 
     try {
       await this.channel!.deleteQueue(queueName);
-      console.log(`Queue "${queueName}" deleted`);
     } catch (error) {
       console.error('Failed to delete queue:', error);
       throw error;
@@ -142,10 +160,30 @@ export default class RabbitMQEmitter implements BusEmitter {
 
     try {
       await this.channel!.deleteExchange(exchangeName);
-      console.log(`Exchange "${exchangeName}" deleted`);
     } catch (error) {
       console.error('Failed to delete exchange:', error);
       throw error;
     }
+  }
+
+  async run(consumers: BusConsumer[]): Promise<void> {
+    for (const consumer of consumers) {
+      const consumerEvent = consumer.getEvent();
+      const exchangeName = consumerEvent.getExchangeName();
+      const exchangeType = consumerEvent.getExchangeType();
+      const queueName = consumerEvent.getQueueName();
+      const routingKey = consumerEvent.getRoutingKey();
+
+      await this.createQueue(exchangeName, exchangeType, queueName, routingKey);
+      await this.consume(queueName, consumer.consume, routingKey, exchangeName, exchangeType);
+    }
+  }
+
+  private getExchangeParametersByRoutingKey(routingKey: string): ExchangeParameterType {
+    if (routingKey.trim()) {
+      return { exchangeName: this.DIRECT_EXCHANGE_NAME, exchangeType: this.DIRECT_EXCHANGE_TYPE as ExchangeType };
+    }
+
+    return { exchangeName: this.DEFAULT_EXCHANGE_NAME, exchangeType: this.DEFAULT_EXCHANGE_TYPE as ExchangeType };
   }
 }

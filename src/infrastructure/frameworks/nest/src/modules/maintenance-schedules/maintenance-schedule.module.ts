@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import MaintenanceScheduleWriterController from '../../controllers/maintenance-schedules/maintenance-schedule.writer.controller';
+import { BusModule } from '../bus-consumer/bus.module';
 import {
   BikeModelRepositoryReaderProvider,
   CreatePreventiveMaintenanceScheduleForBikeModelUseCaseProvider,
@@ -8,7 +9,7 @@ import {
 } from './maintenance-schedule.provider';
 
 @Module({
-  imports: [],
+  imports: [BusModule],
   controllers: [MaintenanceScheduleWriterController],
   providers: [
     MaintenanceScheduleRepositoryWriterProvider,

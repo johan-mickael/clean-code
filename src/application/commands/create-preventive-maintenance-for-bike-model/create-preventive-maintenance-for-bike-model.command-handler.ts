@@ -1,8 +1,10 @@
 import { MaintenanceSchedule } from '@triumph/domain/entity/maintenance_schedules';
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found.error';
+import MaintenanceScheduleCreatedEvent from '@triumph/domain/events/maintenances/maintenance-schedule-created.event';
 
 import { MaintenanceScheduleDTO } from '../../interfaces/dtos/maintenance_schedules.dto';
 import MaintenanceScheduleDTOMapper from '../../interfaces/mappers/maintenance-schedule.dto-mapper';
+import BusEmitter from '../../ports/message-broker/bus-emitter.interface';
 import BikeModelRepositoryReader from '../../ports/repositories/readers/bike-model.repository-reader';
 import MaintenanceScheduleRepositoryWriter from '../../ports/repositories/writers/maintenance-schedule.repository-writer';
 import { InvalidCommandError } from '../common/invalid-command.error';
@@ -15,6 +17,7 @@ export default class CreatePreventiveMaintenanceForBikeModelCommandHandler
   constructor(
     private readonly maintenanceScheduleRepositoryWriter: MaintenanceScheduleRepositoryWriter,
     private readonly bikeModelRepositoryReader: BikeModelRepositoryReader,
+    private readonly eventEmitter: BusEmitter,
   ) {}
 
   async execute(
@@ -51,6 +54,11 @@ export default class CreatePreventiveMaintenanceForBikeModelCommandHandler
 
     const createdMaintenanceScheduleEntity =
       await this.maintenanceScheduleRepositoryWriter.create(maintenanceScheduleDTO);
+
+    const maintenanceScheduleCreatedEvent = new MaintenanceScheduleCreatedEvent().setPayload(
+      createdMaintenanceScheduleEntity,
+    );
+    this.eventEmitter.emit(maintenanceScheduleCreatedEvent);
 
     return MaintenanceScheduleDTOMapper.toDTO(createdMaintenanceScheduleEntity);
   }

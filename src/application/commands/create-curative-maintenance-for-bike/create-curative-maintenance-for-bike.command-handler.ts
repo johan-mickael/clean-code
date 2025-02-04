@@ -3,7 +3,9 @@ import ScheduledMaintenance from '@triumph/domain/entity/maintenance/status/sche
 import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found.error';
 import { BikeNotFoundError } from '@triumph/domain/errors/bikes/bike-not-found.error';
 import { InvalidMaintenanceDateError } from '@triumph/domain/errors/maintenances/invalid-maintenance-date.error';
+import MaintenanceCreatedEvent from '@triumph/domain/events/maintenances/maintenance-created.event';
 
+import BusEmitter from '../../ports/message-broker/bus-emitter.interface';
 import BikeRepositoryReader from '../../ports/repositories/readers/bike-repository-reader';
 import MaintenanceRepositoryWriter from '../../ports/repositories/writers/maintenance-repository-writer';
 import { InvalidCommandError } from '../common/invalid-command.error';
@@ -14,6 +16,7 @@ export default class CreateCurativeMaintenanceForBikeCommandHandler implements C
   constructor(
     private readonly bikeRepositoryReader: BikeRepositoryReader,
     private readonly maintenanceRepositoryWriter: MaintenanceRepositoryWriter,
+    private readonly eventEmitter: BusEmitter,
   ) {}
 
   async execute(
@@ -44,6 +47,10 @@ export default class CreateCurativeMaintenanceForBikeCommandHandler implements C
       maintenanceDate: maintenanceEntity.maintenanceDate,
       status: maintenanceEntity.status.value,
     });
+
+    const maintenanceCreatedEvent = new MaintenanceCreatedEvent().setPayload(createdMaintenanceEntity);
+
+    this.eventEmitter.emit(maintenanceCreatedEvent);
 
     return createdMaintenanceEntity;
   }

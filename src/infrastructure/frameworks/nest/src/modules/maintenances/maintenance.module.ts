@@ -6,10 +6,11 @@ import SequelizeBikeRepositoryReader from '@triumph/sequelize-adapter/src/reposi
 import MongooseMaintenanceRepositoryWriter from '../../../../../databases/mongoose/src/repositories/writers/maintenance.repository-writer';
 import MaintenanceWriterController from '../../controllers/maintenances/maintenance.writer.controller';
 import { BikeModule } from '../bikes/bike.module';
+import { BusModule } from '../bus-consumer/bus.module';
 import { CreateCurativeMaintenanceForBikeUseCaseProvider } from './maintenance.provider';
 
 @Module({
-  imports: [BikeModule],
+  imports: [BikeModule, BusModule],
   controllers: [MaintenanceWriterController],
   providers: [
     {

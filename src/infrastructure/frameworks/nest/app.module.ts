@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import BusEmitter from '@triumph/application/ports/bus-emitter/bus-emitter.interface';
 
 import { BikeModelModule } from './src/modules/bike-models/bike-model.module';
 import { BikeModule } from './src/modules/bikes/bike.module';
+import { BusModule } from './src/modules/bus-consumer/bus.module';
 import { DealerModule } from './src/modules/dealers/dealer.module';
 import { DriverLicenseModule } from './src/modules/driver-licenses/driver-license.module';
 import { DriversModule } from './src/modules/drivers/driver.module';
@@ -32,18 +32,7 @@ import { UserModule } from './src/modules/users/user.module';
     SpareOrdersModule,
     SparePartModule,
     UserModule,
+    BusModule,
   ],
 })
-export class AppModule {
-  static async withBus(busEmitter: BusEmitter): Promise<AppModule> {
-    return {
-      module: AppModule,
-      providers: [
-        {
-          provide: BusEmitter,
-          useValue: busEmitter,
-        },
-      ],
-    };
-  }
-}
+export class AppModule {}
