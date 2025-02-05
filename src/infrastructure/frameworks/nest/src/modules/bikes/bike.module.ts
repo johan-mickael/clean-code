@@ -45,6 +45,7 @@ import {
     DeleteBikeUseCaseProvider,
   ],
   exports: [
+    BikeRepositoryReader,
     CreateBikeUseCaseProvider, // Ajout ici
     UpdateBikeUseCaseProvider,
     DeleteBikeUseCaseProvider,

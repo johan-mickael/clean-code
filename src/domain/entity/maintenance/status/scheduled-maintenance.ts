@@ -1,8 +1,8 @@
-import { MaintenanceStatus } from './maintenance-status.interface';
+import { MaintenanceStatus, SCHEDULED_MAINTENANCE } from './maintenance-status.interface';
 
 export default class ScheduledMaintenance implements MaintenanceStatus {
   get value(): number {
-    return 0;
+    return SCHEDULED_MAINTENANCE;
   }
 
   get label(): string {

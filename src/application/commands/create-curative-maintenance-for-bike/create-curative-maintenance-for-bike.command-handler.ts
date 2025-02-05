@@ -25,8 +25,8 @@ export default class CreateCurativeMaintenanceForBikeCommandHandler implements C
     const maintenanceEntity = new Maintenance(
       createCurativeMaintenanceForBikeCommand.maintenanceScheduleLabel,
       createCurativeMaintenanceForBikeCommand.bikeModelId,
-      new Date(createCurativeMaintenanceForBikeCommand.maintenanceDate),
       new ScheduledMaintenance(),
+      new Date(createCurativeMaintenanceForBikeCommand.maintenanceDate),
     );
 
     try {

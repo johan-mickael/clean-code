@@ -38,6 +38,6 @@ import {
     UpdatePartnerUseCaseProvider,
     DeletePartnerUseCaseProvider,
   ],
-  exports: [],
+  exports: [PartnerRepositoryReader],
 })
 export class PartnerModule {}

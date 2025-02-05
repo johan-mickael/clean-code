@@ -13,6 +13,10 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-admin}
       - POSTGRES_DB=${POSTGRES_DB:-triumph}
       - MONGO_URI=${MONGO_URI:-mongodb://admin:admin@mongo:27017/triumph?authSource=admin}
+      - MAIL_HOST=${MAIL_HOST:-maildev}
+      - MAIL_PORT=${MAIL_PORT:-1025}
+      - MAIL_USER=${MAIL_USER:-admin}
+      - MAIL_PASS=${MAIL_PASS:-admin}
     volumes:
       - .:/app
 
@@ -71,6 +75,18 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=admin
       - ME_CONFIG_MONGODB_URL=mongodb://admin:admin@mongo:27017/triumph
+    restart: unless-stopped
+
+  maildev:
+    image: maildev/maildev
+    ports:
+      - '1025:1025' # SMTP service for sending emails
+      - '1080:1080' # Web interface for viewing emails
+    environment:
+      - MAILDEV_INCOMING_USER=admin
+      - MAILDEV_INCOMING_PASS=admin
+      - MAILDEV_SMTP_PORT=1025
+      - MAILDEV_WEB_PORT=1080
     restart: unless-stopped
 
 volumes:

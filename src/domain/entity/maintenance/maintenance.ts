@@ -7,8 +7,8 @@ export default class Maintenance {
   constructor(
     public label: string,
     public bikeId: string,
-    public maintenanceDate: Date,
     public status: MaintenanceStatus,
+    public maintenanceDate?: Date,
   ) {}
 
   public get id(): string | undefined {
@@ -26,14 +26,6 @@ export default class Maintenance {
 
     if (!this.bikeId) {
       throw new InvalidEntityError('Bike ID is required');
-    }
-
-    if (!this.maintenanceDate) {
-      throw new InvalidEntityError('Maintenance date is required');
-    }
-
-    if (new Date() > this.maintenanceDate) {
-      throw new InvalidEntityError('Maintenance date cannot be in the past');
     }
 
     if (!this.status) {

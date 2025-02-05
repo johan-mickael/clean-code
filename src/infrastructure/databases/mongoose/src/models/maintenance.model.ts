@@ -19,6 +19,7 @@ const MaintenanceSchema = new mongoose.Schema(
     },
     maintenance_date: {
       type: Date,
+      required: false,
     },
     status: {
       type: Number,

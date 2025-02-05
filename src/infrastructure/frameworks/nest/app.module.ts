@@ -11,6 +11,7 @@ import { DrivingIncidentsModule } from './src/modules/driving-incidents/driving-
 import { MaintenanceDetailsModule } from './src/modules/maintenance-details/maintenance-detail.module';
 import { MaintenanceScheduleModule } from './src/modules/maintenance-schedules/maintenance-schedule.module';
 import { MaintenanceModule } from './src/modules/maintenances/maintenance.module';
+import { NotificationModule } from './src/modules/notifications/notification.module';
 import { PartnerModule } from './src/modules/partners/partner.module';
 import { SpareOrdersModule } from './src/modules/spare-orders/spare-order.module';
 import { SparePartModule } from './src/modules/spare-parts/spare-part.module';
@@ -32,6 +33,7 @@ import { UserModule } from './src/modules/users/user.module';
     SpareOrdersModule,
     SparePartModule,
     UserModule,
+    NotificationModule,
     BusModule,
   ],
 })

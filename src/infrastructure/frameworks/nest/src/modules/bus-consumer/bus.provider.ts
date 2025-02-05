@@ -11,7 +11,6 @@ export const BusEmitterProvider = {
       return busEmitter;
     } catch (error) {
       console.error('Error connecting to the bus', error);
-      process.exit(1);
     }
   },
 };

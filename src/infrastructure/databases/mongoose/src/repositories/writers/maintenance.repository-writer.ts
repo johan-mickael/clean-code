@@ -19,8 +19,8 @@ export default class MongooseMaintenanceRepositoryWriter implements MaintenanceR
     const maintenanceEntity = new Maintenance(
       maintenance.label,
       maintenance.bike_id,
-      maintenance.maintenance_date,
       maintenance.status,
+      maintenance.maintenance_date,
     );
 
     maintenanceEntity.id = maintenance._id;

@@ -26,8 +26,6 @@ export default class CreateCurativeMaintenanceForBikeCommand implements Command 
   static validateAndCreateCommand(curativeMaintenanceForBikeData: any): CreateCurativeMaintenanceForBikeCommand {
     const { maintenanceLabel, bikeId, maintenanceDate } = this.preProcessCommandData(curativeMaintenanceForBikeData);
 
-    console.log(maintenanceLabel, bikeId, maintenanceDate);
-
     if (!maintenanceLabel || !bikeId || !maintenanceDate) {
       throw new InvalidCommandError();
     }

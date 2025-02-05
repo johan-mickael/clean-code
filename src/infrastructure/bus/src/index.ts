@@ -175,7 +175,9 @@ export default class RabbitMQEmitter implements BusEmitter {
       const routingKey = consumerEvent.getRoutingKey();
 
       await this.createQueue(exchangeName, exchangeType, queueName, routingKey);
-      await this.consume(queueName, consumer.consume, routingKey, exchangeName, exchangeType);
+
+      const boundConsume = consumer.consume.bind(consumer);
+      await this.consume(queueName, boundConsume, routingKey, exchangeName, exchangeType);
     }
   }
 
