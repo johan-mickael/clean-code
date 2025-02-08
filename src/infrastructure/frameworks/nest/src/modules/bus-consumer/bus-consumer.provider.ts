@@ -4,7 +4,7 @@ import NotificationServiceInterface from '@triumph/application/ports/notificatio
 import BikeRepositoryReader from '@triumph/application/ports/repositories/readers/bike-repository-reader';
 import PartnerRepositoryReader from '@triumph/application/ports/repositories/readers/partner.repository-reader';
 
-import ScheduledMaintenanceForBikeConsumer from '../../bus-consumers/scheduled-maintenance-for-bike.consumer';
+import CheckBikesMaintenancesConsumer from '../../bus-consumers/check-bikes-maintenances.consumer';
 
 export const SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCaseProvider = {
   provide: SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase,
@@ -23,17 +23,17 @@ export const SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCaseProvi
 };
 
 export const ScheduledMaintenanceForBikeConsumerProvider = {
-  provide: ScheduledMaintenanceForBikeConsumer,
+  provide: CheckBikesMaintenancesConsumer,
   useFactory: (useCase: SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase) => {
-    return new ScheduledMaintenanceForBikeConsumer(useCase);
+    return new CheckBikesMaintenancesConsumer(useCase);
   },
   inject: [SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase],
 };
 
 export const BusConsumerProvider = {
   provide: 'BUS_CONSUMERS',
-  useFactory: (generateMaintenanceForBikeConsumer: ScheduledMaintenanceForBikeConsumer) => {
+  useFactory: (generateMaintenanceForBikeConsumer: CheckBikesMaintenancesConsumer) => {
     return [generateMaintenanceForBikeConsumer];
   },
-  inject: [ScheduledMaintenanceForBikeConsumer],
+  inject: [CheckBikesMaintenancesConsumer],
 };

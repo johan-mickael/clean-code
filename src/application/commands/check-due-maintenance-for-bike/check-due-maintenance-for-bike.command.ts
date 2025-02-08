@@ -5,7 +5,7 @@ type MaintenanceForBikeModelData = {
   bikeId?: string;
 };
 
-export default class GenerateMaintenanceForBikeCommand implements Command {
+export default class CheckDueMaintenanceForBike implements Command {
   private constructor(public bikeId: string) {}
 
   private static preProcessCommandData(maintenanceForBikeData: any): MaintenanceForBikeModelData {
@@ -14,13 +14,13 @@ export default class GenerateMaintenanceForBikeCommand implements Command {
     };
   }
 
-  static validateAndCreateCommand(maintenanceForBikeData: any): GenerateMaintenanceForBikeCommand {
+  static validateAndCreateCommand(maintenanceForBikeData: any): CheckDueMaintenanceForBike {
     const { bikeId } = this.preProcessCommandData(maintenanceForBikeData);
 
     if (!bikeId) {
       throw new InvalidCommandError();
     }
 
-    return new GenerateMaintenanceForBikeCommand(bikeId);
+    return new CheckDueMaintenanceForBike(bikeId);
   }
 }

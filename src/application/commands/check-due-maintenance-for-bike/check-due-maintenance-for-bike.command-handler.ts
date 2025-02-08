@@ -12,10 +12,10 @@ import BikeRepositoryReader from '../../ports/repositories/readers/bike-reposito
 import MaintenanceRepositoryReader from '../../ports/repositories/readers/maintenance-repository-reader';
 import MaintenanceScheduleRepositoryReader from '../../ports/repositories/readers/maintenance-schedule.repository-reader';
 import MaintenanceRepositoryWriter from '../../ports/repositories/writers/maintenance-repository-writer';
-import GenerateMaintenanceForBikeCommand from './generate-maintenance-for-bike.command';
-import GenerateMaintenanceForBikeUseCase from './generate-maintenance-for-bike.usecase';
+import CheckDueMaintenanceForBike from './check-due-maintenance-for-bike.command';
+import CheckDueMaintenanceForBikeUseCase from './check-due-maintenance-for-bike.usecase';
 
-export default class GenerateMaintenanceForBikeCommandHandler implements GenerateMaintenanceForBikeUseCase {
+export default class CheckDueMaintenanceForBikeCommandhandler implements CheckDueMaintenanceForBikeUseCase {
   private EXCEDEED_MILEAGE_MAINTENANCE_LABEL = 'Maintenance par dépassement de kilométrage';
   private EXCEDEED_TIME_MAINTENANCE_LABEL = 'Maintenance par dépassement de temps';
 
@@ -28,9 +28,7 @@ export default class GenerateMaintenanceForBikeCommandHandler implements Generat
     private readonly logger: Logger,
   ) {}
 
-  async execute(
-    generateMaintenanceForBikeCommand: GenerateMaintenanceForBikeCommand,
-  ): Promise<Maintenance | undefined> {
+  async execute(generateMaintenanceForBikeCommand: CheckDueMaintenanceForBike): Promise<Maintenance | undefined> {
     const { bikeId } = generateMaintenanceForBikeCommand;
 
     const bike = await this.bikeRepositoryReader.getById(bikeId);
@@ -105,6 +103,12 @@ export default class GenerateMaintenanceForBikeCommandHandler implements Generat
       return false;
     }
 
+    const lastFinishedMaintenance = this.maintenanceRepositoryReader.getLastFinishedMaintenanceForBike(bike.id);
+    if (!lastFinishedMaintenance) {
+      return bike.mileage >= maintenanceSchedule.mileageInterval;
+    }
+
+    // @Todo : Needs to check on finished maintenance
     return bike.mileage >= maintenanceSchedule.mileageInterval;
   }
 
