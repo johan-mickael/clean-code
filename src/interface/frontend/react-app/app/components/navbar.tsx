@@ -63,26 +63,10 @@ const Navbar = () => {
                     <ul className="py-2">
                       <li>
                         <Link
-                          href="/events"
-                          className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-all"
-                        >
-                          Événements
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
                           href="/bike-models"
                           className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-all"
                         >
                           Modèles de Motos
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/occupations"
-                          className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-all"
-                        >
-                          Métiers
                         </Link>
                       </li>
                     </ul>
