@@ -1,13 +1,16 @@
 import axios from 'axios';
 
-const API_BIKES_URL = 'http://localhost:3000/bikes';
-const API_BIKEMODELS_URL = 'http://localhost:3000/bike-models';
-const API_DRIVERS_URL = 'http://localhost:3000/drivers';
-const API_DRIVER_LICENSES_URL = 'http://localhost:3000/driver-licenses';
-const API_DRIVING_URL = 'http://localhost:3000/drivinglicenses';
-const API_DRIVING_HISTORY_URL = 'http://localhost:3000/driving-history';
-const API_DRIVING_INCIDENTS_URL = 'http://localhost:3000/driving-incidents';
-const API_PARTNERS_URL = 'http://localhost:3000/partners';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const API_BIKES_URL = `${API_BASE_URL}/bikes`;
+const API_BIKEMODELS_URL = `${API_BASE_URL}/bike-models`;
+const API_DRIVERS_URL = `${API_BASE_URL}/drivers`;
+const API_DRIVER_LICENSES_URL = `${API_BASE_URL}/driver-licenses`;
+const API_DRIVING_URL = `${API_BASE_URL}/drivinglicenses`;
+const API_DRIVING_HISTORY_URL = `${API_BASE_URL}/driving-history`;
+const API_DRIVING_INCIDENTS_URL = `${API_BASE_URL}/driving-incidents`;
+const API_PARTNERS_URL = `${API_BASE_URL}/partners`;
+const API_SPARE_ORDERS_URL = `${API_BASE_URL}/spare-orders`;
 
 export const getMotos = async () => {
   try {

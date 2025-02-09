@@ -20,6 +20,22 @@ services:
     volumes:
       - .:/app
 
+  frontend:
+    build:
+      context: .
+      dockerfile: src/interface/frontend/react-app/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:3000}
+      - FRONT_PORT=${FRONT_PORT:-3001}
+    command: sh -c "cd /app/frontend && npm install && npm run dev -- -p 3001"
+    volumes:
+      - ./src/interface/frontend/react-app:/app/frontend
+      - /app/frontend/node_modules
+    depends_on:
+      - app
+
   postgres:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
     ports:
