@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Check if the framework is provided and set it to express by default
-FRAMEWORK=${FRAMEWORK:-express}
+# Check if the framework is provided and set it to nest by default
+FRAMEWORK=${FRAMEWORK:-nest}
 
 # Check if the framework is valid
 if [ "$FRAMEWORK" != "express" ] && [ "$FRAMEWORK" != "nest" ]; then

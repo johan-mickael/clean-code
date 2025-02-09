@@ -11,6 +11,7 @@ const API_DRIVING_HISTORY_URL = `${API_BASE_URL}/driving-history`;
 const API_DRIVING_INCIDENTS_URL = `${API_BASE_URL}/driving-incidents`;
 const API_PARTNERS_URL = `${API_BASE_URL}/partners`;
 const API_SPARE_ORDERS_URL = `${API_BASE_URL}/spare-orders`;
+const API_SPARE_PARTS_URL = `${API_BASE_URL}/spare-parts`;
 
 export const getMotos = async () => {
   try {
@@ -166,3 +167,51 @@ export const getPartners = async () => {
     throw error;
   }
 };
+
+export const getSpareOrders = async () => {
+  try {
+    const response = await axios.get(`${API_SPARE_ORDERS_URL}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des commandes de pièces de rechange', error);
+    throw error;
+  }
+};
+
+export const createSpareOrder = async (newSpareOrder: {
+  spareId: string;
+  quantity: number;
+  price: number;
+  deliveryDelayDays: number;
+}) => {
+  try {
+    console.log('ALLO ????');
+    console.log(newSpareOrder);
+    const response = await axios.post(`${API_SPARE_ORDERS_URL}`, newSpareOrder);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la création de la commande de pièce de rechange', error);
+    throw error;
+  }
+};
+
+export const getSpareParts = async () => {
+  try {
+    const response = await axios.get(`${API_SPARE_PARTS_URL}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des pièces détachées', error);
+    throw error;
+  }
+};
+
+export const createSparePart = async (newSparePart: any) => {
+  try {
+    const response = await axios.post(`${API_SPARE_PARTS_URL}`, newSparePart);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la création de la pièce détachée', error);
+    throw error;
+  }
+}

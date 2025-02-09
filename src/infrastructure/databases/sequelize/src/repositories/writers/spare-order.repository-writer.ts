@@ -1,31 +1,33 @@
 import { Error as SequelizeError } from 'sequelize';
 
-import SparePartDTO from '@triumph/application/interfaces/dtos/spare-part.dto';
-import SparePartDTOMapper from '@triumph/application/interfaces/mappers/spare-part.dto-mapper';
-import SparePartRepositoryWriter from '@triumph/application/ports/repositories/writers/spare-part-repository-writer';
-import SparePart from '@triumph/domain/entity/spare-part';
-import { SparePartNotFoundError } from '@triumph/domain/errors/spare-parts/spare-part-not-found.error';
+import SpareOrderDTO from '@triumph/application/interfaces/dtos/spare-order.dto';
+import SpareOrderDTOMapper from '@triumph/application/interfaces/mappers/spare-order.dto-mapper';
+import SpareOrderRepositoryWriter from '@triumph/application/ports/repositories/writers/spare-order-repository-writer';
+import SpareOrder from '@triumph/domain/entity/spare-order';
+import { SpareOrderNotFoundError } from '@triumph/domain/errors/spare-orders/spare-order-not-found.error';
 
-import SparePartModel from '../../models/spare-part.model';
+import SpareOrderModel from '../../models/spare-order.model';
 
-export default class SequelizeSparePartRepositoryWriter implements SparePartRepositoryWriter {
-  async create(sparePartDTO: SparePartDTO): Promise<SparePart> {
-    const sparePartModel = await SparePartModel.create({
-      name: sparePartDTO.name,
-      price: sparePartDTO.price,
-      quantity: sparePartDTO.quantity,
+export default class SequelizeSpareOrderRepositoryWriter implements SpareOrderRepositoryWriter {
+  async create(spareOrderDTO: SpareOrderDTO): Promise<SpareOrder> {
+    const spareOrderModel = await SpareOrderModel.create({
+      spareId: spareOrderDTO.spareId,
+      quantity: spareOrderDTO.quantity,
+      price: spareOrderDTO.price,
+      deliveryDelayDays: spareOrderDTO.deliveryDelayDays,
     });
 
-    return SparePartDTOMapper.toEntity(sparePartModel);
+    return SpareOrderDTOMapper.toEntity(spareOrderModel);
   }
 
-  async update(id: string, sparePartDTO: SparePartDTO): Promise<SparePart> {
+  async update(id: string, spareOrderDTO: SpareOrderDTO): Promise<SpareOrder> {
     try {
-      const [affectedPartCount, updatedParts] = await SparePartModel.update(
+      const [affectedOrderCount, updatedOrders] = await SpareOrderModel.update(
         {
-          name: sparePartDTO.name,
-          price: sparePartDTO.price,
-          quantity: sparePartDTO.quantity,
+          spareId: spareOrderDTO.spareId,
+          quantity: spareOrderDTO.quantity,
+          price: spareOrderDTO.price,
+          deliveryDelayDays: spareOrderDTO.deliveryDelayDays,
         },
         {
           where: { id },
@@ -33,16 +35,16 @@ export default class SequelizeSparePartRepositoryWriter implements SparePartRepo
         },
       );
 
-      if (affectedPartCount === 0) {
-        throw new SparePartNotFoundError();
+      if (affectedOrderCount === 0) {
+        throw new SpareOrderNotFoundError();
       }
 
-      const updatedPart = updatedParts[0];
-      return SparePartDTOMapper.toEntity(updatedPart);
+      const updatedOrder = updatedOrders[0];
+      return SpareOrderDTOMapper.toEntity(updatedOrder);
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
         console.error(error);
-        throw new SparePartNotFoundError();
+        throw new SpareOrderNotFoundError();
       }
 
       throw error;
@@ -51,18 +53,18 @@ export default class SequelizeSparePartRepositoryWriter implements SparePartRepo
 
   async delete(id: string): Promise<void> {
     try {
-      const deletedPartCount = await SparePartModel.destroy({
+      const deletedOrderCount = await SpareOrderModel.destroy({
         where: { id },
       });
 
-      if (deletedPartCount === 0) {
-        throw new SparePartNotFoundError();
+      if (deletedOrderCount === 0) {
+        throw new SpareOrderNotFoundError();
       }
 
       return Promise.resolve();
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
-        throw new SparePartNotFoundError();
+        throw new SpareOrderNotFoundError();
       }
 
       throw error;

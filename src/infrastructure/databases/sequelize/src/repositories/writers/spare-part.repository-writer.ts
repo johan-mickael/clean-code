@@ -1,74 +1,68 @@
 import { Error as SequelizeError } from 'sequelize';
 
-import BikeDTO from '@triumph/application/interfaces/dtos/bike.dto';
-import BikeDTOMapper from '@triumph/application/interfaces/mappers/bike.dto-mapper';
-import BikeRepositoryWriter from '@triumph/application/ports/repositories/writers/bike-repository-writer';
-import Bike from '@triumph/domain/entity/bike';
-import { BikeNotFoundError } from '@triumph/domain/errors/bikes/bike-not-found.error';
+import SparePartDTO from '@triumph/application/interfaces/dtos/spare-part.dto';
+import SparePartDTOMapper from '@triumph/application/interfaces/mappers/spare-part.dto-mapper';
+import SparePartRepositoryWriter from '@triumph/application/ports/repositories/writers/spare-part-repository-writer';
+import SparePart from '@triumph/domain/entity/spare-part';
+import { SparePartNotFoundError } from '@triumph/domain/errors/spare-parts/spare-part-not-found.error';
 
-import BikeModel from '../../models/bike.model';
+import SparePartModel from '../../models/spare-part.model';
 
-export default class SequelizeBikeRepositoryWriter implements BikeRepositoryWriter {
-  async create(bikeDTO: BikeDTO): Promise<Bike> {
-    const bikeModel = await BikeModel.create({
-      bikeModelId: bikeDTO.bikeModelId,
-      partnerId: bikeDTO.partnerId,
-      mileage: bikeDTO.mileage,
-      status: bikeDTO.status,
-      circulationDate: bikeDTO.circulationDate,
+export default class SequelizeSparePartRepositoryWriter implements SparePartRepositoryWriter {
+  async create(sparePartDTO: SparePartDTO): Promise<SparePart> {
+    const sparePartModel = await SparePartModel.create({
+      name: sparePartDTO.name,
+      price: sparePartDTO.price,
+      quantity: sparePartDTO.quantity,
     });
 
-    return BikeDTOMapper.toEntity(bikeModel);
+    return SparePartDTOMapper.toEntity(sparePartModel);
   }
-  async update(id: string, bikeDTO: BikeDTO): Promise<Bike> {
+
+  async update(id: string, sparePartDTO: SparePartDTO): Promise<SparePart> {
     try {
-      const [affectedBikeCount, updatedBikes] = await BikeModel.update(
+      const [affectedPartCount, updatedParts] = await SparePartModel.update(
         {
-          bikeModelId: bikeDTO.bikeModelId,
-          partnerId: bikeDTO.partnerId,
-          mileage: bikeDTO.mileage,
-          status: bikeDTO.status,
-          circulationDate: bikeDTO.circulationDate,
+          name: sparePartDTO.name,
+          price: sparePartDTO.price,
+          quantity: sparePartDTO.quantity,
         },
         {
-          where: {
-            id,
-          },
+          where: { id },
           returning: true,
         },
       );
 
-      if (affectedBikeCount === 0) {
-        throw new BikeNotFoundError();
+      if (affectedPartCount === 0) {
+        throw new SparePartNotFoundError();
       }
 
-      const updatedBike = updatedBikes[0];
-      return BikeDTOMapper.toEntity(updatedBike);
+      const updatedPart = updatedParts[0];
+      return SparePartDTOMapper.toEntity(updatedPart);
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
         console.error(error);
-        throw new BikeNotFoundError();
+        throw new SparePartNotFoundError();
       }
 
       throw error;
     }
   }
+
   async delete(id: string): Promise<void> {
     try {
-      const deletedBikeCount = await BikeModel.destroy({
-        where: {
-          id,
-        },
+      const deletedPartCount = await SparePartModel.destroy({
+        where: { id },
       });
 
-      if (deletedBikeCount === 0) {
-        throw new BikeNotFoundError();
+      if (deletedPartCount === 0) {
+        throw new SparePartNotFoundError();
       }
 
       return Promise.resolve();
     } catch (error: unknown) {
       if (error instanceof SequelizeError) {
-        throw new BikeNotFoundError();
+        throw new SparePartNotFoundError();
       }
 
       throw error;
