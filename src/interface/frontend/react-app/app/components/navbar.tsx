@@ -49,6 +49,18 @@ const Navbar = () => {
               >
                 Incidents
               </Link>
+              <Link
+                href="/spare-parts"
+                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              >
+                Pièces Détachées
+              </Link>
+              <Link
+                href="/spare-orders"
+                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              >
+                Commandes de Pièces
+              </Link>
 
               <div className="relative">
                 <button

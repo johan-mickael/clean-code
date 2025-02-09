@@ -196,6 +196,16 @@ export const createSpareOrder = async (newSpareOrder: {
   }
 };
 
+export const deleteSpareOrder = async (id: string) => {
+  try {
+    const response = await axios.delete(`${API_SPARE_ORDERS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la commande', error);
+    throw error;
+  }
+};
+
 export const getSpareParts = async () => {
   try {
     const response = await axios.get(`${API_SPARE_PARTS_URL}`);
@@ -206,12 +216,42 @@ export const getSpareParts = async () => {
   }
 };
 
+export const getSparePartByIdentifiant = async (id: string) => {
+  try {
+    const response = await axios.get(`${API_SPARE_PARTS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la pièce détachée', error);
+    throw error;
+  }
+}
+
 export const createSparePart = async (newSparePart: any) => {
   try {
     const response = await axios.post(`${API_SPARE_PARTS_URL}`, newSparePart);
     return response.data;
   } catch (error) {
     console.error('Erreur lors de la création de la pièce détachée', error);
+    throw error;
+  }
+}
+
+export const updateSparePart = async (id: string, data: any) => {
+  try {
+    const response = await axios.put(`${API_SPARE_PARTS_URL}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la pièce détachée', error);
+    throw error;
+  }
+}
+
+export const deleteSparePart = async (id: string) => {
+  try {
+    const response = await axios.delete(`${API_SPARE_PARTS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la pièce détachée', error);
     throw error;
   }
 }
