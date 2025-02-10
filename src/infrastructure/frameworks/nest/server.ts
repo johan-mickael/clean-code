@@ -1,18 +1,21 @@
 import { NestFactory } from '@nestjs/core';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 
+
+
 import MongooseAdapter from '../../databases/mongoose/src';
 import { AppModule } from './app.module';
 import { HttpErrorInterceptor } from './src/middlewares/http-error.interceptor';
+
+
+
+
 
 class NestServer {
   private readonly serverName = 'Nest';
   private readonly serverPort = parseInt(process.env.PORT || '3000');
 
   async bootstrap() {
-    // Getting the application context
-    await NestFactory.createApplicationContext(AppModule);
-
     // Connecting to the database
     await NestServer.connectToDatabase();
 
