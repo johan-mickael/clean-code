@@ -1,0 +1,3 @@
+export const NOTIFICATION_THRESHOLDS = {
+  SPARE_PART_LOW_STOCK: 5
+};

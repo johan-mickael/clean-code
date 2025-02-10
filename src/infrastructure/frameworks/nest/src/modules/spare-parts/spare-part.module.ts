@@ -13,9 +13,11 @@ import {
   ListSparePartsUseCaseProvider,
   UpdateSparePartUseCaseProvider,
 } from './spare-part.provider';
+import { NotificationModule } from '../notifications/notification.module';
+import { SparePartNotificationService } from '../../services/notifications/spare-part-notification.service';
 
 @Module({
-  imports: [],
+  imports: [NotificationModule],
   controllers: [SparePartReaderController, SparePartWriterController],
   providers: [
     {
@@ -26,6 +28,7 @@ import {
       provide: SparePartRepositoryWriter,
       useClass: SequelizeSparePartRepositoryWriter,
     },
+    SparePartNotificationService,
     ListSparePartsUseCaseProvider,
     GetSparePartByIdentifierUseCaseProvider,
     CreateSparePartUseCaseProvider,

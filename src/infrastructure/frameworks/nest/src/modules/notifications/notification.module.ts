@@ -3,7 +3,7 @@ import NotificationServiceInterface from '@triumph/application/ports/notificatio
 import MaildevNotificationService from '@triumph/notification/src/maildev/index';
 
 @Module({
-  imports: [],
+  imports: [NotificationModule],
   providers: [
     {
       provide: NotificationServiceInterface,
