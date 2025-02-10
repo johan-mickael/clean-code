@@ -5,6 +5,7 @@ import { BusModule } from '../bus-consumer/bus.module';
 import {
   BikeModelRepositoryReaderProvider,
   CreatePreventiveMaintenanceScheduleForBikeModelUseCaseProvider,
+  MaintenanceScheduleRepositoryReaderProvider,
   MaintenanceScheduleRepositoryWriterProvider,
 } from './maintenance-schedule.provider';
 
@@ -12,10 +13,11 @@ import {
   imports: [BusModule],
   controllers: [MaintenanceScheduleWriterController],
   providers: [
+    MaintenanceScheduleRepositoryReaderProvider,
     MaintenanceScheduleRepositoryWriterProvider,
     BikeModelRepositoryReaderProvider,
     CreatePreventiveMaintenanceScheduleForBikeModelUseCaseProvider,
   ],
-  exports: [],
+  exports: [MaintenanceScheduleRepositoryReaderProvider, MaintenanceScheduleRepositoryWriterProvider],
 })
 export class MaintenanceScheduleModule {}

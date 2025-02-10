@@ -15,10 +15,14 @@ import { NotificationModule } from './src/modules/notifications/notification.mod
 import { PartnerModule } from './src/modules/partners/partner.module';
 import { SpareOrdersModule } from './src/modules/spare-orders/spare-order.module';
 import { SparePartModule } from './src/modules/spare-parts/spare-part.module';
+import { TaskSchedulesModule } from './src/modules/task-schedules/task-schedules.module';
 import { UserModule } from './src/modules/users/user.module';
+import { UtilitiesModule } from './src/modules/utilities/utilities.module';
 
 @Module({
   imports: [
+    UtilitiesModule,
+    BusModule,
     BikeModule,
     BikeModelModule,
     DealerModule,
@@ -34,7 +38,7 @@ import { UserModule } from './src/modules/users/user.module';
     SparePartModule,
     UserModule,
     NotificationModule,
-    BusModule,
+    TaskSchedulesModule,
   ],
 })
 export class AppModule {}

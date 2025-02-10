@@ -1,6 +1,6 @@
 import Logger from '@triumph/application/ports/logger/logger.interface';
 
-export default abstract class ConsoleLogger implements Logger {
+export default class ConsoleLogger implements Logger {
   info(message?: any, ...optionalParams: any[]): void {
     console.info(message, ...optionalParams);
   }

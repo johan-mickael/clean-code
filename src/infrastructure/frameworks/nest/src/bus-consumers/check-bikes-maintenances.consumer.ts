@@ -2,7 +2,7 @@ import SendNotificationToPartnerForBikeAwaitingForAMaintenanceCommand from '@tri
 import SendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase from '@triumph/application/commands/send-notification-to-partner-for-bike-awaiting-for-a-maintenance/send-notification-to-partner-for-bike-awaiting-for-a-maintenance.usecase';
 import BusConsumer from '@triumph/application/ports/message-broker/bus-consumer.interface';
 import { Event } from '@triumph/domain/events/event.interface';
-import CheckBikesMaintenancesEvent from '@triumph/domain/events/maintenances/check-bikes-maintenances.event';
+import ScheduledMaintenanceForBikeCreatedEvent from '@triumph/domain/events/maintenances/scheduled-maintenance-for-bike-created.event';
 
 export default class CheckBikesMaintenancesConsumer implements BusConsumer {
   constructor(
@@ -10,19 +10,17 @@ export default class CheckBikesMaintenancesConsumer implements BusConsumer {
   ) {}
 
   getEvent(): Event {
-    return new CheckBikesMaintenancesEvent();
+    return new ScheduledMaintenanceForBikeCreatedEvent();
   }
 
   consume(message: any): void {
-    const bikeIds = message.data;
+    const { label, bikeId } = message.data;
 
-    for (const bikeId of bikeIds) {
-      const command = SendNotificationToPartnerForBikeAwaitingForAMaintenanceCommand.validateAndCreateCommand({
-        bikeId,
-        label: 'label',
-      });
+    const command = SendNotificationToPartnerForBikeAwaitingForAMaintenanceCommand.validateAndCreateCommand({
+      bikeId,
+      label: label,
+    });
 
-      this.sendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase.execute(command);
-    }
+    this.sendNotificationToPartnerForBikeAwaitingForAMaintenanceUseCase.execute(command);
   }
 }

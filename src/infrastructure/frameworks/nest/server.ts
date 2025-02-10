@@ -1,15 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import SequelizeAdapter from '@triumph/sequelize-adapter/src';
 
-
-
 import MongooseAdapter from '../../databases/mongoose/src';
 import { AppModule } from './app.module';
 import { HttpErrorInterceptor } from './src/middlewares/http-error.interceptor';
-
-
-
-
 
 class NestServer {
   private readonly serverName = 'Nest';
