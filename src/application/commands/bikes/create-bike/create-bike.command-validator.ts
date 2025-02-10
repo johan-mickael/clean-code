@@ -4,9 +4,18 @@ import CreateBikeCommand from './create-bike.command';
 
 export default class CreateBikeCommandValidator implements CommandValidator {
   validateCommand(createBikeCommand: CreateBikeCommand): void {
-    const { bikeModelId, partnerId } = createBikeCommand.bikePayload;
+    const { bike_model_id, partner_id } = createBikeCommand.bikePayload;
 
-    if (!bikeModelId.trim() || !partnerId.trim()) {
+    if (!bike_model_id || !partner_id) {
+      throw new InvalidCommandError();
+    }
+
+    const { normalizedBikeModelId, normalizedPartnerId } = {
+      normalizedBikeModelId: bike_model_id.trim(),
+      normalizedPartnerId: partner_id.trim(),
+    };
+
+    if (!normalizedBikeModelId || !normalizedPartnerId) {
       throw new InvalidCommandError();
     }
   }

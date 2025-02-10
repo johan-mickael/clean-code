@@ -108,7 +108,6 @@ export default class CheckDueMaintenanceForBikeCommandhandler implements CheckDu
       return bike.mileage >= maintenanceSchedule.mileageInterval;
     }
 
-    // @Todo : Needs to check on finished maintenance
     return bike.mileage >= maintenanceSchedule.mileageInterval;
   }
 

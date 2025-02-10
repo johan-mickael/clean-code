@@ -1,8 +1,6 @@
 import Maintenance from '@triumph/domain/entity/maintenance/maintenance';
 import ScheduledMaintenance from '@triumph/domain/entity/maintenance/status/scheduled-maintenance';
-import { BikeModelNotFoundError } from '@triumph/domain/errors/bike-models/bike-model-not-found.error';
 import { BikeNotFoundError } from '@triumph/domain/errors/bikes/bike-not-found.error';
-import { InvalidMaintenanceDateError } from '@triumph/domain/errors/maintenances/invalid-maintenance-date.error';
 import MaintenanceCreatedEvent from '@triumph/domain/events/maintenances/maintenance-created.event';
 
 import BusEmitter from '../../ports/message-broker/bus-emitter.interface';

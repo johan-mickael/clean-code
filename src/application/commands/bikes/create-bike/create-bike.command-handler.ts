@@ -20,13 +20,13 @@ export default class CreateBikeCommandHandler implements CreateBikeUseCase {
   async execute(createBikeCommand: CreateBikeCommand): Promise<BikeDTO> {
     new CreateBikeCommandValidator().validateCommand(createBikeCommand);
 
-    const bikeModelIdInput = createBikeCommand.bikePayload.bikeModelId;
+    const bikeModelIdInput = createBikeCommand.bikePayload.bike_model_id;
     const associatedBikeModel = await this.bikeModelRepositoryReader.getById(bikeModelIdInput);
     if (!associatedBikeModel) {
       throw new BikeModelNotFoundError();
     }
 
-    const partnerIdInput = createBikeCommand.bikePayload.partnerId;
+    const partnerIdInput = createBikeCommand.bikePayload.partner_id;
     const associatedPartner = await this.partnerRepositoryReader.getById(partnerIdInput);
     if (!associatedPartner) {
       throw new PartnerNotFoundError();

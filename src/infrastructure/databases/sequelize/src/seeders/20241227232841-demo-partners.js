@@ -1,8 +1,5 @@
 'use strict';
 
-// @ts-ignore
-const { UUIDV4 } = require('sequelize');
-
 const TABLE_NAME = 'partners';
 
 module.exports = {
